@@ -11,11 +11,11 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		Object attribute = request.getSession().getAttribute("doctorInfo");
-		if (attribute == null) {
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-			return false;
-		}
+//		Object attribute = request.getSession().getAttribute("doctorInfo");
+//		if (attribute == null) {
+//			request.getRequestDispatcher("/login.jsp").forward(request, response);
+//			return false;
+//		}
 		return true;
 	}
 

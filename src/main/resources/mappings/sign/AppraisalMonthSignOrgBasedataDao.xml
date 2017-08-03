@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.boco.modules.fdoc.dao.sign.AppraisalMonthSignOrgBasedataDao">
+	<sql id="Base_Column_List" >
+		id, org_id, sign_count, hyper_count, diabetes_count, phychosis_count, old_count, 
+		maternal_count, children_count, family_count, month, create_time
+	</sql>
+</mapper>
