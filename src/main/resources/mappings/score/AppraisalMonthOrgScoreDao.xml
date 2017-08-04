@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.boco.modules.fdoc.dao.score.AppraisalMonthOrgScoreDao">
+	 <sql id="Base_Column_List" >
+	    id, org_id, sign_increment, family_increment, sign_manage_score, public_health_score, 
+	    health_manage_score, customer_score, result_socre, team_total, un_qualified_increment, 
+	    qualified_increment, excellent_increment, month, create_time
+	  </sql>
+	  <select id="getHospitalList" resultType="com.boco.modules.fdoc.model.score.HospitalEntity"   >
+	    SELECT
+			b.id,
+			b.org_name
+		FROM 
+			t_hospital b
+		 
+	  </select>
+</mapper>
