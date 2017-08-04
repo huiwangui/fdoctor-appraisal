@@ -15,10 +15,10 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="format-detection" content="telephone=no">
 
-		<link rel="stylesheet" href="/fdoctor-ms/statics/beginnerAdmin/plugins/layui/css/layui.css" media="all" />
-		<link rel="stylesheet" href="/fdoctor-ms/statics/beginnerAdmin/css/global.css" media="all">
-		<link rel="stylesheet" href="/fdoctor-ms/statics/beginnerAdmin/plugins/font-awesome/css/font-awesome.min.css">
-		<link rel="shortcut icon" type="image/x-icon" href="/fdoctor-ms/statics/image/bitbug_favicon.ico" media="screen" /> 
+		<link rel="stylesheet" href="/fdoctor-appsaisal/statics/beginnerAdmin/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="/fdoctor-appsaisal/statics/beginnerAdmin/css/global.css" media="all">
+		<link rel="stylesheet" href="/fdoctor-appsaisal/statics/beginnerAdmin/plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="shortcut icon" type="image/x-icon" href="/fdoctor-appsaisal/statics/image/bitbug_favicon.ico" media="screen" /> 
 	</head>
 
 	<body>
@@ -80,7 +80,7 @@
 					</ul>
 					<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
 						<div class="layui-tab-item layui-show">
-							<iframe src="/fdoctor-ms/sys/mainPage" style="min-height: 500px;" filter="main"></iframe>
+							<iframe src="/fdoctor-apprairal/sys/mainPage" style="min-height: 500px;" filter="main"></iframe>
 						</div>
 					</div>
 				</div>
@@ -110,7 +110,7 @@
 			</script>
 			<!--锁屏模板 end -->
 			
-			<script type="text/javascript" src="/fdoctor-ms/statics/beginnerAdmin/plugins/layui/layui.js"></script>
+			<script type="text/javascript" src="/fdoctor-apprairal/statics/beginnerAdmin/plugins/layui/layui.js"></script>
 			<script>
 				layui.use('layer', function() {
 					var $ = layui.jquery,
@@ -126,22 +126,22 @@
 				                    {
 				                       title: "包类型管理",
 				                        icon: "&#xe641;",
-				                        href: "/fdoctor-ms/servicePack/showPack"
+				                        href: "/fdoctor-appsaisal/servicePack/showPack"
 				                    },
 				                    {
 				                        title: "服务项目管理",
 				                        icon: "&#xe63c;",
-				                        href: "/fdoctor-ms/servicePack/showDetail"
+				                        href: "/fdoctor-appsaisal/servicePack/showDetail"
 				                    },
 				                    {
 				                        title: "服务项目管理（新版）",
 				                        icon: "&#xe63c;",
-				                        href: "/fdoctor-ms/servicePack/showDetailNew"
+				                        href: "/fdoctor-appsaisal/servicePack/showDetailNew"
 				                    },
 				                    {
 				                        title: "管理服务关系",
 				                        icon: "&#xe64c;",
-				                        href: "/fdoctor-ms/servicePack/showRelation"
+				                        href: "/fdoctor-appsaisal/servicePack/showRelation"
 				                    }
 				                ]
 				            },
@@ -154,45 +154,45 @@
 				                    {
 				                        title: "预约号源管理",
 				                        icon: "fa-table",
-				                        href: "/fdoctor-ms/outpatientSource/showPage"
+				                        href: "/fdoctor-appsaisal/outpatientSource/showPage"
 				                    },
 				                    {
 				                        title: "预约信息管理",
 				                        icon: "&#xe687;",
-				                        href: "/fdoctor-ms/outpatientOrder/showPage"
+				                        href: "/fdoctor-appsaisal/outpatientOrder/showPage"
 				                    },
 				                    {
 				                        title: "免疫停诊管理",
 				                        icon: "&#xe60b;",
-				                        href: "/fdoctor-ms/outpatientStop/showPage"
+				                        href: "/fdoctor-appsaisal/outpatientStop/showPage"
 				                    }
 				                ]
 				            },
 				            {
-				                title: "医院信息维护",
+				                title: "设置",
 				                icon: "&#xe638;",
 				                href: "c",
 				                children: [
 				                    {
-				                        title: "医院字典表",
+				                        title: "指标设置",
 				                        icon: "&#xe629;",
-				                        href: "/fdoctor-ms/hospital/showPage"
+				                        href: "/fdoctor-apprairal/hospital/showPage"
 				                    },
 				                    {
-				                        title: "团队字典表",
+				                        title: "分数线设置",
 				                        icon: "&#xe61d;",
-				                        href: "/fdoctor-ms/team/showPage"
+				                        href: "/fdoctor-appsaisal/team/showPage"
 				                    },
 				                    {
-				                        title: "医生字典表",
+				                        title: "密码设置",
 				                        icon: "&#xe613;",
-				                        href: "/fdoctor-ms/doctor/showPage"
+				                        href: "/fdoctor-appsaisal/doctor/showPage"
 				                    }
 				                ]
 				            }
 				        ]
 			</script>
-			<script src="/fdoctor-ms/statics/beginnerAdmin/js/index.js"></script>
+			<script src="/fdoctor-apprairal/statics/beginnerAdmin/js/index.js"></script>
 		</div>
 	</body>
 
