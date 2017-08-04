@@ -15,4 +15,7 @@
 			t_hospital b
 		 
 	  </select>
+	  <select id="getTeamScoreList" resultType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo">
+	  
+	  </select>
 </mapper>
