@@ -1,5 +1,6 @@
 package com.boco.modules.fdoc.service.system.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -30,6 +31,7 @@ public class AppraisalQuotaServiceImpl implements  AppraisalQuotaService{
 	public int updateByPrimaryKey(List<AppraisalQuotaEntity> appraisalQuotaEntitys) {
 		int result=0;
 		for (AppraisalQuotaEntity appraisalQuotaEntity:appraisalQuotaEntitys) {
+			appraisalQuotaEntity.setUpdateTime(new Date());
 		  result=appraisalQuotaDao.updateByPrimaryKey(appraisalQuotaEntity);
 		}
 		return result;

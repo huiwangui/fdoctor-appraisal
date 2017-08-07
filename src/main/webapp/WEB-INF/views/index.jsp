@@ -131,7 +131,7 @@
 				                    {
 				                        title: "分数线设置",
 				                        icon: "&#xe61d;",
-				                        href: "/fdoctor-appraisal/team/showPage"
+				                        href: "/fdoctor-appraisal/grade/line"
 				                    },
 				                    {
 				                        title: "密码设置",

@@ -48,7 +48,6 @@ public class AppraisalQuotaController {
 	             return i;  
 			}
 		});
-		System.out.println(JsonUtils.getJson(list));
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("rows", list);
 		map.put("total", list.size());
