@@ -64,7 +64,9 @@ public class AppraisalQuotaController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public String save(HttpServletRequest request,String body) {
+		
 		List<AppraisalQuotaEntity> list=JsonUtils.getObjectList(body, AppraisalQuotaEntity.class);
+		System.out.println(list);
 	    int result=  (int) appraisalQuotaService.updateByPrimaryKey(list);
 	    if(result>0){
 	 	   return JsonUtils.getJson(BaseJsonVo.success(1));

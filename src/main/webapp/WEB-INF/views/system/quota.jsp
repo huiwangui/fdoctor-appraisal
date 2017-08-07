@@ -150,7 +150,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    onBeforeLoad: function (param) {
 		    },
 		    onLoadSuccess: function (data) {
-		    	console.log(data)
 		    },
 		    onLoadError: function () {
 		        
@@ -189,19 +188,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    	return
 			    }
 			    if(healthRate!=100){
-			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级健康管理指标之和为100!','warning'); 
+			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级健康管理指标之和为100!'+healthRate,'warning'); 
 			   	    return
 			    }
 			    if(sfRate!=100){
-			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级随访体检指标之和为100!','warning'); 
+			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级随访体检指标之和为100!'+sfRate,'warning'); 
 			    	return
 			    }
 			    if(signRate!=100){
-			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级签约管理指标之和为100!','warning'); 
+			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级签约管理指标之和为100!'+signRate,'warning'); 
 			   	    return
 			    }
 			    //提交保存
-			    $.post("/fdoctor-appraisal/system/save",JSON.stringify(obj),function(result){
+			    $.post("/fdoctor-appraisal/system/save",{body:JSON.stringify(obj)},function(result){
 				       if(result.code==200){
 				    	   jQuery.messager.alert('提示:','你好,保存成功，下月统计时生效!','info'); 
 				       }

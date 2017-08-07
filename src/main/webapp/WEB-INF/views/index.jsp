@@ -117,57 +117,7 @@
 						layer = layui.layer;
 				});
 				var navs = [
-				            {
-				                title: "服务包管理",
-				                spread: true,
-				                icon: "fa-cubes",
-				                href: "a",
-				                children: [
-				                    {
-				                       title: "包类型管理",
-				                        icon: "&#xe641;",
-				                        href: "/fdoctor-appraisal/servicePack/showPack"
-				                    },
-				                    {
-				                        title: "服务项目管理",
-				                        icon: "&#xe63c;",
-				                        href: "/fdoctor-appraisal/servicePack/showDetail"
-				                    },
-				                    {
-				                        title: "服务项目管理（新版）",
-				                        icon: "&#xe63c;",
-				                        href: "/fdoctor-appraisal/servicePack/showDetailNew"
-				                    },
-				                    {
-				                        title: "管理服务关系",
-				                        icon: "&#xe64c;",
-				                        href: "/fdoctor-appraisal/servicePack/showRelation"
-				                    }
-				                ]
-				            },
-				            {
-				                title: "预约免疫管理",
-				                icon: "&#xe62a;",
-				                href: "b",
-				                parentId: 0,
-				                children: [
-				                    {
-				                        title: "预约号源管理",
-				                        icon: "fa-table",
-				                        href: "/fdoctor-appraisal/outpatientSource/showPage"
-				                    },
-				                    {
-				                        title: "预约信息管理",
-				                        icon: "&#xe687;",
-				                        href: "/fdoctor-appraisal/outpatientOrder/showPage"
-				                    },
-				                    {
-				                        title: "免疫停诊管理",
-				                        icon: "&#xe60b;",
-				                        href: "/fdoctor-appraisal/outpatientStop/showPage"
-				                    }
-				                ]
-				            },
+				        
 				            {
 				                title: "设置",
 				                icon: "&#xe638;",
