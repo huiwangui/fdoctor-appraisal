@@ -1,4 +1,4 @@
-package com.boco.modules.fdoc.service;
+package com.boco.modules.fdoc.service.system;
 
 import com.boco.modules.fdoc.model.system.AppraisalUserEntity;
 

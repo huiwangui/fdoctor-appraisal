@@ -9,4 +9,15 @@
 	<select id="getAll"  resultType="com.boco.modules.fdoc.model.system.AppraisalQuotaEntity" >
 	   select <include refid="Base_Column_List"/> from t_appraisal_quota
 	</select>
+	
+	
+	  <update id="updateByPrimaryKey" parameterType="com.boco.modules.fdoc.model.system.AppraisalQuotaEntity" >
+	      update t_appraisal_quota
+	      set name = #{name,jdbcType=VARCHAR},
+	      rate = #{rate,jdbcType=INTEGER},
+	      parent_id = #{parentId,jdbcType=INTEGER},
+	      remark = #{remark,jdbcType=VARCHAR},
+	      update_time = #{updateTime,jdbcType=TIMESTAMP}
+	      where id = #{id,jdbcType=INTEGER}
+      </update>
 </mapper>
