@@ -55,7 +55,7 @@
 								</dd>
 								 -->
 								<dd>
-									<a href=""><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+										<a href="/fdoctor-appraisal/user/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;注销</a>
 								</dd>
 							</dl>
 						</li>
@@ -136,7 +136,7 @@
 				                    {
 				                        title: "密码设置",
 				                        icon: "&#xe613;",
-				                        href: "/fdoctor-appraisal/doctor/showPage"
+				                        href: "/fdoctor-appraisal/user/password"
 				                    }
 				                ]
 				            }

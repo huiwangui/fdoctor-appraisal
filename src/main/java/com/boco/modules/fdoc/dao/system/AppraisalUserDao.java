@@ -6,5 +6,10 @@ import com.boco.modules.fdoc.model.system.AppraisalUserEntity;
 
 @MyBatisDao
 public interface AppraisalUserDao extends CrudDao<AppraisalUserEntity>{
+	
+	
+	AppraisalUserEntity selectByPrimaryKey(String id);
+	AppraisalUserEntity selectByUserNameAndPassword(AppraisalUserEntity appraisalUserEntity);
+	int updateByPrimaryKeySelective(AppraisalUserEntity appraisalUserEntity);
 
 }

@@ -5,12 +5,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>健康管理绩效考核系统</title>
     <link rel="stylesheet" href="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/css/layui.css">
     <link rel="stylesheet" href="/fdoctor-appraisal/statics/css/login.css" />
+    <script src="/fdoctor-appraisal/statics/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/layui.js"></script>
 </head>
 
 <body>
@@ -20,7 +19,7 @@
 		</div>
 				
 		
-		<div class="main">
+	<div class="main">
 			<div class="login_box">
 				<div class="title tc">
 					<h4>用户登录</h4>
@@ -28,25 +27,25 @@
 				</div>
 				<div class="content">
 					<form action="">
-						<div style="margin-top: 10%;">
+						<div style="margin-top: 10%; " class="clearfix">
 							<span class="left_icon1"></span>
 							<input type="text" name="account" id="account" value="" placeholder="用户名" class="username"/>
 						</div>
-						<div >
+						<div class="clearfix">
 							<span class="left_icon2"></span>
 							<input type="password" name="password" id="password" value=""  placeholder="密码" class="password"/>
 						</div>
-						 <div class="chk">
+						<!-- <div class="chk clearfix">
 							<label >
 								<input type="checkbox" name="" id="" value=""  />  记住密码
 							</label>
-						</div> 
-						<div  >
-							<a  lay-submit="" lay-filter="sub" class="login_btn">登录</a>
+						</div> -->
+						<div  class="clearfix" style="margin-top:6%">
+							<a  class="login_btn" id="loginButton" lay-submit="" lay-filter="sub">登录</a>
 						</div>
-						<div >
+						<!-- <div  class="clearfix">
 							<a href="/" class="forget_pws">忘记密码？</a>
-						</div> 
+						</div> -->
 					</form>
 				</div>
 			</div>
@@ -85,8 +84,7 @@
 	</script>
 		
 		
-<script src="/fdoctor-appraisal/statics/js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/layui.js"></script>
+
 <script type="text/javascript">
     layui.use(['form', 'layer'], function () {
 
@@ -122,8 +120,8 @@
 				type : 'POST',
 				url : '/fdoctor-appraisal/user/login',
 				data : {
-					username : $('#account').val(),
-					password : $('#password').val()
+					username : $('#account').val().trim(),
+					password : $('#password').val().trim()
 					
 				},
 				success : function(a) {

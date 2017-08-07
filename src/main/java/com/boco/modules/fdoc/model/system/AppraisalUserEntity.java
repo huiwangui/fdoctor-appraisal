@@ -44,6 +44,14 @@ public class AppraisalUserEntity {
 
     
 
+	public AppraisalUserEntity(String id, String userName, String password, String type) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.type = type;
+	}
+
 	public String getId() {
         return id;
     }

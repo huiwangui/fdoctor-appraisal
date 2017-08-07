@@ -5,4 +5,35 @@
 	<sql id="Base_Column_List" >
 		id, user_name, password, type
 	</sql>
+	
+	 <select id="selectByPrimaryKey" resultType="com.boco.modules.fdoc.model.system.AppraisalUserEntity" parameterType="java.lang.String" >
+        select 
+	    <include refid="Base_Column_List" />
+	    from t_appraisal_user
+	    where id = #{id,jdbcType=VARCHAR}
+     </select>
+	
+	
+	<select id="selectByUserNameAndPassword" resultType="com.boco.modules.fdoc.model.system.AppraisalUserEntity" parameterType="com.boco.modules.fdoc.model.system.AppraisalUserEntity" >
+        select 
+	    <include refid="Base_Column_List" />
+	    from t_appraisal_user
+	    where user_name = #{userName,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+     </select>
+	
+	 <update id="updateByPrimaryKeySelective" parameterType="com.boco.modules.fdoc.model.system.AppraisalUserEntity" >
+	    update t_appraisal_user
+	    <set>
+	      <if test="userName != null" >
+	        user_name = #{userName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="password != null" >
+	        password = #{password,jdbcType=VARCHAR},
+	      </if>
+	      <if test="type != null" >
+	        type = #{type,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>
