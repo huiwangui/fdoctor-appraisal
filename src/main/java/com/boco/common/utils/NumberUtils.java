@@ -72,4 +72,38 @@ public class NumberUtils {
 		}
 		return list;
 	}
+	
+	/**
+	 * 整数间除法运算
+	 * @param dividend 被除数
+	 * @param divisor 除数
+	 * @param length 保留小数点后位数
+	 */
+	public static Double division(int dividend, int divisor, int length){
+		//除数为0， 直接返回0
+		if (divisor == 0) {
+			return 0.0;
+		}else {
+			Double result = Double.valueOf(dividend) / Double.valueOf(divisor);
+			//保留小数位数运算
+			return roundHalfUp(result, length);
+		}
+	}
+	
+	/**
+	 * 小数间除法运算
+	 * @param dividend 被除数
+	 * @param divisor 除数
+	 * @param length 保留小数点后位数
+	 */
+	public static Double division(double dividend, double divisor, int length){
+		//除数为0， 直接返回0
+		if (divisor == 0) {
+			return 0.0;
+		}else {
+			Double result = dividend / divisor;
+			//保留小数位数运算
+			return roundHalfUp(result, length);
+		}
+	}
 }
