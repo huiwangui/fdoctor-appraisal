@@ -1,5 +1,7 @@
 package com.boco.modules.fdoc.dao.sign;
 
+import java.util.List;
+
 import com.boco.common.annotation.MyBatisDao;
 import com.boco.common.persistence.CrudDao;
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTotalIncrementEntity;
@@ -20,4 +22,10 @@ public interface AppraisalMonthSignTotalIncrementDao extends CrudDao<AppraisalMo
 	 */
 	public AppraisalMonthSignTotalIncrementVo getSignTotalData(String monthOrYear);
 	
+	/**
+	 * 获取某年签约数据集合
+	 * @param year：年份，格式为yyyy
+	 * @return
+	 */
+	public List<AppraisalMonthSignTotalIncrementEntity> getYearSignDataList(String year);
 }

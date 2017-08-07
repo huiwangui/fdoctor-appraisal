@@ -1,11 +1,16 @@
 package com.boco.modules.fdoc.service.sign.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.boco.common.utils.NumberUtils;
 import com.boco.modules.fdoc.dao.sign.AppraisalMonthSignTotalIncrementDao;
+import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTotalIncrementEntity;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignTotalIncrementService;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignTotalIncrementVo;
 
@@ -32,6 +37,42 @@ public class AppraisalMonthSignTotalIncrementServiceImpl implements AppraisalMon
 		signTotalData.setChildrenProportion(NumberUtils.division(signTotalData.getChildrenIncrement(), signTotal, 3));	//儿童占比
 		
 		return signTotalData;
+	}
+
+	@Override
+	public List<AppraisalMonthSignTotalIncrementEntity> getYearSignDataList(
+			String year) {
+		
+		//获取年份数据
+		List<AppraisalMonthSignTotalIncrementEntity> yearSignDataList = signTotalDao.getYearSignDataList(year);
+		
+		//没有的月份用0填充
+		String[] months = {year + "01", year + "02", year + "03", year + "04", year + "05", year + "06", year + "07",
+				year + "08", year + "09", year + "10", year + "11", year + "12"};
+		
+		for (int i = 0; i < months.length; i++) {
+			//设置flag, 判断list中有没有当前循环的月份
+			boolean flag = false;
+			for (AppraisalMonthSignTotalIncrementEntity item : yearSignDataList) {
+				if (months[i].equals(item.getMonth())) {
+					flag = true;
+				}
+			}
+			if (!flag) {
+				AppraisalMonthSignTotalIncrementEntity entity = new AppraisalMonthSignTotalIncrementEntity();
+				entity.setMonth(months[i]);
+				yearSignDataList.add(entity);
+			}
+		}
+		
+		//重新排序
+		Collections.sort(yearSignDataList,new Comparator<AppraisalMonthSignTotalIncrementEntity>(){
+            public int compare(AppraisalMonthSignTotalIncrementEntity arg0, AppraisalMonthSignTotalIncrementEntity arg1) {
+                return arg0.getMonth().compareTo(arg1.getMonth());
+            }
+        });
+		
+		return yearSignDataList;
 	}
 
 }
