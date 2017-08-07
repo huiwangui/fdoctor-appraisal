@@ -6,4 +6,21 @@
 		id, sign_increment, hyper_increment, diabetes_increment, phychosis_increment, old_increment, 
 		maternal_increment, children_increment, family_increment, month, create_time
 	</sql>
+	
+	<!-- 获取签约总量数据 -->
+	<select id="getSignTotalData" parameterType="string" resultType="com.boco.modules.fdoc.vo.AppraisalMonthSignTotalIncrementVo">
+		SELECT
+			SUM(sign_increment) sign_increment,
+			SUM(hyper_increment) hyper_increment,
+			SUM(diabetes_increment) diabetes_increment,
+			SUM(phychosis_increment) phychosis_increment,
+			SUM(old_increment) old_increment,
+			SUM(maternal_increment) maternal_increment,
+			SUM(children_increment) children_increment,
+			SUM(family_increment) family_increment
+		FROM
+			t_appraisal_month_sign_total_increment
+		WHERE
+			`month` LIKE CONCAT(#{0}, '%')
+	</select>
 </mapper>
