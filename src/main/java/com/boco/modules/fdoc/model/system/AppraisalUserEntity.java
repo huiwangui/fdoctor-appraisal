@@ -15,8 +15,7 @@ public class AppraisalUserEntity {
     * 用户名
     */
     private String userName;
-
-    /**
+	/**
     * 密码
     */
     private String password;
@@ -25,8 +24,27 @@ public class AppraisalUserEntity {
     * 用户类型
     */
     private String type;
+    
+    public AppraisalUserEntity() {
+		super();
+	}
+    
+    public AppraisalUserEntity(String userName, String password, String type) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.type = type;
+	}
 
-    public String getId() {
+	public AppraisalUserEntity(String userName, String password) {
+		super();
+		this.userName = userName;
+		this.password = password;
+	}
+
+    
+
+	public String getId() {
         return id;
     }
 

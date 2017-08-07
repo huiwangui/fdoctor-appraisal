@@ -15,10 +15,10 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="format-detection" content="telephone=no">
 
-		<link rel="stylesheet" href="/fdoctor-appsaisal/statics/beginnerAdmin/plugins/layui/css/layui.css" media="all" />
-		<link rel="stylesheet" href="/fdoctor-appsaisal/statics/beginnerAdmin/css/global.css" media="all">
-		<link rel="stylesheet" href="/fdoctor-appsaisal/statics/beginnerAdmin/plugins/font-awesome/css/font-awesome.min.css">
-		<link rel="shortcut icon" type="image/x-icon" href="/fdoctor-appsaisal/statics/image/bitbug_favicon.ico" media="screen" /> 
+		<link rel="stylesheet" href="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="/fdoctor-appraisal/statics/beginnerAdmin/css/global.css" media="all">
+		<link rel="stylesheet" href="/fdoctor-appraisal/statics/beginnerAdmin/plugins/font-awesome/css/font-awesome.min.css">
+		<link rel="shortcut icon" type="image/x-icon" href="/fdoctor-appraisal/statics/image/bitbug_favicon.ico" media="screen" /> 
 	</head>
 
 	<body>
@@ -43,7 +43,7 @@
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
 								<img src="http://182.151.199.4:8115/upload/img/default.jpg" />
-								<span id="userNameSpan">${sessionScope.user_in_session.userName}</span>
+								<span id="userNameSpan"></span>
 							</a>
 							<dl class="layui-nav-child">
 								<!-- 
@@ -80,7 +80,7 @@
 					</ul>
 					<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
 						<div class="layui-tab-item layui-show">
-							<iframe src="/fdoctor-apprairal/sys/mainPage" style="min-height: 500px;" filter="main"></iframe>
+							<iframe src="/fdoctor-appraisal/user/mainPage" style="min-height: 500px;" filter="main"></iframe>
 						</div>
 					</div>
 				</div>
@@ -109,8 +109,8 @@
 				</div>
 			</script>
 			<!--锁屏模板 end -->
-			
-			<script type="text/javascript" src="/fdoctor-apprairal/statics/beginnerAdmin/plugins/layui/layui.js"></script>
+			                                  
+			<script type="text/javascript" src="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/layui.js"></script>
 			<script>
 				layui.use('layer', function() {
 					var $ = layui.jquery,
@@ -126,22 +126,22 @@
 				                    {
 				                       title: "包类型管理",
 				                        icon: "&#xe641;",
-				                        href: "/fdoctor-appsaisal/servicePack/showPack"
+				                        href: "/fdoctor-appraisal/servicePack/showPack"
 				                    },
 				                    {
 				                        title: "服务项目管理",
 				                        icon: "&#xe63c;",
-				                        href: "/fdoctor-appsaisal/servicePack/showDetail"
+				                        href: "/fdoctor-appraisal/servicePack/showDetail"
 				                    },
 				                    {
 				                        title: "服务项目管理（新版）",
 				                        icon: "&#xe63c;",
-				                        href: "/fdoctor-appsaisal/servicePack/showDetailNew"
+				                        href: "/fdoctor-appraisal/servicePack/showDetailNew"
 				                    },
 				                    {
 				                        title: "管理服务关系",
 				                        icon: "&#xe64c;",
-				                        href: "/fdoctor-appsaisal/servicePack/showRelation"
+				                        href: "/fdoctor-appraisal/servicePack/showRelation"
 				                    }
 				                ]
 				            },
@@ -154,17 +154,17 @@
 				                    {
 				                        title: "预约号源管理",
 				                        icon: "fa-table",
-				                        href: "/fdoctor-appsaisal/outpatientSource/showPage"
+				                        href: "/fdoctor-appraisal/outpatientSource/showPage"
 				                    },
 				                    {
 				                        title: "预约信息管理",
 				                        icon: "&#xe687;",
-				                        href: "/fdoctor-appsaisal/outpatientOrder/showPage"
+				                        href: "/fdoctor-appraisal/outpatientOrder/showPage"
 				                    },
 				                    {
 				                        title: "免疫停诊管理",
 				                        icon: "&#xe60b;",
-				                        href: "/fdoctor-appsaisal/outpatientStop/showPage"
+				                        href: "/fdoctor-appraisal/outpatientStop/showPage"
 				                    }
 				                ]
 				            },
@@ -176,23 +176,23 @@
 				                    {
 				                        title: "指标设置",
 				                        icon: "&#xe629;",
-				                        href: "/fdoctor-apprairal/hospital/showPage"
+				                        href: "/fdoctor-appraisal/system/quota"
 				                    },
 				                    {
 				                        title: "分数线设置",
 				                        icon: "&#xe61d;",
-				                        href: "/fdoctor-appsaisal/team/showPage"
+				                        href: "/fdoctor-appraisal/team/showPage"
 				                    },
 				                    {
 				                        title: "密码设置",
 				                        icon: "&#xe613;",
-				                        href: "/fdoctor-appsaisal/doctor/showPage"
+				                        href: "/fdoctor-appraisal/doctor/showPage"
 				                    }
 				                ]
 				            }
 				        ]
 			</script>
-			<script src="/fdoctor-apprairal/statics/beginnerAdmin/js/index.js"></script>
+			<script src="/fdoctor-appraisal/statics/beginnerAdmin/js/index.js"></script>
 		</div>
 	</body>
 

@@ -22,7 +22,7 @@ public class AppraisalMonthHealthManageOrgBasedataEntity {
     /**
     * 健康教育次数
     */
-    private Integer educationCount;
+    private Integer educationIncrement;
 
     /**
     * 日活跃量
@@ -32,12 +32,12 @@ public class AppraisalMonthHealthManageOrgBasedataEntity {
     /**
     * 健康评估次数
     */
-    private Integer assessmentCount;
+    private Integer assessmentIncrement;
 
     /**
     * 建档数
     */
-    private Integer documentCount;
+    private Integer documentIncrement;
 
     /**
     * 统计的目标月份，格式yyyyMM，如201708
@@ -65,13 +65,7 @@ public class AppraisalMonthHealthManageOrgBasedataEntity {
         this.orgId = orgId;
     }
 
-    public Integer getEducationCount() {
-        return educationCount;
-    }
-
-    public void setEducationCount(Integer educationCount) {
-        this.educationCount = educationCount;
-    }
+   
 
     public Integer getDailyActivity() {
         return dailyActivity;
@@ -79,22 +73,6 @@ public class AppraisalMonthHealthManageOrgBasedataEntity {
 
     public void setDailyActivity(Integer dailyActivity) {
         this.dailyActivity = dailyActivity;
-    }
-
-    public Integer getAssessmentCount() {
-        return assessmentCount;
-    }
-
-    public void setAssessmentCount(Integer assessmentCount) {
-        this.assessmentCount = assessmentCount;
-    }
-
-    public Integer getDocumentCount() {
-        return documentCount;
-    }
-
-    public void setDocumentCount(Integer documentCount) {
-        this.documentCount = documentCount;
     }
 
     public String getMonth() {
@@ -112,4 +90,30 @@ public class AppraisalMonthHealthManageOrgBasedataEntity {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	public Integer getEducationIncrement() {
+		return educationIncrement;
+	}
+
+	public void setEducationIncrement(Integer educationIncrement) {
+		this.educationIncrement = educationIncrement;
+	}
+
+	public Integer getAssessmentIncrement() {
+		return assessmentIncrement;
+	}
+
+	public void setAssessmentIncrement(Integer assessmentIncrement) {
+		this.assessmentIncrement = assessmentIncrement;
+	}
+
+	public Integer getDocumentIncrement() {
+		return documentIncrement;
+	}
+
+	public void setDocumentIncrement(Integer documentIncrement) {
+		this.documentIncrement = documentIncrement;
+	}
+    
+    
 }

@@ -3,7 +3,7 @@
 var tab;
 
 layui.config({
-	base: '/fdoctor-ms/statics/beginnerAdmin/js/',
+	base: '/fdoctor-appraisal/statics/beginnerAdmin/js/',
 	version:new Date().getTime()
 }).use(['element', 'layer', 'navbar', 'tab'], function() {
 	var element = layui.element(),
@@ -170,7 +170,7 @@ function lock($, layer) {
 			 */
 			var unlock = function(un, pwd) {
 				//这里可以使用ajax方法解锁
-				$.post('/fdoctor-ms/unlock',{username:un,password:pwd},function(data){
+				$.post('/fdoctor-appraisal/unlock',{username:un,password:pwd},function(data){
 				 	//验证成功
 					if(data.code == 200){
 						//关闭锁屏层

@@ -5,4 +5,8 @@
 	<sql id="Base_Column_List" >
 		id, name, rate, parent_id, remark, update_time
 	</sql>
+	
+	<select id="getAll"  resultType="com.boco.modules.fdoc.model.system.AppraisalQuotaEntity" >
+	   select <include refid="Base_Column_List"/> from t_appraisal_quota
+	</select>
 </mapper>
