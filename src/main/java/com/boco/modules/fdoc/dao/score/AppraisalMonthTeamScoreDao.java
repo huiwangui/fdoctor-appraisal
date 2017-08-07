@@ -15,5 +15,30 @@ public interface AppraisalMonthTeamScoreDao extends CrudDao<AppraisalMonthTeamSc
 	 * @return List<AppraisalMonthTeamScoreVo>
 	 * @author h
 	 */
-	public List<AppraisalMonthTeamScoreVo> getTeamScoreList();
+	public List<AppraisalMonthTeamScoreVo> getTeamScoreList(AppraisalMonthTeamScoreVo vo);
+	/**
+	 * Tilte: getTeamScoreListCount 
+	 * Description:根据条件获取所有的医疗团队总数
+	 * @param vo
+	 * @return int
+	 * @author h
+	 */
+	public int getTeamScoreListCount(AppraisalMonthTeamScoreVo vo);
+	/**
+	 * Tilte: getAppraisalMonthTeamScoreByMonth 
+	 * Description:根据月份查询指定团队信息
+	 * @param entity
+	 * @return List<AppraisalMonthTeamScoreVo>
+	 * @author h
+	 */
+	public AppraisalMonthTeamScoreVo getAppraisalMonthTeamScoreByMonth(AppraisalMonthTeamScoreEntity entity);
+	/**
+	 * Tilte: getAppraisalMonthTeamScoreByTeamId 
+	 * Description:根据团队id查询实力
+	 * @param teamId
+	 * @return AppraisalMonthTeamScoreVo
+	 * @author h
+	 */
+	public AppraisalMonthTeamScoreVo getAppraisalMonthTeamScoreByTeamId(String teamId);
+
 }

@@ -1,6 +1,5 @@
 package com.boco.modules.fdoc.vo;
 
-import java.util.Date;
 import java.util.List;
 
 import com.boco.common.persistence.Page;

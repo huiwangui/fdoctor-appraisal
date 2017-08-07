@@ -11,6 +11,7 @@ import com.boco.modules.fdoc.dao.score.AppraisalMonthOrgScoreDao;
 import com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity;
 import com.boco.modules.fdoc.model.score.HospitalEntity;
 import com.boco.modules.fdoc.service.score.AppraisalMonthOrgScoreService;
+import com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo;
  
 @Service
 public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScoreService {
@@ -20,6 +21,11 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 	@Override
 	public List<HospitalEntity> getHospitalList() {		 
 		return appraisalMonthOrgScoreDao.getHospitalList();
+	}
+	@Override
+	public AppraisalMonthOrgScoreVo getAppraisalMonthOrgScoreByMonth(AppraisalMonthOrgScoreEntity entity) {
+		 
+		return  appraisalMonthOrgScoreDao.getAppraisalMonthOrgScoreByMonth(entity);
 	}
 
 }

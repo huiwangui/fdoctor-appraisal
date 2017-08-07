@@ -51,13 +51,13 @@
 	
 	
 	<!-- 获取医院信息 -->
-	<select id="getHospitalInfo" parameterType="string" resultType="com.boco.modules.fdoc.model.HospitalEntity">
+	<select id="getHospitalInfo" parameterType="string" resultType="com.boco.modules.fdoc.model.score.HospitalEntity">
 		select id,org_name,region_code,address from t_hospital
 		where id = #{0}
 	</select>
 	
 	<!-- 获取全部医院列表 -->
-	<select id="getHospitalList" resultType="com.boco.modules.fdoc.model.HospitalEntity">
+	<select id="getHospitalList" resultType="com.boco.modules.fdoc.model.score.HospitalEntity">
 		select id,org_name,region_code,address from t_hospital
 	</select>
 	
@@ -85,7 +85,7 @@
 	</select>
 	
 	<!-- 新建医院 -->
-	<insert id="saveHos"  parameterType="com.boco.modules.fdoc.model.HospitalEntity">
+	<insert id="saveHos"  parameterType="com.boco.modules.fdoc.model.score.HospitalEntity">
 		insert into t_hospital(id,org_name,region_code,address,create_time,update_time)
 		values(
 				#{id,jdbcType=VARCHAR},#{orgName,jdbcType=VARCHAR},#{regionCode,jdbcType=VARCHAR},
@@ -93,7 +93,7 @@
 	</insert>
 	
 	<!-- 修改医院 -->
-	<update id="updateHos" parameterType="com.boco.modules.fdoc.model.HospitalEntity">
+	<update id="updateHos" parameterType="com.boco.modules.fdoc.model.score.HospitalEntity">
 		update t_hospital
 		set
 			org_name=#{orgName,jdbcType=VARCHAR},

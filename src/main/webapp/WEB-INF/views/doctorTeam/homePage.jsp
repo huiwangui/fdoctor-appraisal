@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  	<div class="layui-inline" >
 			   	    <label class="layui-form-label"  style="width: 100px;"> 月份：</label>
 					<div class="layui-input-inline">
-						<input type="text" id="d243" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'})" class="Wdate"/> 
+						<input type="text" id="month" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'})" class="Wdate"/> 
 					</div>     
 			    </div>
 			    
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 	<div class="layui-inline" >
 				 	<label class="layui-form-label" > 医生姓名：</label>
 				    <div class="layui-input-inline">
-				      <input >     
+				      <input id="doctorName">     
 				    </div>
 			    </div>
 			     
@@ -72,9 +72,115 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
      <script>
-		 layui.use('form', function(){
+	/* 	 layui.use('form', function(){
 		 	var form = layui.form();
-		 });
+		 }); */
+		 
+		 
+		 function tableConfig(){
+	    		layui.config({
+	                base: '/fdoctor-appraisal/statics/beginnerAdmin/js/'
+	            }).use(['btable','layer'], function () {
+	                var layer = layui.layer;
+	                
+	                var btable = layui.btable(),
+	                    $ = layui.jquery;
+	                
+	                
+	                btable.set({
+	                    elem: '#content',
+	                    url: '/fdoctor-appraisal/doctorTeam/teamScoreList',
+	                    type: 'GET',
+	                    pageSize: 1,
+	                    columns: [{
+	                        fieldName: '医生团队',
+	                        field: 'doctorName'                        
+	                    },{
+	                        fieldName: '签约户数/人数',
+	                        field: 'signFamilyAndPerson'                        
+	                    },/* {
+	                        fieldName: '签约户数/人数',
+	                        field: 'familyIncrement'
+	                    },{
+	                        fieldName: '签约人数',
+	                        field: 'signIncrement'	                        
+	                    }, */{
+	                        fieldName: '签约管理考评',
+	                        field: 'signManageScore'
+	                    },{
+	                        fieldName: '随访管理考评',
+	                        field: 'publicHealthScore'
+	                    },{
+	                        fieldName: '健康管理考评',
+	                        field: 'healthManageScore'
+	                    },{
+	                    	fieldName: '居民满意度考评',
+	                        field: 'customerScore'	                      
+	                    },{
+	                    	fieldName: '考核结果',
+	                    	field : 'resultSocre'                        
+	                    },{
+	                    	fieldName: '团队实力',
+	                    	colRender : 'typeRender'	                        
+	                    }],
+	                    even: true,
+	                    //skin: 'row',
+	                   checkbox: true,
+	                   field: 'id',
+	                    paged: true,
+	                    singleSelect: true,
+	                    params : packParams(),
+	                });
+	                btable.render();
+	               $(window).on('resize', function (e) {
+	                    var $that = $(this);
+	                    $('#content').height($that.height() - 92);
+	                }).resize();
+	                
+	            });
+	    		
+	    		
+	    	}
+	    	
+	    	tableConfig();
+	    
+	    	//查询按钮声明点击事件，查询逻辑
+	        $('#selectButton').on('click', function(){
+	        	tableConfig();
+	        });
+	  	  	
+	        function packParams(){
+	        	var orgId=$("#orgId").val();
+	        	if(orgId=='0'){
+	        		orgId='';
+	        	}
+	        	
+	    		var param = {
+	    				orgId:orgId,
+	    				month:$("#month").val(),
+	    				doctorName:$("#doctorName").val()
+	    				 
+	    		}
+	    		return param;
+	    	}
+	        function typeRender( ){
+			    return "<a href='#'>查看</a>"
+	        }
+			/* function typeRenderC(data){
+			    if(data == '0' ){
+			    	return '上午';
+			    }else if(data == '1'){
+			    	return '下午';
+			    }else if(data == '2'){
+			    	return '全天';
+			    }else if(data == '3'){
+			    	return '晚上';
+			    }else if(data == '4'){
+			    	return '休息';
+			    }else{
+	        		return data;
+	        	}
+	        } */
 	</script>
  </body>
 </html>

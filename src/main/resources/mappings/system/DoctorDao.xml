@@ -113,7 +113,7 @@
   </select>
   
   <!-- 查询所有医生 -->
-  <select id="findAllList" parameterType="com.boco.modules.fdoc.model.DoctorEntity" resultType="com.boco.modules.fdoc.model.DoctorEntity">
+  <select id="findAllList" parameterType="com.boco.modules.fdoc.model.system.DoctorEntity" resultType="com.boco.modules.fdoc.model.system.DoctorEntity">
   	select <include refid="Base_Column_List"/> from t_doctor
   </select>
   

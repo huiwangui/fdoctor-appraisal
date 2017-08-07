@@ -3,4 +3,128 @@
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.boco.modules.fdoc.dao.score.AppraisalMonthTeamScoreDao">
 	  
+	  <!-- 条件查询医生团队 -->
+	  <select id="getTeamScoreList" parameterType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo" resultType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo">
+	   SELECT
+			b.doc_name doctor_name,
+			a.sign_increment,
+			a.family_increment,
+			a.sign_manage_score,
+			a.public_health_score,
+			a.health_manage_score,
+			a.customer_score,
+			a.result_socre
+		FROM
+			t_appraisal_month_team_score a,
+			t_doctor b
+		WHERE
+			a.team_id = b.team_id
+		AND b.leader_flag = "1"
+		<if test="doctorName != null and doctorName != ''">
+		   and a.team_id  in (
+						SELECT team_id from t_doctor c where c.doc_name LIKE CONCAT('%', #{doctorName}, "%") 
+						)
+		</if>
+		<if test="month != null and month != ''">
+		  and a.month =#{month}
+		</if>
+		<if test="orgId != null and orgId != ''">
+		  and b.org_id =#{orgId}
+		</if>
+	  </select> 
+	  <!--条件查询医生团队 总数  -->
+	  <select id="getTeamScoreListCount" parameterType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo" resultType="integer">
+	   SELECT
+			count(b.doc_name)
+			 
+		FROM
+			t_appraisal_month_team_score a,
+			t_doctor b
+		WHERE
+			a.team_id = b.team_id
+		AND b.leader_flag = "1"
+		<if test="doctorName != null and doctorName != ''">
+		   and a.team_id  in (
+						SELECT team_id from t_doctor c where c.doc_name LIKE CONCAT('%', #{doctorName}, "%") 
+						)
+		</if>
+		<if test="month != null and month != ''">
+		  and a.month =#{month}
+		</if>
+		<if test="orgId != null and orgId != ''">
+		  and b.org_id =#{orgId}
+		</if>
+	  </select>
+	  <!-- 根据月份查询指定团队信息 -->
+	  <select id="getAppraisalMonthTeamScoreByMonth" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity" resultType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo">
+	   SELECT
+			a.result_socre,
+			a.sign_increment,
+			a.family_increment,
+			count(DISTINCT(e.person_id)) chronic_disease_number,
+			f.address org_address,
+			f.org_name,
+			b.doc_name doctor_name
+		FROM
+			t_appraisal_month_team_score a,
+			t_doctor b,
+			t_user_doc_sign c,
+			t_person_information d,
+			t_person_desease_info e,
+			t_hospital f
+		WHERE
+			a.team_id = b.team_id
+		AND b.team_id = c.doc_team_id
+		AND c.family_id = d.family_id
+		AND d.person_id = e.person_id
+		AND b.org_id = f.id
+		and b.leader_flag="1"
+		<if test="teamId != null and teamId != ''">
+		  and a.team_id =#{teamId}
+		</if>	 
+		<if test="month != null and month != ''">
+		  and a.month =#{month}
+		</if>
+	 
+	  </select>
+	  <!-- 根据团队id查询实力 -->
+	  <select id="getAppraisalMonthTeamScoreByTeamId" parameterType="string" resultType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo">
+	   SELECT
+			AVG(a.sign_hyper_score) sign_hyper_score,
+			AVG(a.sign_diabetes_score) sign_diabetes_score,
+			AVG(a.sign_phychosis_score) sign_phychosis_score,
+			AVG(a.sign_old_score) sign_old_score,
+			AVG(a.sign_maternal_score) sign_maternal_score,
+			AVG(a.sign_children_score) sign_children_score,
+			AVG(a.sign_manage_score) sign_manage_score,
+			AVG(a.public_health_hyper_score) public_health_hyper_score,
+			AVG(a.public_health_diabetes_score) public_health_diabetes_score,
+			AVG(a.public_health_phychosis_socre) public_health_phychosis_socre,
+			AVG(a.public_health_old_score) public_health_old_score,
+			AVG(a.public_health_maternal_score) public_health_maternal_score,
+			AVG(a.public_health_children_score) public_health_children_score,
+			AVG(a.public_health_score) public_health_score,
+		    AVG(a.health_manage_edu_score) health_manage_edu_score,
+			AVG(a.health_manage_daily_activity_score) health_manage_daily_activity_score,
+			AVG(a.health_manage_assessment_score) health_manage_assessment_score,
+			AVG(a.health_manage_document_score) health_manage_document_score,
+			AVG(a.health_manage_score) health_manage_score,
+			AVG(a.customer_score) customer_score
+		FROM
+			t_appraisal_month_team_score a,
+			t_doctor b,
+			t_user_doc_sign c,
+			t_person_information d,
+			t_person_desease_info e,
+			t_hospital f
+		WHERE
+			a.team_id = b.team_id
+		AND b.team_id = c.doc_team_id
+		AND c.family_id = d.family_id
+		AND d.person_id = e.person_id
+		AND b.org_id = f.id
+		and b.leader_flag="1"		 
+		and a.team_id =#{0}
+	 
+	  </select>
 </mapper>
