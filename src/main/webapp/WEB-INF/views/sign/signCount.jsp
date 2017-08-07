@@ -53,6 +53,31 @@
 					</div>     
 			    </div>
 			    </div>
+			    
+			    <div class="layui-inline" >
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" title="总人数${baseEntity.signCount}人" value="1" checked>
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" title="高血压${baseEntity.hyperCount}人" value="2">
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" title="糖尿病${baseEntity.diabetesCount人" value="3">
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" title="重症精神病${baseEntity.majorPsychosisCount}人" value="4">
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" title="老年人${baseEntity.oldCount}人" value="5">
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" title="孕产妇${baseEntity.maternalCount}人" value="6">
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" title="儿童${baseEntity.childrenCount}人" value="7">
+			    	</div>
+			    
+			    </div>
 				
 			    
 			    <div class="layui-inline" >
@@ -66,9 +91,7 @@
         </blockquote>
 		<div class="layui-btn-group">
 		<c:if test="${fn:length(sessionScope.user_in_session.orgIds)> 1}">  
-		  <button class="layui-btn layui-btn-primary layui-btn-small" id="addButton"><i class="layui-icon">&#xe654;</i>新增团队</button>
-		  <button class="layui-btn layui-btn-primary layui-btn-small" id="updateButton"><i class="layui-icon">&#xe642;</i>编辑该团队</button>
-		  <button class="layui-btn layui-btn-primary layui-btn-small" id="deleteButton"><i class="layui-icon">&#xe640;</i>删除该团队</button>
+		  <button class="layui-btn layui-btn-primary layui-btn-small" id="detailButton"><i class="layui-icon">&#xe654;</i>新增团队</button>
 		</c:if> 
 		</div>
         <div id="content" style="width: 100%;height: 500px;"></div>
@@ -92,40 +115,45 @@
                 //});
                 btable.set({
                     elem: '#content',
-                    url: '/fdoctor-appraisal/team/getTeamList',
+                    url: '/fdoctor-appraisal/team/getSignDetail',
                     type: 'GET',
-                    pageSize: 15,
+                    pageSize: 10,
                     columns: [{
-                        fieldName: '团队id',
-                        field: 'teamId',
+                        fieldName: '合同id',
+                        field: 'id',
                         hidden: true
                     },{
-                        fieldName: '团队队长',
-                        field: 'leader'
+                        fieldName: '签约家庭',
+                        field: 'personName',
+                        colRender : 'typeRenderb'
                     },{
-                        fieldName: '医生',
-                        field: 'docOne',
-                        colRender : 'typeRenderB'
+                        fieldName: '团队名称',
+                        field: 'docName',
+                        colRender : 'typeRenderA'
                     },{
-                        fieldName: '公卫医生',
-                        field: 'docTwo',
-                        colRender : 'typeRenderB'
+                        fieldName: '所属机构',
+                        field: 'orgName'
                     },{
-                        fieldName: '护士',
-                        field: 'docThree',
-                        colRender : 'typeRenderB'
+                        fieldName: '签约服务包',
+                        field: 'packName'
+                    },{
+                        fieldName: '签约年限',
+                        field: 'lastTime'
+                    },{
+                        fieldName: '签约时间',
+                        field: 'signTime'
                     }],
                     even: true,
                     //skin: 'row',
                     checkbox: true,
-                    field: 'teamId',
+                    field: 'id',
                     paged: true,
                     singleSelect: true,
                     params : packParams(),
                 });
                 btable.render();
                 
-                $('#updateButton').on('click', function () {
+                $('#detailButton').on('click', function () {
                     //获取选择的数据
                     btable.getSelections(function (obj) {
                     	if(obj.count == 0){
@@ -144,47 +172,7 @@
 
                 });
                 
-                $('#addButton').on('click', function () {
-                	layer.open({
-               		  type: 2,
-               		  title: false,
-               		  id : Math.ceil(100),
-               		  area: ['600px', '400px'],
-               		  closeBtn: 1,
-               		  content: '/fdoctor-appraisal/team/toAddTeam'
-                	});
-                });
                 
-                $('#deleteButton').on('click',function (){
-                	 //获取选择的数据
-                    btable.getSelections(function (obj) {
-                    	if(obj.count == 0){
-                    		layer.msg('请选择要删除的数据',{icon: 7,id : Math.ceil(100)});
-                    	}else{
-                    		layer.confirm('确认删除？', {icon: 3,id : Math.ceil(100)}, function(index){
-                    			$.ajax({
-            						type : 'POST',
-            						url : '/fdoctor-appraisal/team/deleteTeam',
-            						data : {
-            							teamId : obj.ids[0]
-            						},
-            						success : function(data) {
-            							if (data.code == 200) {
-            								layer.msg('删除成功！', {
-            									icon : 1
-            								});
-            								tableConfig();
-            							} else {
-            								layer.msg('删除失败！', {
-            									icon : 2
-            								});
-            							}
-            						}
-            					});
-                   			});
-                    	}
-                    });
-                });
 
                $(window).on('resize', function (e) {
                     var $that = $(this);
@@ -205,7 +193,7 @@
 		    	 if(data.value != '0'){
 			    	$.ajax({
 					 			type : 'GET',
-					 			url : '/fdoctor-appraisal/team/getTeamLeader',
+					 			url : '/fdoctor-appraisal/sign/getTeamLeader',
 					 			data :{
 					 				orgId:data.value
 					 			},
@@ -231,16 +219,6 @@
         $('#selectButton').on('click', function(){
         	tableConfig();
         });
-        function packParams2(data){
-        	var orgId=data.value;
-        	if(orgId=='0'){
-        		orgId='';
-        	}
-        	var param = {
-    				orgId:orgId
-    		}
-        	return param;
-        }
         function packParams(){
         	var orgId=$("#orgId").val();
         	if(orgId=='0'){
@@ -250,23 +228,33 @@
         	if(teamId=='0'){
         		teamId='';
         	}
+        	var personTypeList=$("input[name='personType']");
+        	var personType="";
+        	for(i=0;i<personTypeList.length;i++){
+        		if(personTypeList[i].checked){
+        			personType=personTypeList[i].value;
+        		}
+        	}
+        	
     		var param = {
     				orgId:orgId,
-    				teamId:teamId
+    				teamId:teamId,
+    				personType:personType
     		}
     		return param;
     	}
-        function typeRenderB(data){
+        function typeRenderA(data){
         	if(data==undefined){
         		return "";
         	}else{
-        		if(data.length>15){
-        			var j=data.substring(15,data.length);
-        			var s=data.replace(j,'...');
-        			return s;
-        		}else{
-        			return data;
-        		}
+        		return data;
+        	}
+        }
+        function typeRenderA(data){
+        	if(data==undefined){
+        		return "";
+        	}else{
+        		return data+'的团队';
         	}
         }
     </script>

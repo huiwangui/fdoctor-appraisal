@@ -18,13 +18,19 @@ import org.apache.commons.lang3.time.DateFormatUtils;
  * @version 2014-4-15
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
-    public  static int number =0; 
-    /**
+	public static int immuneNumber = 0;
+	public static int followUpNumber = 0;
+	public static int physicalExaminationNumber = 0;
+
+	/**
 	 * 
 	 * addZero:(数字格式化，前面不足的补0). <br/>
+	 * 
 	 * @author q
-	 * @param size：返回的位数
-	 * @param item：目标数字
+	 * @param size
+	 *            ：返回的位数
+	 * @param item
+	 *            ：目标数字
 	 * @return
 	 */
 	public static String addZero(int size, int item) {
@@ -37,6 +43,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		String str2 = df.format(Integer.parseInt(str1));
 		return str2;
 	}
+
 	private static String[] parsePatterns = { "yyyy-MM-dd",
 			"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM", "yyyy/MM/dd",
 			"yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM", "yyyy.MM.dd",
@@ -377,46 +384,64 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 			itemDate = calendarInWeek.getTime();
 			j++;
 		}
-		
+
 		return list;
 	}
-    
-	
-	 public static Date parse(String strDate) throws ParseException {  
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
-	        return sdf.parse(strDate);  
-	    }  
+
+	public static Date parse(String strDate) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.parse(strDate);
+	}
+
 	/**
 	 * 生日换算年龄
 	 * 
 	 */
-	 public static  int getAgeByCal(Date birthDay) throws Exception {  
-	        Calendar cal = Calendar.getInstance();  
-	  
-	        if (cal.before(birthDay)) {  
-	            throw new IllegalArgumentException(  
-	                    "The birthDay is before Now.It's unbelievable!");  
-	        }  
-	        int yearNow = cal.get(Calendar.YEAR);  
-	        int monthNow = cal.get(Calendar.MONTH);  
-	        int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);  
-	        cal.setTime(birthDay);  
-	  
-	        int yearBirth = cal.get(Calendar.YEAR);  
-	        int monthBirth = cal.get(Calendar.MONTH);  
-	        int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);  
-	  
-	        int age = yearNow - yearBirth;  
-	  
-	        if (monthNow <= monthBirth) {  
-	            if (monthNow == monthBirth) {  
-	                if (dayOfMonthNow < dayOfMonthBirth) age--;  
-	            }else{  
-	                age--;  
-	            }  
-	        }  
-	        return age;  
-	    }  
+	public static int getAgeByCal(Date birthDay) throws Exception {
+		Calendar cal = Calendar.getInstance();
+
+		if (cal.before(birthDay)) {
+			throw new IllegalArgumentException(
+					"The birthDay is before Now.It's unbelievable!");
+		}
+		int yearNow = cal.get(Calendar.YEAR);
+		int monthNow = cal.get(Calendar.MONTH);
+		int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+		cal.setTime(birthDay);
+
+		int yearBirth = cal.get(Calendar.YEAR);
+		int monthBirth = cal.get(Calendar.MONTH);
+		int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+
+		int age = yearNow - yearBirth;
+
+		if (monthNow <= monthBirth) {
+			if (monthNow == monthBirth) {
+				if (dayOfMonthNow < dayOfMonthBirth)
+					age--;
+			} else {
+				age--;
+			}
+		}
+		return age;
+	}
+
+	/**
+	 * 
+	 * getDateBeforeOrAfter:(获取目标日期之前或者之后的时间). <br/>
+	 * @author q
+	 * @param nowDate
+	 * @param days
+	 * @return
+	 */
+	public static Date getDateBeforeOrAfter(Date nowDate, int days) {
+		Calendar calendar1 = Calendar.getInstance();
+		calendar1.setTime(nowDate);
+		calendar1.add(Calendar.DATE, days);
+		
+		return calendar1.getTime();
+	}
+
 	/**
 	 * @param args
 	 * @throws ParseException

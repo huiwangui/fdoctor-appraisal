@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.boco.modules.fdoc.dao.system.DoctorDao">
+	<sql id="Base_Column_List" >
+	    id, doc_name, sex, dept_name, org_id, region_code, phone_number, specialty, introduction, 
+	    team_id, doc_type, create_time, update_time, title
+  	</sql>
+  	
+  	
+ 	<!-- 查看医生信息 -->
+ 	<select id="getDoctorInfo" parameterType="string" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+ 		SELECT
+			a.id,
+			a.doc_name,
+			a.sex,
+			a.dept_name,
+			a.org_id,
+			a.region_code,
+			a.phone_number,
+			a.specialty,
+			a.introduction,
+			a.team_id,
+			a.doc_type,
+			a.title,
+			b.org_name,
+			c.doc_name leaderName,
+			d.ct memberNumInTeam,
+			b.address orgAddress,
+			e.user_name,
+			e.`password`
+		FROM
+			t_doctor a
+		LEFT JOIN t_hospital b ON a.org_id = b.id
+		LEFT JOIN t_doctor_user e  on a.id=e.doctor_id
+		LEFT JOIN (
+			SELECT
+				doc_name,
+				team_id
+			FROM
+				t_doctor
+			WHERE
+				leader_flag = 1
+		) c ON a.team_id = c.team_id
+		LEFT JOIN (
+			SELECT
+				team_id,
+				count(id) ct
+			FROM
+				t_doctor
+			GROUP BY
+				team_id
+		) d ON a.team_id = d.team_id
+		WHERE
+			a.id = #{0}
+ 	</select>
+ 	
+	 <!-- 根据医生ID获取其团队成员，排除自己在外 -->
+  <select id="getDoctorTeamMemberByDocId" parameterType="string" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+  		SELECT
+			a.id,
+			a.doc_name,
+			a.sex,
+			a.dept_name,
+			a.org_id,
+			a.region_code,
+			a.phone_number,
+			a.specialty,
+			a.introduction,
+			a.team_id,
+			a.doc_type,
+			a.title,
+			b.org_name
+		FROM
+			t_doctor a
+		LEFT JOIN t_hospital b ON a.org_id = b.id
+		WHERE
+			a.team_id = (
+				SELECT
+					team_id
+				FROM
+					t_doctor
+				WHERE
+					id = #{0}
+			)
+		AND a.id != #{0}
+  </select>
+  
+  <!-- 根据团队ID获取其团队成员 -->
+  <select id="getDoctorTeamMemberByTeamId" parameterType="string" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+  	SELECT
+		a.id,
+		a.doc_name,
+		a.sex,
+		a.dept_name,
+		a.org_id,
+		a.region_code,
+		a.phone_number,
+		a.specialty,
+		a.introduction,
+		a.team_id,
+		a.doc_type,
+		a.title,
+		a.leader_flag,
+		b.org_name,
+		c.img
+	FROM
+		t_doctor a
+	LEFT JOIN t_hospital b ON a.org_id = b.id
+	left join t_doctor_user c on a.id = c.doctor_id
+	WHERE
+		a.team_id = #{0}
+  </select>
+  
+  <!-- 查询所有医生 -->
+  <select id="findAllList" parameterType="com.boco.modules.fdoc.model.DoctorEntity" resultType="com.boco.modules.fdoc.model.DoctorEntity">
+  	select <include refid="Base_Column_List"/> from t_doctor
+  </select>
+  
+  <!-- 获取团队队长，即为团队内医生的信息 -->
+  <select id="getTeamLeaderInfo" parameterType="string" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+  	SELECT
+		a.id,
+		a.doc_name,
+		a.sex,
+		a.dept_name,
+		a.org_id,
+		a.region_code,
+		a.phone_number,
+		a.specialty,
+		a.introduction,
+		a.team_id,
+		a.doc_type,
+		b.org_name
+	FROM
+		t_doctor a
+	LEFT JOIN t_hospital b ON a.org_id = b.id
+	WHERE
+		a.team_id = #{0} 
+	AND a.leader_flag = 1
+  </select>
+  
+  <!-- 获取医生列表 -->
+  <select id="getDoctorList" parameterType="com.boco.modules.fdoc.vo.DoctorDetailVo" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+  	SELECT
+		a.id,
+		a.doc_name,
+		a.sex,
+		a.dept_name,
+		a.org_id,
+		a.region_code,
+		a.phone_number,
+		a.specialty,
+		a.introduction,
+		a.team_id,
+		a.doc_type,
+		b.org_name
+	FROM
+		t_doctor a
+	LEFT JOIN t_hospital b ON a.org_id = b.id
+	<where>
+		<if test="docName != null and docName != ''">
+			a.doc_name LIKE CONCAT('%', #{docName}, "%")
+		</if>
+	</where>
+  </select>
+  
+  <!-- 获取医生列表 -->
+  <select id="getDocList" parameterType="com.boco.modules.fdoc.vo.DoctorDetailVo" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+  	SELECT
+		a.id,
+		a.doc_name,
+		a.sex,
+		a.dept_name,
+		a.org_id,
+		a.region_code,
+		a.phone_number,
+		a.specialty,
+		a.introduction,
+		a.team_id,
+		a.doc_type,
+		a.title,
+		b.org_name,
+		c.user_name,
+		c.`password`
+	FROM
+		t_doctor a
+	LEFT JOIN t_hospital b ON a.org_id = b.id
+	LEFT JOIN t_doctor_user c ON a.id=c.doctor_id
+	<where>
+		<if test="orgId != null  and orgId != ''">
+			a.org_id=#{orgId}
+		</if>
+		<if test="docType != null  and docType != ''">
+		AND	a.doc_type=#{docType]
+		</if>
+		<if test="docName != null and docName != ''">
+		AND	a.doc_name LIKE CONCAT('%', #{docName}, "%")
+		</if>
+	</where>
+  </select>
+  
+  <!-- 获取医生数量 -->
+  <select id="getDoctorCount" parameterType="com.boco.modules.fdoc.vo.DoctorDetailVo" resultType="integer">
+	  SELECT
+		count(a.id)
+	FROM
+		t_doctor a
+	LEFT JOIN t_hospital b ON a.org_id = b.id
+	LEFT JOIN t_doctor_user c ON a.id=c.doctor_id
+	<where>
+		<if test="orgId != null  and orgId != ''">
+			a.org_id=#{orgId}
+		</if>
+		<if test="docType != null  and docType != ''">
+		AND	a.doc_type=#{docType]
+		</if>
+		<if test="docName != null and docName != ''">
+		AND	a.doc_name LIKE CONCAT('%', #{docName}, "%")
+		</if>
+	</where>
+  </select>
+  
+  <!-- 获取医生团队总数 -->
+  <select id="getTeamCount" resultType="integer">
+  	select count(a.team_id) from (
+		select team_id from t_doctor GROUP BY team_id
+	) a
+  </select>
+  
+  <!-- 通过机构ID获取机构下的团队ID集合 -->
+  <select id="getTeamIdsByHospital" parameterType="string" resultType="string">
+  	SELECT DISTINCT
+		team_id
+	FROM
+		t_doctor
+	WHERE
+		org_id = #{0}
+  </select>
+  
+  <!-- 通过机构Id获取团队队长集合 -->
+  <select id="getLeaderList" parameterType="com.boco.modules.fdoc.vo.DoctorDetailVo" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+  	SELECT 
+		*
+	FROM
+		t_doctor
+	WHERE
+		leader_flag=1
+		<if test="orgId != null  and orgId != ''">
+		And	org_id=#{orgId}
+		</if>
+		<if test="teamId != null  and teamId != ''">
+		AND	team_id=#{teamId}
+		</if>
+  </select>
+  
+  <!-- 获取团队数量 -->
+  <select id="getLeaderCount" parameterType="com.boco.modules.fdoc.vo.DoctorDetailVo" resultType="INTEGER">
+  	SELECT 
+		count(*)
+	FROM
+		t_doctor
+	WHERE
+		leader_flag=1
+		<if test="orgId != null  and orgId != ''">
+		AND	org_id=#{orgId}
+		</if>
+		<if test="teamId != null  and teamId != ''">
+		AND	team_id=#{teamId}
+		</if>
+  </select>
+  
+  <!-- 根据医院和医生种类获取医生列表 -->
+  <select id="getDocByType" parameterType="com.boco.modules.fdoc.vo.DoctorDetailVo" resultType="com.boco.modules.fdoc.vo.DoctorDetailVo">
+  	select * from t_doctor
+  	where org_id=#{orgId} and doc_type=#{docType}
+  </select>
+  
+
+</mapper>
