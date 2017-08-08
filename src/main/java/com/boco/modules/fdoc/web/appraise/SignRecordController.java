@@ -3,7 +3,9 @@ package com.boco.modules.fdoc.web.appraise;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.boco.common.json.BaseJsonVo;
 import com.boco.common.persistence.Page;
 import com.boco.common.utils.JsonUtils;
+import com.boco.common.utils.NumberUtils;
 import com.boco.modules.fdoc.model.score.HospitalEntity;
+import com.boco.modules.fdoc.model.sign.SigServicepackEntity;
 import com.boco.modules.fdoc.model.statistics.StatisticsDayBasedataEntity;
+import com.boco.modules.fdoc.service.sign.SigServicepackService;
 import com.boco.modules.fdoc.service.sign.SignService;
 import com.boco.modules.fdoc.service.system.DocService;
 import com.boco.modules.fdoc.service.system.HospitalService;
@@ -44,6 +49,8 @@ public class SignRecordController {
 	StatisticsDayBasedataService baseService;
 	@Resource
 	SignService signService;
+	@Resource
+	SigServicepackService packService;
 	
 	@RequestMapping(value = "/showPage",method = RequestMethod.GET)
 	public String showPage(HttpServletRequest request, Model model){
@@ -102,6 +109,18 @@ public class SignRecordController {
 			end.setTime(sVo.getDueTime());
 			int lastTime=end.get(Calendar.YEAR)-begin.get(Calendar.YEAR);
 			sVo.setLastTime(String.valueOf(lastTime));
+			//服务包value
+			int packValue=sVo.getPackValue();
+			String packList=NumberUtils.bitand(packValue);
+			Map<String, String> map=new HashMap<String,String>();
+			map.put("values", packList);
+			List<SigServicepackEntity> spList=packService.getServicePacksByValues(map);
+			String packName="";
+			for(SigServicepackEntity sEntity:spList){
+				packName=packName+sEntity.getPackName()+"，";
+			}
+			packName=packName.substring(0, packName.length() - 1);
+			sVo.setPackName(packName);
 		}
 		
 		return JsonUtils.getJson(BaseJsonVo.pageList(list, count));
