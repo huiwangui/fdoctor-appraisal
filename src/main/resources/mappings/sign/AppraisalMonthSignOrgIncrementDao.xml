@@ -11,7 +11,7 @@
 	<select id="getMonthSignOrgDataList" parameterType="string" resultType="com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo">
 		SELECT
 			a.*, b.org_name,
-			c.result_socre
+			c.result_score
 		FROM
 			t_appraisal_month_sign_org_increment a
 		LEFT JOIN t_hospital b ON a.org_id = b.id
