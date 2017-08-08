@@ -34,11 +34,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<table id="dg" 
 	</table>
-	
+	<!-- 
 	<button class="layui-btn layui-btn-normal" id="save" type="button">保存设置</button>
+	<button class="layui-btn layui-btn-normal" id="cancle" type="button">取消编辑</button> -->
 		
  
 	<script type="text/javascript">
+	
+	    var edit = undefined;//全局变量  是否编辑
 		$('#dg').datagrid({
 		    url: '/fdoctor-appraisal/system/getAll',
 		    method: 'get',
@@ -87,9 +90,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        { field: 'updateTime', title: '更新时间', width: 8, align: 'left', formatter: formatDatebox },
 		        { field: 'parentId', title: '父ID', width: 16, align: 'left', hidden:'true'  },
 		    ]],
+		    toolbar: [{ text: '保存', iconCls: 'icon-save', handler: function () {
+		    	save()
+            }
+            }, '-',
+            { text: '取消编辑', iconCls: 'icon-redo', handler: function () {
+            	cancle();
+            }
+            }, '-'],
 		    onBeforeLoad: function (param) {
 		    },
 		    onLoadSuccess: function (data) {
+		    	/* $('#save').hide()
+		    	$('#cancle').hide() */
+		    	
 		    },
 		    onLoadError: function () {
 		        
@@ -97,11 +111,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    onClickCell: function (rowIndex, field, value) {
 		    	
 		    	onClickCell2(rowIndex,field)
+		    	
 		        
+		    },
+		    
+		    onAfterEdit: function (rowIndex, rowData, changes) {
+		    	edit = true;
+		    	
 		    }
 		});
-	
-		$('#save').on('click',function(){
+		//取消编辑
+		function cancle(){
+			
+			  
+			  $('#dg').datagrid("rejectChanges");
+			  $('#dg').datagrid("unselectAll");
+			  edit = undefined;
+		};
+		
+		//保存
+		function save(){
+				if(edit==undefined){
+					return;
+				}
 				var obj = $("#dg").datagrid("getRows");
 				console.log(obj)
 			    var firstRate=0;
@@ -124,28 +156,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}); 
 			    if(firstRate!=100){
 			    	//提示 1级和不等100
-			    	jQuery.messager.alert('提示:','你好,保存失败，请确保一级指标之和为100!','warning'); 
+			    	jQuery.messager.alert('提示:','你好,保存失败，请确保一级指标之和为100!当前值为：'+firstRate,'warning'); 
 			    	return
 			    }
 			    if(healthRate!=100){
-			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级健康管理指标之和为100!'+healthRate,'warning'); 
+			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级健康管理指标之和为100!当前值为：'+healthRate,'warning'); 
 			   	    return
 			    }
 			    if(sfRate!=100){
-			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级随访体检指标之和为100!'+sfRate,'warning'); 
+			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级随访体检指标之和为100!当前值为：'+sfRate,'warning'); 
 			    	return
 			    }
 			    if(signRate!=100){
-			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级签约管理指标之和为100!'+signRate,'warning'); 
+			    	jQuery.messager.alert('提示:','你好,保存失败，请确保二级签约管理指标之和为100!当前值为：'+signRate,'warning'); 
 			   	    return
 			    }
 			    //提交保存
 			    $.post("/fdoctor-appraisal/system/save",{body:JSON.stringify(obj)},function(result){
 				       if(result.code==200){
+				    	   $("#dg").datagrid('reload');	
 				    	   jQuery.messager.alert('提示:','你好,保存成功，下月统计时生效!','info'); 
 				       }
 			     });
-		})
+		}
 	
 	
 		$.extend($.fn.datagrid.methods, {

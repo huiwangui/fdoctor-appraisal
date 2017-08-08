@@ -1,6 +1,8 @@
 package com.boco.common.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +23,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	private static final char SEPARATOR = '_';
 	private static final String CHARSET_NAME = "UTF-8";
+	private static final String SALT = "du2390rdksa#&&%$^&I*OPO";
 
 	/**
 	 * 转换为字节数组
@@ -447,5 +450,36 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		Matcher m = p.matcher(str);
 		return m.replaceAll("").trim();
 	}
+	
+	
+    /**
+     * 
+     * toMd5:(字符串MD5加密). <br/>
+     * @author q
+     * @param sourceStr
+     * @return
+     */
+    public static String toMd5(String sourceStr){
+    	String result = "";
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update((sourceStr+SALT).getBytes());
+            byte b[] = md.digest();
+            int i;
+            StringBuffer buf = new StringBuffer("");
+            for (int offset = 0; offset < b.length; offset++) {
+                i = b[offset];
+                if (i < 0)
+                    i += 256;
+                if (i < 16)
+                    buf.append("0");
+                buf.append(Integer.toHexString(i));
+            }
+            result = buf.toString();
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println(e);
+        }
+        return result;
+    }
 
 }

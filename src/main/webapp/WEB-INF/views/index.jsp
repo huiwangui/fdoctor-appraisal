@@ -55,7 +55,7 @@
 								</dd>
 								 -->
 								<dd>
-										<a href="/fdoctor-appraisal/user/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;注销</a>
+										<a href="/fdoctor-appraisal/user/loginOut"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;注销</a>
 								</dd>
 							</dl>
 						</li>
