@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
 	
-	<table id="dg" 
+	<table id="dg" >
 	</table>
 	<!-- 
 	<button class="layui-btn layui-btn-normal" id="save" type="button">保存设置</button>
