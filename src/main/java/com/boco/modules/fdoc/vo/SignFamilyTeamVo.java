@@ -4,12 +4,14 @@ import java.util.Date;
 
 import com.boco.common.persistence.Page;
 
+import ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy;
+
 /**
  * Description
  * @author lzz
  * @date 2017年8月7日 下午3:54:54
  */
-public class signFamilyTeamVo {
+public class SignFamilyTeamVo {
 	
 	/*
 	 * 合同id
@@ -32,10 +34,14 @@ public class signFamilyTeamVo {
 	private String orgName;
 	
 	/*
-	 * 签约服务包
+	 * 签约服务包权值
+	 */
+	private int packValue;
+	
+	/*
+	 * 签约服务包名
 	 */
 	private String packName;
-	
 	/*
 	 * 签约时间
 	 */
@@ -59,7 +65,22 @@ public class signFamilyTeamVo {
 	/*
 	 * 分页控件
 	 */
-	private Page<signFamilyTeamVo> page;
+	private Page<SignFamilyTeamVo> page;
+	
+	/*
+	 * 机构id
+	 */
+	private String orgId;
+	
+	/*
+	 * 团队id
+	 */
+	private String teamId;
+	
+	/*
+	 * 查询人员类型
+	 */
+	private String personType;
 	
 	public int getId() {
 		return id;
@@ -85,14 +106,38 @@ public class signFamilyTeamVo {
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
 	}
+	public Date getSignTime() {
+		return signTime;
+	}
+	public String getOrgId() {
+		return orgId;
+	}
+	public int getPackValue() {
+		return packValue;
+	}
+	public void setPackValue(int packValue) {
+		this.packValue = packValue;
+	}
 	public String getPackName() {
 		return packName;
 	}
 	public void setPackName(String packName) {
 		this.packName = packName;
 	}
-	public Date getSignTime() {
-		return signTime;
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+	public String getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(String teamId) {
+		this.teamId = teamId;
+	}
+	public String getPersonType() {
+		return personType;
+	}
+	public void setPersonType(String personType) {
+		this.personType = personType;
 	}
 	public void setSignTime(Date signTime) {
 		this.signTime = signTime;
@@ -115,10 +160,10 @@ public class signFamilyTeamVo {
 	public void setLastTime(String lastTime) {
 		this.lastTime = lastTime;
 	}
-	public Page<signFamilyTeamVo> getPage() {
+	public Page<SignFamilyTeamVo> getPage() {
 		return page;
 	}
-	public void setPage(Page<signFamilyTeamVo> page) {
+	public void setPage(Page<SignFamilyTeamVo> page) {
 		this.page = page;
 	}
 	

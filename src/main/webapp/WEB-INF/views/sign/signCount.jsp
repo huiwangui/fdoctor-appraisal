@@ -56,25 +56,25 @@
 			    
 			    <div class="layui-inline" >
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="总人数${baseEntity.signCount}人" value="1" checked>
+			    		<input type="radio" name="personType" title="总人数${baseEntity.signCount}人" value="0" checked>
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="高血压${baseEntity.hyperCount}人" value="2">
+			    		<input type="radio" name="personType" title="高血压${baseEntity.hyperCount}人" value="1">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="糖尿病${baseEntity.diabetesCount人" value="3">
+			    		<input type="radio" name="personType" title="糖尿病${baseEntity.diabetesCount}人" value="2">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="重症精神病${baseEntity.majorPsychosisCount}人" value="4">
+			    		<input type="radio" name="personType" title="重症精神病${baseEntity.majorPsychosisCount}人" value="3">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="老年人${baseEntity.oldCount}人" value="5">
+			    		<input type="radio" name="personType" title="老年人${baseEntity.oldCount}人" value="4">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="孕产妇${baseEntity.maternalCount}人" value="6">
+			    		<input type="radio" name="personType" title="孕产妇${baseEntity.maternalCount}人" value="5">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="儿童${baseEntity.childrenCount}人" value="7">
+			    		<input type="radio" name="personType" title="儿童${baseEntity.childrenCount}人" value="6">
 			    	</div>
 			    
 			    </div>
@@ -90,9 +90,7 @@
 		</form>
         </blockquote>
 		<div class="layui-btn-group">
-		<c:if test="${fn:length(sessionScope.user_in_session.orgIds)> 1}">  
-		  <button class="layui-btn layui-btn-primary layui-btn-small" id="detailButton"><i class="layui-icon">&#xe654;</i>新增团队</button>
-		</c:if> 
+			<button class="layui-btn layui-btn-primary layui-btn-small" id="detailButton"><i class="layui-icon">&#xe654;</i>签约详情</button>
 		</div>
         <div id="content" style="width: 100%;height: 500px;"></div>
     </div>
@@ -115,7 +113,7 @@
                 //});
                 btable.set({
                     elem: '#content',
-                    url: '/fdoctor-appraisal/team/getSignDetail',
+                    url: '/fdoctor-appraisal/sign/getSignDetail',
                     type: 'GET',
                     pageSize: 10,
                     columns: [{
@@ -125,7 +123,7 @@
                     },{
                         fieldName: '签约家庭',
                         field: 'personName',
-                        colRender : 'typeRenderb'
+                        colRender : 'typeRenderB'
                     },{
                         fieldName: '团队名称',
                         field: 'docName',
@@ -141,7 +139,7 @@
                         field: 'lastTime'
                     },{
                         fieldName: '签约时间',
-                        field: 'signTime'
+                        field: 'signTimeStr'
                     }],
                     even: true,
                     //skin: 'row',
@@ -243,7 +241,7 @@
     		}
     		return param;
     	}
-        function typeRenderA(data){
+        function typeRenderB(data){
         	if(data==undefined){
         		return "";
         	}else{

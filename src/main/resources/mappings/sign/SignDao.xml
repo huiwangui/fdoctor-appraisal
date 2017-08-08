@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.boco.modules.fdoc.dao.sign.SignDao">
+
+	<select id="getSignListByType" parameterType="com.boco.modules.fdoc.vo.SignFamilyTeamVo" resultType="com.boco.modules.fdoc.vo.SignFamilyTeamVo">
+	
+	select 
+		a.id,c.person_name,d.doc_name,b.doc_org_name org_name,a.service_pack_value pack_value,
+		a.sign_time,a.due_time
+	from t_sign_agreement a
+	left join t_user_doc_sign b on a.sign_id=b.id
+	left join t_person_information c on b.family_id=c.family_id
+	left join t_doctor d on b.doc_team_id = d.team_id
+	where c.master_flag='1' and d.leader_flag='1'
+	<if test="teamId != null and teamId != ''">
+		and d.team_id=#{teamId}
+	</if>
+	<if test="orgId != null and orgId != ''">
+		and d.org_id=#{orgId}
+	</if>
+	and b.family_id in(
+		select family_id 
+		from t_person_information e
+		left join t_person_desease_info f on e.person_id=f.person_id 
+		where 1=1
+			<if test="personType=='1'">
+			and hyper_flag='1'
+			</if>
+			<if test="personType=='2'">
+			and diabetes_flag='1'
+			</if>
+			<if test="personType=='3'">
+			and major_psychosis_flag='1'
+			</if>
+			<if test="personType=='4'">
+			and oldm_flag='1'
+			</if>
+			<if test="personType=='5'">
+			and maternal_flag='1'
+			</if>
+			<if test="personType=='6'">
+			and child_flag='1'
+			</if>
+		)	
+	
+	</select>
+	
+	<select id="getSignListByTypeCount" parameterType="com.boco.modules.fdoc.vo.SignFamilyTeamVo" resultType="integer">
+	
+	select 
+		count(*)
+	from t_sign_agreement a
+	left join t_user_doc_sign b on a.sign_id=b.id
+	left join t_person_information c on b.family_id=c.family_id
+	left join t_doctor d on b.doc_team_id = d.team_id
+	where c.master_flag='1' and d.leader_flag='1'
+	<if test="teamId != null and teamId != ''">
+		and d.team_id=#{teamId}
+	</if>
+	<if test="orgId != null and orgId != ''">
+		and d.org_id=#{orgId}
+	</if>
+	and b.family_id in(
+		select family_id 
+		from t_person_information e
+		left join t_person_desease_info f on e.person_id=f.person_id 
+		where 1=1
+			<if test="personType=='1'">
+			and hyper_flag='1'
+			</if>
+			<if test="personType=='2'">
+			and diabetes_flag='1'
+			</if>
+			<if test="personType=='3'">
+			and major_psychosis_flag='1'
+			</if>
+			<if test="personType=='4'">
+			and oldm_flag='1'
+			</if>
+			<if test="personType=='5'">
+			and maternal_flag='1'
+			</if>
+			<if test="personType=='6'">
+			and child_flag='1'
+			</if>
+		)	
+	
+	</select>
+
+	
+</mapper>

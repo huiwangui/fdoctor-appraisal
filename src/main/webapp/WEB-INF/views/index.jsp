@@ -118,6 +118,18 @@
 				});
 				var navs = [
 				        
+							{
+							    title: "服务监管",
+							    icon: "&#xe638;",
+							    href: "c",
+							    children: [
+							        {
+							            title: "签约管理",
+							            icon: "&#xe629;",
+							            href: "/fdoctor-appraisal/sign/showPage"
+							        }
+							    ]
+							},
 				            {
 				                title: "设置",
 				                icon: "&#xe638;",

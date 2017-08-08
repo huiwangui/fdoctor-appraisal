@@ -170,5 +170,21 @@ public class StatisticsDayBasedataEntity {
 		this.createTime = createTime;
 	}
 
+	public int getOldCount() {
+		return oldCount;
+	}
+
+	public void setOldCount(int oldCount) {
+		this.oldCount = oldCount;
+	}
+
+	public int getMaternalCount() {
+		return maternalCount;
+	}
+
+	public void setMaternalCount(int maternalCount) {
+		this.maternalCount = maternalCount;
+	}
+	
 
 }
