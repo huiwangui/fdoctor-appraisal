@@ -6,4 +6,24 @@
 		id, team_id, sign_increment, hyper_increment, diabetes_increment, phychosis_increment, old_increment, 
 		maternal_increment, children_increment, family_increment, month, create_time
 	</sql>
+	
+	<!-- 获取团队签约管理月度数据集合 -->
+	<select id="getMonthSignTeamDataList" parameterType="string" resultType="com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo">
+		SELECT
+			b.doc_name doctorName,
+			a.*, c.result_score
+		FROM
+			t_appraisal_month_sign_team_increment a
+		LEFT JOIN (
+			SELECT
+				team_id,
+				doc_name
+			FROM
+				t_doctor
+			WHERE
+				leader_flag = 1
+		) b ON a.team_id = b.team_id
+		LEFT JOIN t_appraisal_month_team_score c ON a.team_id = c.team_id
+		AND a.`month` = c.`month`
+	</select>
 </mapper>
