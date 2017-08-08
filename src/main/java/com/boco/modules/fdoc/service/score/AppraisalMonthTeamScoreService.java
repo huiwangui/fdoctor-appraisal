@@ -1,6 +1,7 @@
 package com.boco.modules.fdoc.service.score;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity;
 import com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo;
@@ -52,6 +53,11 @@ public interface AppraisalMonthTeamScoreService {
 	 */
 	public List<AppraisalMonthTeamScoreVo> getAppraisalMonthTeamScoreListByMonth(String month);
 
-	 
+	/**
+	 * 按照分数线对月份团队得分数据进行分组
+	 * @param month
+	 * @return
+	 */
+	public Map<String, Object> getAppraisalMonthTeamScoreWithGrade(String month);
 
 }
