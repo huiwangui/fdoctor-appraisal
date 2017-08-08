@@ -14,6 +14,7 @@ import com.boco.common.enums.ApiStatusEnum;
 import com.boco.common.json.BaseJsonVo;
 import com.boco.common.utils.JsonUtils;
 import com.boco.common.utils.MatcherUtiles;
+import com.boco.common.utils.StringUtils;
 import com.boco.modules.fdoc.model.system.AppraisalUserEntity;
 import com.boco.modules.fdoc.service.system.AppraisalUserService;
 
@@ -28,7 +29,7 @@ public class AppraisalUserController {
 	public String save(HttpServletRequest request,String body) {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-		AppraisalUserEntity entity=new AppraisalUserEntity(userName,password);
+		AppraisalUserEntity entity=new AppraisalUserEntity(StringUtils.toMd5(userName),StringUtils.toMd5(password));
 		AppraisalUserEntity user=appraisalUserService.selectByUserNameAndPassword(entity);
         if(user!=null){
         	// 将登陆用户写入session
@@ -61,13 +62,13 @@ public class AppraisalUserController {
       * @param request
       * @param password
       * @param newpassword
-      * @param repassword
       * @return
       *
       */
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
 	@ResponseBody
-	public String updatePassword(HttpServletRequest request,String password,String newpassword,String repassword) {
+	public String updatePassword(HttpServletRequest request,String password,String newpassword) {
 		// 判断新密码是否合法
 		if (!MatcherUtiles.noSpecialChar(newpassword)) {
 			return JsonUtils.getJson(BaseJsonVo.empty(
@@ -75,20 +76,24 @@ public class AppraisalUserController {
 					ApiStatusEnum.PASSWORD_OUTLAW.getValue()));
 		}
 		AppraisalUserEntity user=(AppraisalUserEntity)request.getSession().getAttribute("user_session");
-        if(password.equals(user.getPassword())){
-        	AppraisalUserEntity entity=new AppraisalUserEntity(user.getId(),user.getUserName(),newpassword,user.getType());
-        	int result=appraisalUserService.updateByPrimaryKeySelective(entity);
-        	 if(result>0){
-        		 request.getSession().setAttribute("user_session", entity);
+		if(user==null){
+			return JsonUtils.getJson(BaseJsonVo.empty(
+					ApiStatusEnum.SESSION_TOKEN_VALID.getKey(),
+					ApiStatusEnum.SESSION_TOKEN_VALID.getValue()));
+		}
+		AppraisalUserEntity entity=new AppraisalUserEntity(user.getUserName(),StringUtils.toMd5(password));
+        if(entity!=null){
+        	AppraisalUserEntity updateEntity=new AppraisalUserEntity(user.getId(),user.getUserName(),StringUtils.toMd5(newpassword),user.getType());
+        	int result=appraisalUserService.updateByPrimaryKeySelective(updateEntity);
+        	if(result>0){
+        		 updateEntity.setPassword(null);
+        		 request.getSession().setAttribute("user_session", updateEntity);
       	 	   return JsonUtils.getJson(BaseJsonVo.success(1));
       		}else{
       			return JsonUtils.getJson(BaseJsonVo.error());
       		}
-        	
         }else{
-        	return JsonUtils.getJson(BaseJsonVo.empty(
-					ApiStatusEnum.OLD_ERROR.getKey(),
-					ApiStatusEnum.OLD_ERROR.getValue()));
+        	return JsonUtils.getJson(BaseJsonVo.empty(ApiStatusEnum.OLD_ERROR.getKey(),ApiStatusEnum.OLD_ERROR.getValue()));
         }
 	}
    /**
@@ -98,11 +103,10 @@ public class AppraisalUserController {
     * @return
     *
     */
-	@RequestMapping(value = "/loginOut", method = RequestMethod.GET)
-	@ResponseBody
+	@RequestMapping(value = "/loginOut")
 	public String loginOut(HttpServletRequest request,String body) {
         
 		request.getSession().removeAttribute("user_session");
-		return "redirect:/fdoctor-appraisal";
+		return "redirect:/";
 	}
 }

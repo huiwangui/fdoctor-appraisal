@@ -16,7 +16,7 @@
 	</head>
 
 	<body>
-		首页
+		首页....
 	</body>
 	
 	<script type="text/javascript">

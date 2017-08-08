@@ -36,7 +36,7 @@
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/statics/**" />
 			<mvc:exclude-mapping path="/login.jsp" />
-			<mvc:exclude-mapping path="/sys/docLogin" />
+			<mvc:exclude-mapping path="/user/login" />
 			<bean class="com.boco.modules.fdoc.interceptor.LoginInterceptor">
 			</bean>
 		</mvc:interceptor>

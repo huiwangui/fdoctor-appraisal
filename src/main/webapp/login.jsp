@@ -12,7 +12,7 @@
     <script type="text/javascript" src="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/layui.js"></script>
 </head>
 
-<body>
+<body  onkeydown="keyLogin();">
 		<div class="header">
 			<span></span>
 			<img src="/fdoctor-appraisal/statics/image/login/logo.png" alt="" />
@@ -69,6 +69,7 @@
 	<script type="text/javascript">
 		//这段是控制屏幕大小变化时候html的根字体大小 百分比形势
 		(function (doc, win) {
+			
 		var docEl = doc.documentElement,
 		resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
 		recalc = function () {
@@ -86,6 +87,14 @@
 		
 
 <script type="text/javascript">
+
+function keyLogin(){ 
+	     if (event.keyCode==13)  //回车键的键值为13 
+	        document.getElementById("loginButton").click(); //调用登录按钮的登录事件 
+}
+
+
+
     layui.use(['form', 'layer'], function () {
 
         // 操作对象
@@ -139,6 +148,8 @@
         }); 
         
     })
+    
+   
 
 </script>
 </body>
