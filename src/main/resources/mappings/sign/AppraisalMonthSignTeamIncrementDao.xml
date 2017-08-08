@@ -25,5 +25,7 @@
 		) b ON a.team_id = b.team_id
 		LEFT JOIN t_appraisal_month_team_score c ON a.team_id = c.team_id
 		AND a.`month` = c.`month`
+		WHERE
+			a.`month` = #{0}
 	</select>
 </mapper>
