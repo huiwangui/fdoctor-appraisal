@@ -80,7 +80,7 @@
 					</ul>
 					<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
 						<div class="layui-tab-item layui-show">
-							<iframe src="/fdoctor-appraisal/user/mainPage" style="min-height: 500px;" filter="main"></iframe>
+							<iframe src="/fdoctor-appraisal/main/mainPage" style="min-height: 500px;" filter="main"></iframe>
 						</div>
 					</div>
 				</div>
