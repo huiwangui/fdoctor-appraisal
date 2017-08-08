@@ -64,7 +64,7 @@ public class AppraisalMonthTeamScoreEntity {
 	    /**
 		 * 公卫服务重性精神病得分（二类指标）
 		 */
-	    private Double publicHealthPhychosisSocre;
+	    private Double publicHealthPhychosisScore;
 	    /**
 		 * 公卫服务老年人得分（二类指标）
 		 */
@@ -108,7 +108,7 @@ public class AppraisalMonthTeamScoreEntity {
 	    /**
 		 * 总评得分（最终得分）
 		 */
-	    private Double resultSocre;
+	    private Double resultScore;
 	    /**
 		 * 统计的目标月份，格式yyyyMM，如201708
 		 */
@@ -195,12 +195,7 @@ public class AppraisalMonthTeamScoreEntity {
 		public void setPublicHealthDiabetesScore(Double publicHealthDiabetesScore) {
 			this.publicHealthDiabetesScore = publicHealthDiabetesScore;
 		}
-		public Double getPublicHealthPhychosisSocre() {
-			return publicHealthPhychosisSocre;
-		}
-		public void setPublicHealthPhychosisSocre(Double publicHealthPhychosisSocre) {
-			this.publicHealthPhychosisSocre = publicHealthPhychosisSocre;
-		}
+		 
 		public Double getPublicHealthOldScore() {
 			return publicHealthOldScore;
 		}
@@ -261,11 +256,18 @@ public class AppraisalMonthTeamScoreEntity {
 		public void setCustomerScore(Double customerScore) {
 			this.customerScore = customerScore;
 		}
-		public Double getResultSocre() {
-			return resultSocre;
+		 
+		public Double getPublicHealthPhychosisScore() {
+			return publicHealthPhychosisScore;
 		}
-		public void setResultSocre(Double resultSocre) {
-			this.resultSocre = resultSocre;
+		public void setPublicHealthPhychosisScore(Double publicHealthPhychosisScore) {
+			this.publicHealthPhychosisScore = publicHealthPhychosisScore;
+		}
+		public Double getResultScore() {
+			return resultScore;
+		}
+		public void setResultScore(Double resultScore) {
+			this.resultScore = resultScore;
 		}
 		public String getMonth() {
 			return month;

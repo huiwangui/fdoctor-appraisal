@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        field: 'customerScore'	                      
 	                    },{
 	                    	fieldName: '考核结果',
-	                    	field : 'resultSocre'                        
+	                    	field : 'resultScore'                        
 	                    },{
 	                    	fieldName: '团队实力',
 	                    	colRender : 'typeRender'	                        

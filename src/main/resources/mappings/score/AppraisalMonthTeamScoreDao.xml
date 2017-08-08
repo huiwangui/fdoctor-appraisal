@@ -5,11 +5,11 @@
 	  <sql id="Base_Column_List" >
 	    id, team_id, sign_increment, family_increment, sign_hyper_score, sign_diabetes_score, 
 	    sign_phychosis_score, sign_old_score, sign_maternal_score, sign_children_score, sign_manage_score, 
-	    public_health_hyper_score, public_health_diabetes_score, public_health_phychosis_socre, 
+	    public_health_hyper_score, public_health_diabetes_score, public_health_phychosis_score, 
 	    public_health_old_score, public_health_maternal_score, public_health_children_score, 
 	    public_health_score, health_manage_edu_score, health_manage_daily_activity_score, 
 	    health_manage_assessment_score, health_manage_document_score, health_manage_score, 
-	    customer_score, result_socre, month, create_time
+	    customer_score, result_score, month, create_time
 	  </sql>
 	  <!-- 条件查询医生团队 -->
 	  <select id="getTeamScoreList" parameterType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo" resultType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo">
@@ -21,7 +21,7 @@
 			a.public_health_score,
 			a.health_manage_score,
 			a.customer_score,
-			a.result_socre
+			a.result_score
 		FROM
 			t_appraisal_month_team_score a,
 			t_doctor b
@@ -66,7 +66,7 @@
 	  <!-- 根据月份查询指定团队信息 -->
 	  <select id="getAppraisalMonthTeamScoreByMonth" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity" resultType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo">
 	   SELECT
-			a.result_socre,
+			a.result_score,
 			a.sign_increment,
 			a.family_increment,
 			count(DISTINCT(e.person_id)) chronic_disease_number,
@@ -107,7 +107,7 @@
 			AVG(a.sign_manage_score) sign_manage_score,
 			AVG(a.public_health_hyper_score) public_health_hyper_score,
 			AVG(a.public_health_diabetes_score) public_health_diabetes_score,
-			AVG(a.public_health_phychosis_socre) public_health_phychosis_socre,
+			AVG(a.public_health_phychosis_score) public_health_phychosis_score,
 			AVG(a.public_health_old_score) public_health_old_score,
 			AVG(a.public_health_maternal_score) public_health_maternal_score,
 			AVG(a.public_health_children_score) public_health_children_score,
@@ -140,11 +140,11 @@
 		  SELECT  
 		    a.team_id, a.sign_increment, a.family_increment, a.sign_hyper_score, a.sign_diabetes_score, 
 		    a.sign_phychosis_score, a.sign_old_score, a.sign_maternal_score, a.sign_children_score, a.sign_manage_score, 
-		    a.public_health_hyper_score, a.public_health_diabetes_score, a.public_health_phychosis_socre, 
+		    a.public_health_hyper_score, a.public_health_diabetes_score, a.public_health_phychosis_score, 
 		    a.public_health_old_score, a.public_health_maternal_score, a.public_health_children_score, 
 		    a.public_health_score, a.health_manage_edu_score, a.health_manage_daily_activity_score, 
 		    a.health_manage_assessment_score, a.health_manage_document_score, a.health_manage_score, 
-		    a.customer_score, a.result_socre, a.month, a.create_time,b.doc_name doctor_name
+		    a.customer_score, a.result_score, a.month, a.create_time,b.doc_name doctor_name
 		  FROM
 			t_appraisal_month_team_score a,
 			t_doctor b

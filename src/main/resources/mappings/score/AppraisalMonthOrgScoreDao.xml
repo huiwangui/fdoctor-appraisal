@@ -5,11 +5,11 @@
 	 <sql id="Base_Column_List" >
 	    id, org_id, sign_increment, family_increment, sign_hyper_score, sign_diabetes_score, 
 	    sign_phychosis_score, sign_old_score, sign_maternal_score, sign_children_score, sign_manage_score, 
-	    public_health_hyper_score, public_health_diabetes_score, public_health_phychosis_socre, 
+	    public_health_hyper_score, public_health_diabetes_score, public_health_phychosis_score, 
 	    public_health_old_score, public_health_maternal_score, public_health_children_score, 
 	    public_health_score, health_manage_edu_score, health_manage_daily_activity_score, 
 	    health_manage_assessment_score, health_manage_document_score, health_manage_score, 
-	    customer_score, result_socre, team_total, un_qualified_increment, qualified_increment, 
+	    customer_score, result_score, team_total, un_qualified_increment, qualified_increment, 
 	    excellent_increment, month, create_time
 	  </sql>
 	  <!-- 根据月份获取机构当月信息 -->
@@ -21,7 +21,7 @@
 			a.excellent_increment,
 			a.sign_increment,
 			a.family_increment,
-			a.result_socre,
+			a.result_score,
 			f.address org_address,
 			f.org_name,
 			count(DISTINCT(b.person_id)) chronic_disease_number
@@ -50,11 +50,11 @@
 		 SELECT
 			a.org_id, a.sign_increment, a.family_increment, a.sign_hyper_score, a.sign_diabetes_score, 
 		    a.sign_phychosis_score, a.sign_old_score, a.sign_maternal_score, a.sign_children_score, a.sign_manage_score, 
-		    a.public_health_hyper_score, a.public_health_diabetes_score, a.public_health_phychosis_socre, 
+		    a.public_health_hyper_score, a.public_health_diabetes_score, a.public_health_phychosis_score, 
 		    a.public_health_old_score, a.public_health_maternal_score, a.public_health_children_score, 
 		    a.public_health_score, a.health_manage_edu_score, a.health_manage_daily_activity_score, 
 		    a.health_manage_assessment_score, a.health_manage_document_score, a.health_manage_score, 
-		    a.customer_score, a.result_socre, a.team_total, a.un_qualified_increment, a.qualified_increment, 
+		    a.customer_score, a.result_score, a.team_total, a.un_qualified_increment, a.qualified_increment, 
 		    a.excellent_increment, a.month, a.create_time,b.org_name
 		 FROM
 			t_appraisal_month_org_score a,

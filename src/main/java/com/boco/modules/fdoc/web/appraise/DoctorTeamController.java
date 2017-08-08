@@ -91,8 +91,8 @@ public class DoctorTeamController {
 			if(team.getCustomerScore()==null){
 				team.setCustomerScore(0.0);
 			}
-			if(team.getResultSocre()==null){
-				team.setResultSocre(0.0);
+			if(team.getResultScore()==null){
+				team.setResultScore(0.0);
 			}
 		}
 		//return JsonUtils.getJson(teamScoreList);
@@ -107,7 +107,7 @@ public class DoctorTeamController {
 		AppraisalMonthTeamScoreVo vo = appraisalMonthTeamScoreService.getAppraisalMonthTeamScoreByMonth(entity);
 		//获取指定团队的实力
 		AppraisalMonthTeamScoreVo scoreVo =appraisalMonthTeamScoreService.getAppraisalMonthTeamScoreByTeamId(teamId);
-		scoreVo.setResultSocre(vo.getResultSocre());
+		scoreVo.setResultScore(vo.getResultScore());
 		scoreVo.setSignIncrement(vo.getSignIncrement());
 		scoreVo.setFamilyIncrement(vo.getFamilyIncrement());
 		scoreVo.setChronicDiseaseNumber(vo.getChronicDiseaseNumber());

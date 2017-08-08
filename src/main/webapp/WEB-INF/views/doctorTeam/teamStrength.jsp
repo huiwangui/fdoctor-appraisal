@@ -24,20 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </head>
  <body>
  <table class="layui-table" lay-even="" lay-skin="nob">
-  <!-- <colgroup>
-    <col width="150">
-    <col width="150">
-    <col width="200">
-    <col>
-  </colgroup>
-  <thead>
-    <tr>
-      <th>人物</th>
-      <th>民族</th>
-      <th>出场时间</th>
-      <th>格言</th>
-    </tr> 
-  </thead> -->
+ 
   <tbody>
     <tr>
       <td>${team.orgName }</td>
@@ -52,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <tr>
       <td>慢病人数：${team.chronicDiseaseNumber }人</td>
-      <td>考核得分：${team.resultSocre }</td>
+      <td>考核得分：${team.resultScore }</td>
       
     </tr>
     <tr>
@@ -126,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		             type: 'radar',           
 		             data : [                 
 		                  {
-		                     value : [${team.publicHealthHyperScore}, ${team.publicHealthDiabetesScore}, ${team.publicHealthPhychosisSocre}, ${team.publicHealthOldScore}, ${team.publicHealthMaternalScore}, ${team.publicHealthChildrenScore}],
+		                     value : [${team.publicHealthHyperScore}, ${team.publicHealthDiabetesScore}, ${team.publicHealthPhychosisScore}, ${team.publicHealthOldScore}, ${team.publicHealthMaternalScore}, ${team.publicHealthChildrenScore}],
 		                     name : '得分情况'
 		                 } 
 		             ],	          
