@@ -19,19 +19,20 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 		return appraisalMonthTeamScoreDao.getTeamScoreList(vo);
 	}
 	@Override
-	public int getTeamScoreListCount(AppraisalMonthTeamScoreVo vo) {
-		 
+	public int getTeamScoreListCount(AppraisalMonthTeamScoreVo vo) {		 
 		return appraisalMonthTeamScoreDao.getTeamScoreListCount(vo);
 	}
 	@Override
-	public AppraisalMonthTeamScoreVo getAppraisalMonthTeamScoreByMonth(AppraisalMonthTeamScoreEntity entity) {
-		 
+	public AppraisalMonthTeamScoreVo getAppraisalMonthTeamScoreByMonth(AppraisalMonthTeamScoreEntity entity) {		 
 		return appraisalMonthTeamScoreDao.getAppraisalMonthTeamScoreByMonth(entity);
 	}
 	@Override
-	public AppraisalMonthTeamScoreVo getAppraisalMonthTeamScoreByTeamId(String teamId) {
-		 
+	public AppraisalMonthTeamScoreVo getAppraisalMonthTeamScoreByTeamId(String teamId) {		 
 		return appraisalMonthTeamScoreDao.getAppraisalMonthTeamScoreByTeamId(teamId);
+	}
+	@Override
+	public List<AppraisalMonthTeamScoreVo> getAppraisalMonthTeamScoreListByMonth(String month) {	 
+		return appraisalMonthTeamScoreDao.getAppraisalMonthTeamScoreListByMonth(month);
 	}
 
 }

@@ -25,4 +25,13 @@ public interface AppraisalMonthOrgScoreService {
 	 */
 	public AppraisalMonthOrgScoreVo getAppraisalMonthOrgScoreByMonth(AppraisalMonthOrgScoreEntity entity);
 
+	/**
+	 * Tilte: getAppraisalMonthOrgScoreListByMonth 
+	 * Description:根据月份获取机构列表
+	 * @param month
+	 * @return List<AppraisalMonthOrgScoreVo>
+	 * @author h
+	 */
+	public List<AppraisalMonthOrgScoreVo> getAppraisalMonthOrgScoreListByMonth(String month);
+
 }

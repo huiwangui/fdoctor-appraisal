@@ -3,18 +3,15 @@
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.boco.modules.fdoc.dao.score.AppraisalMonthOrgScoreDao">
 	 <sql id="Base_Column_List" >
-	    id, org_id, sign_increment, family_increment, sign_manage_score, public_health_score, 
-	    health_manage_score, customer_score, result_socre, team_total, un_qualified_increment, 
-	    qualified_increment, excellent_increment, month, create_time
+	    id, org_id, sign_increment, family_increment, sign_hyper_score, sign_diabetes_score, 
+	    sign_phychosis_score, sign_old_score, sign_maternal_score, sign_children_score, sign_manage_score, 
+	    public_health_hyper_score, public_health_diabetes_score, public_health_phychosis_socre, 
+	    public_health_old_score, public_health_maternal_score, public_health_children_score, 
+	    public_health_score, health_manage_edu_score, health_manage_daily_activity_score, 
+	    health_manage_assessment_score, health_manage_document_score, health_manage_score, 
+	    customer_score, result_socre, team_total, un_qualified_increment, qualified_increment, 
+	    excellent_increment, month, create_time
 	  </sql>
-	  <select id="getHospitalList" resultType="com.boco.modules.fdoc.model.score.HospitalEntity"   >
-	    SELECT
-			b.id,
-			b.org_name
-		FROM 
-			t_hospital b
-		 
-	  </select>
 	  <!-- 根据月份获取机构当月信息 -->
 	  <select id="getAppraisalMonthOrgScoreByMonth" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity" resultType="com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo">
 	   	SELECT
@@ -47,6 +44,24 @@
 		<if test="month != null  and month != ''">
 			and a.month=#{month}
 		</if>		 
+	  </select>
+	  <!-- 根据月份获取机构列表 -->
+	  <select id="getAppraisalMonthOrgScoreListByMonth" parameterType="string" resultType="com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo">	  
+		 SELECT
+			a.org_id, a.sign_increment, a.family_increment, a.sign_hyper_score, a.sign_diabetes_score, 
+		    a.sign_phychosis_score, a.sign_old_score, a.sign_maternal_score, a.sign_children_score, a.sign_manage_score, 
+		    a.public_health_hyper_score, a.public_health_diabetes_score, a.public_health_phychosis_socre, 
+		    a.public_health_old_score, a.public_health_maternal_score, a.public_health_children_score, 
+		    a.public_health_score, a.health_manage_edu_score, a.health_manage_daily_activity_score, 
+		    a.health_manage_assessment_score, a.health_manage_document_score, a.health_manage_score, 
+		    a.customer_score, a.result_socre, a.team_total, a.un_qualified_increment, a.qualified_increment, 
+		    a.excellent_increment, a.month, a.create_time,b.org_name
+		 FROM
+			t_appraisal_month_org_score a,
+			t_hospital b
+		 WHERE
+			a.org_id = b.id
+		 and a.`month` =#{0}
 	  </select>
 	 
 </mapper>

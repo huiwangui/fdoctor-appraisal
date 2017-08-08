@@ -42,6 +42,15 @@ public interface AppraisalMonthTeamScoreService {
 	 * @author h
 	 */
 	public AppraisalMonthTeamScoreVo getAppraisalMonthTeamScoreByTeamId(String teamId);
+	
+	/**
+	 * Tilte: getAppraisalMonthTeamScoreListByMonth 
+	 * Description:根据月份获取医生团队列表
+	 * @param month
+	 * @return List<AppraisalMonthTeamScoreVo>
+	 * @author h
+	 */
+	public List<AppraisalMonthTeamScoreVo> getAppraisalMonthTeamScoreListByMonth(String month);
 
 	 
 
