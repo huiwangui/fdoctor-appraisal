@@ -10,13 +10,7 @@ import com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo;
 
 @MyBatisDao
 public interface AppraisalMonthOrgScoreDao extends CrudDao<AppraisalMonthOrgScoreEntity>{
-	/**
-	 * Tilte: getorganizationList 
-	 * Description:获取所有医疗机构
-	 * @return List<AppraisalMonthOrgScoreEntity>
-	 * @author h
-	 */
-	public List<HospitalEntity> getHospitalList();
+	 
 	/**
 	 * Tilte: getAppraisalMonthOrgScoreByMonth 
 	 * Description:根据月份获取机构当月信息
@@ -25,4 +19,12 @@ public interface AppraisalMonthOrgScoreDao extends CrudDao<AppraisalMonthOrgScor
 	 * @author h
 	 */
 	public AppraisalMonthOrgScoreVo getAppraisalMonthOrgScoreByMonth(AppraisalMonthOrgScoreEntity entity);
+	/**
+	 * Tilte: getAppraisalMonthOrgScoreListByMonth 
+	 * Description:根据月份获取机构列表
+	 * @param month
+	 * @return List<AppraisalMonthOrgScoreVo>
+	 * @author h
+	 */
+	public List<AppraisalMonthOrgScoreVo> getAppraisalMonthOrgScoreListByMonth(String month);
 }
