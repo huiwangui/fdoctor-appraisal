@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">    
-    <title>医疗机构考核结果</title>        
+    <title>医生团队考核结果</title>        
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">    
@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <form class="layui-form" action="">
         	<div class="layui-form-item" align="left" style="margin-left: 0px;margin-top: 10px;">
 			  	<div class="layui-inline"  >
-				  	<label class="layui-form-label" > 医疗机构：</label>
+				  	<label class="layui-form-label" style="padding:9px 0"> 医疗机构：</label>
 				    <div class="layui-input-inline" ">
 				      	<select name="orgId" id="orgId" lay-search>
 							<option value="" style="width: 210px;">请选择</option>			 
@@ -42,17 +42,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  	</div>
 			  	
 			  	<div class="layui-inline" >
-			   	    <label class="layui-form-label"  style="width: 100px;"> 月份：</label>
+			   	    <label class="layui-form-label"  style="width: 100px; padding:9px 0"> 月份：</label>
 					<div class="layui-input-inline">
-						<input type="text" id="month" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'})" class="Wdate"/> 
+						<input type="text" id="month" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'})" class="Wdate" style="color:#666;height:38px;text-indent:10px;border:1px solid #e6e6e6;line-height:38px;"/> 
 					</div>     
 			    </div>
 			    
 			    
 			 	<div class="layui-inline" >
-				 	<label class="layui-form-label" > 医生姓名：</label>
+				 	<label class="layui-form-label" style="padding:9px 0"> 医生姓名：</label>
 				    <div class="layui-input-inline">
-				      <input id="doctorName">     
+				      <input id="doctorName" style="height:38px;text-indent:10px;border:1px solid #e6e6e6;color:#666;line-height:38px;">     
 				    </div>
 			    </div>
 			     
@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    
 			    <div class="layui-inline" >
 			    	 <div class="layui-input-inline">
-			    	<button class="layui-btn layui-btn-radius" style="width: 150px;margin-left: 50px;" id="selectButton" type="button">查询</button>
+			    	<button class="layui-btn layui-btn-radius" style="width: 150px;" id="selectButton" type="button">查询</button>
 			    	</div>
 			    </div>
 			    
@@ -72,10 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
      <script>
-	/* 	 layui.use('form', function(){
-		 	var form = layui.form();
-		 }); */
-		 
+	 
 		 
 		 function tableConfig(){
 	    		layui.config({
@@ -91,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    elem: '#content',
 	                    url: '/fdoctor-appraisal/doctorTeam/teamScoreList',
 	                    type: 'GET',
-	                    pageSize: 1,
+	                    pageSize: 15,
 	                    columns: [{
 	                        fieldName: '医生团队',
 	                        field: 'doctorName'                        
@@ -121,14 +118,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    	field : 'resultScore'                        
 	                    },{
 	                    	fieldName: '团队实力',
+	                    	field : 'map', 
 	                    	colRender : 'typeRender'	                        
 	                    }],
 	                    even: true,
 	                    //skin: 'row',
-	                   checkbox: true,
-	                   field: 'id',
+	                    checkbox: false,
+	                    field: 'id',
 	                    paged: true,
-	                    singleSelect: true,
+	                    //singleSelect: true,
 	                    params : packParams(),
 	                });
 	                btable.render();
@@ -163,24 +161,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		}
 	    		return param;
 	    	}
-	        function typeRender( ){
-			    return "<a href='#'>查看</a>"
+	        function typeRender(data){
+	        	var data=eval(data);
+	        	return '<button data-method="offset" data-type="auto" style="width:125px" class="layui-btn" onclick="goHand(\''+data.teamId+'\',\''+data.month+'\')" >查看</button>';
+		 
 	        }
-			/* function typeRenderC(data){
-			    if(data == '0' ){
-			    	return '上午';
-			    }else if(data == '1'){
-			    	return '下午';
-			    }else if(data == '2'){
-			    	return '全天';
-			    }else if(data == '3'){
-			    	return '晚上';
-			    }else if(data == '4'){
-			    	return '休息';
-			    }else{
-	        		return data;
-	        	}
-	        } */
+			function goHand(teamId,month){
+				layer.open({
+             		  type: 2,
+             		  title: false,
+             		  id : Math.ceil(150),
+             		  area: ['1100px', '580px'],
+             		  closeBtn: 1,
+             		  content: "/fdoctor-appraisal/doctorTeam/teamStrength?month="+month+"&teamId="+teamId
+              	});
+				//window.open("/fdoctor-appraisal/doctorTeam/teamStrength?month="+month+"&teamId="+teamId);
+				//window.location.href="/fdoctor-appraisal/doctorTeam/teamStrength?month="+month+"&teamId="+teamId;
+			}
 	</script>
  </body>
 </html>

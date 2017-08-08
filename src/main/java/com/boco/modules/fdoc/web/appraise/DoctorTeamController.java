@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.validator.internal.metadata.aggregated.ValidatableParametersMetaData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,17 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boco.common.json.BaseJsonVo;
 import com.boco.common.persistence.Page;
-import com.boco.common.utils.DateUtils;
 import com.boco.common.utils.JsonUtils;
-import com.boco.common.utils.ObjectUtils;
 import com.boco.common.utils.StringUtils;
-import com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity;
 import com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity;
 import com.boco.modules.fdoc.model.score.HospitalEntity;
 import com.boco.modules.fdoc.service.score.AppraisalMonthOrgScoreService;
 import com.boco.modules.fdoc.service.score.AppraisalMonthTeamScoreService;
-import com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo;
 import com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo;
+ 
+ 
  
  
 
@@ -94,6 +91,8 @@ public class DoctorTeamController {
 			if(team.getResultScore()==null){
 				team.setResultScore(0.0);
 			}
+			 
+			 
 		}
 		//return JsonUtils.getJson(teamScoreList);
 		return JsonUtils.getJson(BaseJsonVo.pageList(teamScoreList, count));

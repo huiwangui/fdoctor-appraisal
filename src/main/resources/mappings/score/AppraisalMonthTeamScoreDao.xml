@@ -14,6 +14,8 @@
 	  <!-- 条件查询医生团队 -->
 	  <select id="getTeamScoreList" parameterType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo" resultType="com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo">
 	   SELECT
+	        a.team_id,
+	        a.month,
 			b.doc_name doctor_name,
 			a.sign_increment,
 			a.family_increment,

@@ -130,6 +130,23 @@
 							        }
 							    ]
 							},
+							{
+							    title: "考核结果",
+							    icon: "&#xe638;",
+							    href: "c",
+							    children: [
+							        {
+							            title: "医疗机构",
+							            icon: "&#xe629;",
+							            href: "/fdoctor-appraisal/sign/showPage"
+							        },
+							        {
+							            title: "医生团队",
+							            icon: "&#xe629;",
+							            href: "/fdoctor-appraisal/doctorTeam/homePage"
+							        }
+							    ]
+							},
 				            {
 				                title: "设置",
 				                icon: "&#xe638;",
