@@ -9,6 +9,15 @@ import com.boco.modules.fdoc.model.system.AppraisalGradeLineEntity;
 @MyBatisDao
 public interface AppraisalGradeLineDao extends CrudDao<AppraisalGradeLineEntity>{
 
-	List<AppraisalGradeLineEntity> findAll();
+	/**
+	 * 查询所有分数线
+	 * @return
+	 */
+	public List<AppraisalGradeLineEntity> findAll();
 
+	/**
+	 * 获取优秀分数线
+	 * @return
+	 */
+	public AppraisalGradeLineEntity getExcellentGradeLine();
 }
