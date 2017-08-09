@@ -21,102 +21,102 @@ public class AppraisalMonthSignOrgIncrementVo extends AppraisalMonthSignOrgIncre
 	/**
 	 * 高血压签约得分（二类指标）
 	 */
-    private Double signHyperScore;
+    private double signHyperScore;
     
     /**
 	 * 糖尿病得分（二类指标）
 	 */
-    private Double signDiabetesScore;
+    private double signDiabetesScore;
     
     /**
 	 * 重性精神病签约得分（二类指标）
 	 */
-    private Double signPhychosisScore;
+    private double signPhychosisScore;
     
     /**
 	 * 签约管理老年人得分（二类指标）
 	 */
-    private Double signOldScore;
+    private double signOldScore;
     
     /**
 	 * 孕产妇签约得分（二类指标）
 	 */
-    private Double signMaternalScore;
+    private double signMaternalScore;
     
     /**
 	 * 儿童签约得分
 	 */
-    private Double signChildrenScore;
+    private double signChildrenScore;
     
     /**
 	 * 签约管理得分（一类指标）
 	 */
-    private Double signManageScore;
+    private double signManageScore;
     
     /**
 	 * 公卫服务高血压得分（二类指标）
 	 */
-    private Double publicHealthHyperScore;
+    private double publicHealthHyperScore;
     
     /**
 	 * 公卫服务糖尿病得分（二类指标）
 	 */
-    private Double publicHealthDiabetesScore;
+    private double publicHealthDiabetesScore;
     
     /**
 	 * 公卫服务重性精神病得分（二类指标）
 	 */
-    private Double publicHealthPhychosisScore;
+    private double publicHealthPhychosisScore;
     
     /**
 	 * 公卫服务老年人得分（二类指标）
 	 */
-    private Double publicHealthOldScore;
+    private double publicHealthOldScore;
     
     /**
 	 * 公卫服务孕产妇得分
 	 */
-    private Double publicHealthMaternalScore;
+    private double publicHealthMaternalScore;
     
     /**
 	 * 公卫服务儿童得分（二类指标）
 	 */
-    private Double publicHealthChildrenScore;
+    private double publicHealthChildrenScore;
     
     /**
 	 * 公卫服务得分（一类指标）
 	 */
-    private Double publicHealthScore;
+    private double publicHealthScore;
     
     /**
 	 * 健康管理健康教育得分（二类指标）
 	 */
-    private Double healthManageEduScore;
+    private double healthManageEduScore;
     
     /**
 	 * 健康管理日活跃量得分（二类指标）
 	 */
-    private Double healthManageDailyActivityScore;
+    private double healthManageDailyActivityScore;
     
     /**
 	 * 健康管理健康评估得分（二类指标）
 	 */
-    private Double healthManageAssessmentScore;
+    private double healthManageAssessmentScore;
     
     /**
 	 * 健康管理建档得分（二类指标）
 	 */
-    private Double healthManageDocumentScore;
+    private double healthManageDocumentScore;
     
     /**
 	 * 健康管理得分（一类指标）
 	 */
-    private Double healthManageScore;
+    private double healthManageScore;
     
     /**
 	 * 居民满意度得分（一类得分）
 	 */
-    private Double customerScore;
+    private double customerScore;
     
 
 	public String getOrgName() {
@@ -135,164 +135,164 @@ public class AppraisalMonthSignOrgIncrementVo extends AppraisalMonthSignOrgIncre
 		this.resultScore = resultScore;
 	}
 
-	public Double getSignHyperScore() {
+	public double getSignHyperScore() {
 		return signHyperScore;
 	}
 
-	public void setSignHyperScore(Double signHyperScore) {
+	public void setSignHyperScore(double signHyperScore) {
 		this.signHyperScore = signHyperScore;
 	}
 
-	public Double getSignDiabetesScore() {
+	public double getSignDiabetesScore() {
 		return signDiabetesScore;
 	}
 
-	public void setSignDiabetesScore(Double signDiabetesScore) {
+	public void setSignDiabetesScore(double signDiabetesScore) {
 		this.signDiabetesScore = signDiabetesScore;
 	}
 
-	public Double getSignPhychosisScore() {
+	public double getSignPhychosisScore() {
 		return signPhychosisScore;
 	}
 
-	public void setSignPhychosisScore(Double signPhychosisScore) {
+	public void setSignPhychosisScore(double signPhychosisScore) {
 		this.signPhychosisScore = signPhychosisScore;
 	}
 
-	public Double getSignOldScore() {
+	public double getSignOldScore() {
 		return signOldScore;
 	}
 
-	public void setSignOldScore(Double signOldScore) {
+	public void setSignOldScore(double signOldScore) {
 		this.signOldScore = signOldScore;
 	}
 
-	public Double getSignMaternalScore() {
+	public double getSignMaternalScore() {
 		return signMaternalScore;
 	}
 
-	public void setSignMaternalScore(Double signMaternalScore) {
+	public void setSignMaternalScore(double signMaternalScore) {
 		this.signMaternalScore = signMaternalScore;
 	}
 
-	public Double getSignChildrenScore() {
+	public double getSignChildrenScore() {
 		return signChildrenScore;
 	}
 
-	public void setSignChildrenScore(Double signChildrenScore) {
+	public void setSignChildrenScore(double signChildrenScore) {
 		this.signChildrenScore = signChildrenScore;
 	}
 
-	public Double getSignManageScore() {
+	public double getSignManageScore() {
 		return signManageScore;
 	}
 
-	public void setSignManageScore(Double signManageScore) {
+	public void setSignManageScore(double signManageScore) {
 		this.signManageScore = signManageScore;
 	}
 
-	public Double getPublicHealthHyperScore() {
+	public double getPublicHealthHyperScore() {
 		return publicHealthHyperScore;
 	}
 
-	public void setPublicHealthHyperScore(Double publicHealthHyperScore) {
+	public void setPublicHealthHyperScore(double publicHealthHyperScore) {
 		this.publicHealthHyperScore = publicHealthHyperScore;
 	}
 
-	public Double getPublicHealthDiabetesScore() {
+	public double getPublicHealthDiabetesScore() {
 		return publicHealthDiabetesScore;
 	}
 
-	public void setPublicHealthDiabetesScore(Double publicHealthDiabetesScore) {
+	public void setPublicHealthDiabetesScore(double publicHealthDiabetesScore) {
 		this.publicHealthDiabetesScore = publicHealthDiabetesScore;
 	}
 
-	public Double getPublicHealthPhychosisScore() {
+	public double getPublicHealthPhychosisScore() {
 		return publicHealthPhychosisScore;
 	}
 
-	public void setPublicHealthPhychosisScore(Double publicHealthPhychosisScore) {
+	public void setPublicHealthPhychosisScore(double publicHealthPhychosisScore) {
 		this.publicHealthPhychosisScore = publicHealthPhychosisScore;
 	}
 
-	public Double getPublicHealthOldScore() {
+	public double getPublicHealthOldScore() {
 		return publicHealthOldScore;
 	}
 
-	public void setPublicHealthOldScore(Double publicHealthOldScore) {
+	public void setPublicHealthOldScore(double publicHealthOldScore) {
 		this.publicHealthOldScore = publicHealthOldScore;
 	}
 
-	public Double getPublicHealthMaternalScore() {
+	public double getPublicHealthMaternalScore() {
 		return publicHealthMaternalScore;
 	}
 
-	public void setPublicHealthMaternalScore(Double publicHealthMaternalScore) {
+	public void setPublicHealthMaternalScore(double publicHealthMaternalScore) {
 		this.publicHealthMaternalScore = publicHealthMaternalScore;
 	}
 
-	public Double getPublicHealthChildrenScore() {
+	public double getPublicHealthChildrenScore() {
 		return publicHealthChildrenScore;
 	}
 
-	public void setPublicHealthChildrenScore(Double publicHealthChildrenScore) {
+	public void setPublicHealthChildrenScore(double publicHealthChildrenScore) {
 		this.publicHealthChildrenScore = publicHealthChildrenScore;
 	}
 
-	public Double getPublicHealthScore() {
+	public double getPublicHealthScore() {
 		return publicHealthScore;
 	}
 
-	public void setPublicHealthScore(Double publicHealthScore) {
+	public void setPublicHealthScore(double publicHealthScore) {
 		this.publicHealthScore = publicHealthScore;
 	}
 
-	public Double getHealthManageEduScore() {
+	public double getHealthManageEduScore() {
 		return healthManageEduScore;
 	}
 
-	public void setHealthManageEduScore(Double healthManageEduScore) {
+	public void setHealthManageEduScore(double healthManageEduScore) {
 		this.healthManageEduScore = healthManageEduScore;
 	}
 
-	public Double getHealthManageDailyActivityScore() {
+	public double getHealthManageDailyActivityScore() {
 		return healthManageDailyActivityScore;
 	}
 
 	public void setHealthManageDailyActivityScore(
-			Double healthManageDailyActivityScore) {
+			double healthManageDailyActivityScore) {
 		this.healthManageDailyActivityScore = healthManageDailyActivityScore;
 	}
 
-	public Double getHealthManageAssessmentScore() {
+	public double getHealthManageAssessmentScore() {
 		return healthManageAssessmentScore;
 	}
 
-	public void setHealthManageAssessmentScore(Double healthManageAssessmentScore) {
+	public void setHealthManageAssessmentScore(double healthManageAssessmentScore) {
 		this.healthManageAssessmentScore = healthManageAssessmentScore;
 	}
 
-	public Double getHealthManageDocumentScore() {
+	public double getHealthManageDocumentScore() {
 		return healthManageDocumentScore;
 	}
 
-	public void setHealthManageDocumentScore(Double healthManageDocumentScore) {
+	public void setHealthManageDocumentScore(double healthManageDocumentScore) {
 		this.healthManageDocumentScore = healthManageDocumentScore;
 	}
 
-	public Double getHealthManageScore() {
+	public double getHealthManageScore() {
 		return healthManageScore;
 	}
 
-	public void setHealthManageScore(Double healthManageScore) {
+	public void setHealthManageScore(double healthManageScore) {
 		this.healthManageScore = healthManageScore;
 	}
 
-	public Double getCustomerScore() {
+	public double getCustomerScore() {
 		return customerScore;
 	}
 
-	public void setCustomerScore(Double customerScore) {
+	public void setCustomerScore(double customerScore) {
 		this.customerScore = customerScore;
 	}
 }

@@ -16,6 +16,8 @@
 	src="/fdoctor-appraisal/statics/js/jquery.easydropdown.js"></script>
 <script type="text/javascript"
 	src="/fdoctor-appraisal/statics/echarts.min.js"></script>
+<script type="text/javascript"
+	src="/fdoctor-appraisal/statics/js/inputTools.js"></script>
 </head>
 
 <body>
@@ -103,71 +105,67 @@
 				
 				<div class="month">
 					<ul>
-						<li class="active"><a href="javascript:void(0)">01月</a></li>
-						<li><a href="javascript:void(0)">02月</a></li>
-						<li><a href="javascript:void(0)">03月</a></li>
-						<li><a href="javascript:void(0)">04月</a></li>
-						<li><a href="javascript:void(0)">05月</a></li>
-						<li><a href="javascript:void(0)">06月</a></li>
-						<li><a href="javascript:void(0)">07月</a></li>
-						<li><a href="javascript:void(0)">08月</a></li>
-						<li><a href="javascript:void(0)">09月</a></li>
-						<li><a href="javascript:void(0)">10月</a></li>
-						<li><a href="javascript:void(0)">11月</a></li>
-						<li><a href="javascript:void(0)">12月</a></li>
+						<li class="active"><a href="javascript:void(0)" onclick="changeSignMonth('01', this)">01月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('02', this)">02月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('03', this)">03月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('04', this)">04月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('05', this)">05月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('06', this)">06月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('07', this)">07月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('08', this)">08月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('09', this)">09月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('10', this)">10月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('11', this)">11月</a></li>
+						<li><a href="javascript:void(0)" onclick="changeSignMonth('12', this)">12月</a></li>
 
 					</ul>
 				</div>
-				<div class="box3"></div>
+				<div class="box3" id="excellent_org_charts_div"></div>
 				<div class="box4">
-					<div>
-						<h5 class="tc">成都天爱基层卫生院</h5>
+					<div id="org_detail_div">
+						<h5 class="tc" org-field-name="orgName"></h5>
 						<table>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i1.png" alt="" /></td>
-								<td>成都市xxxxxxxxxxxxxxxxxxxx</td>
+								<td org-field-name="orgAddress"></td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i2.png" alt="" /></td>
 								<td>
 									<p>
-										医生团队总数：<span class="blue_color">220</span>
+										医生团队总数：<span class="blue_color" org-field-name="teamTotal"></span>
 									</p>
 									<p class="s_block">
-										<span class="tc blue_color"> 合格 60 </span> <span class="tc">
-											不合格 30 </span> <span class="tc red_color"> 优秀 10 </span>
+										<span class="tc blue_color"> 合格 <span org-field-name="qualifiedIncrement"></span> </span> <span class="tc">
+											不合格<span org-field-name="unQualifiedIncrement"></span>  </span> <span class="tc red_color"> 优秀
+											 <span org-field-name="excellentIncrement"></span> </span>
 									</p>
 								</td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i3.png" alt="" /></td>
-								<td>签约户数：<span class="blue_color">400</span>户
+								<td>签约户数：<span class="blue_color" org-field-name="familyIncrement"></span>户
 								</td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i4.png" alt="" /></td>
-								<td>签约居民数：<span class="blue_color">366</span>人
+								<td>签约居民数：<span class="blue_color" org-field-name="signIncrement"></span>人
 								</td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i5.png" alt="" /></td>
-								<td>慢病人数：<span class="blue_color">400</span>户
-								</td>
-							</tr>
-							<tr>
-								<td><img src="/fdoctor-appraisal/statics/image/main/i6.png" alt="" /></td>
-								<td>特殊人群：<span class="blue_color">400</span>户
+								<td>慢病人数：<span class="blue_color" org-field-name="chronicDiseaseNumber"></span>人
 								</td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i7.png" alt="" /></td>
-								<td>考核得分：<span class="blue_color">98</span> <a href="/"
+								<td>考核得分：<span class="blue_color" org-field-name="resultScore"></span> <a href="javascript:void(0)"
 									class="treat">医疗机构实力</a>
 								</td>
 							</tr>
 						</table>
 					</div>
-					<div style="display: none;">
+					<div style="display: none;" id="org_not_found_div">
 						暂无优秀签约机构数据.
 					</div>
 				</div>
@@ -176,7 +174,7 @@
 
 			<!--第三排的-->
 			<div class="section mt10 clearfix">
-				<div class="box3"></div>
+				<div class="box3" id="excellent_team_charts_div"></div>
 				<div class="box4">
 					<div style="display: none;">
 						<h5 class="tc">成都天爱基层卫生院</h5>
@@ -236,7 +234,7 @@
 
 <script type="text/javascript">
 	/**
-	*	---------------------------------------全局事件声明--------------------------------------------
+	*	---------------------------------------全局事件、函数声明--------------------------------------------
 	*/
 	//切换“签约管理”下面的内容，变换为糖尿病、高血压等
 	function changeSignItem(type, obj){
@@ -247,14 +245,71 @@
 		$('#sign_item_type').val(type);	//设置隐藏域中的值为点击的值
 		
 		loadSignBar(type);	//重新加载签约总量数据
+		loadExcellentOrgBar();	//重新加载优秀机构数据
+	}
+	
+	//切换“签约管理”下面的月份
+	function changeSignMonth(month, obj){
+		//切换之后的显示效果
+		$('.month li').removeClass('active');
+		$(obj).parent().addClass('active');
+		
+		$('#sign_month').val(month);	//设置隐藏域中的值为点击的值
+		
+		loadExcellentOrgBar();	//重新加载优秀机构数据
+	}
+	
+	//加载通用柱状图
+	function loadCommonBarCharts(chartsObj, legend, unit, xAxisData, seriesData){
+		var option = {
+				tooltip: {
+			        trigger: 'axis',
+			        formatter: '{b0}' + legend + ': {c0}' + unit
+			    },
+			    legend: {
+			        data:[legend]
+			    },
+			    xAxis: [
+			        {
+			            type: 'category',
+			            data: xAxisData,
+			            axisPointer: {
+			                type: 'shadow'
+			            }
+			        }
+			    ],
+			    yAxis: [
+			        {
+			            type: 'value',
+			            name: legend,
+			            axisLabel: {
+			                formatter: '{value} ' + unit
+			            }
+			        }
+			    ],
+			    series: [
+			        {
+			            name:legend,
+			            type:'bar',
+			            data: seriesData
+			        }
+			    ],
+			    color : ['#6699FF']
+		}
+		chartsObj.setOption(option);
 	}
 	
 	$('#sign_item_type').val('sign');	//默认查看总人数
 	$('#sign_month').val('01');	//默认月份为1月
+	
+	
+	
+	
 	/**
 	*	----------------------------------------签约管理------------------------------------------------
 	*/
 	
+	//============================页面第一排相关======================
 	//加载签约总量数据
 	function loadSignTotalData(){
 		$.ajax({
@@ -274,6 +329,9 @@
 	
 	loadSignTotalData();
 	
+	//实例化总签约charts
+	var signBarChart = echarts.init(document.getElementById('sign_charts_div'));
+	
 	//加载所有年份签约趋势数据
 	function loadSignBar(type){
 		$.ajax({
@@ -289,8 +347,7 @@
 					chartsData.push(data.data[i][type + 'Increment']);
 				}
 				
-				//实例化echarts
-				var myChart = echarts.init(document.getElementById('sign_charts_div'));
+				
 				var option = {
 						tooltip: {
 					        trigger: 'axis',
@@ -331,14 +388,128 @@
 					    ],
 					    color : ['#6699FF']
 				}
-				myChart.setOption(option);
+				signBarChart.setOption(option);
  			}
  		});
 	}
 	
 	loadSignBar('sign');	//默认为查询签约人数
 	
-	//加载
+	//============================页面第二排相关======================
+	
+	//封装target参数，将参数转化为后台模型中的字段，用于后台反射调用
+	function signParamTarget(param){
+		if(param == 'sign'){
+			return 'signManageScore';
+		}else{
+			return 'sign' + titleUpperCase(param) + 'Score';
+		}
+	}
+	
+	//实例化优秀团队柱状图charts
+	var signExcellentOrgBarChart = echarts.init(document.getElementById('excellent_org_charts_div'));
+	signExcellentOrgBarChart.on('click', function (params) {
+		//发送请求获取机构的信息
+		$.ajax({
+ 			type : 'GET',
+ 			url : '/fdoctor-appraisal/main/getOrgDetail',
+ 			data : {
+ 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				orgId : params.data.orgId
+ 			},
+ 			success : function(orgScoreInfo) {
+ 				if(orgScoreInfo.code == 200){
+ 					//展示机构得分详情
+ 					$('#org_detail_div').removeAttr('style');
+ 					$('#org_not_found_div').attr('style', 'display:none;');
+ 					
+ 					$("[org-field-name]").text('');
+ 					
+ 					$.each(orgScoreInfo.data, function(name, value) {
+ 						$("[org-field-name='" + name + "']").text(value);
+ 					});
+ 				}else{
+ 					//隐藏机构得分详情，展示提示信息
+ 					$('#org_not_found_div').removeAttr('style');
+ 					$('#org_detail_div').attr('style', 'display:none;');
+ 				}
+ 			}
+ 		});
+	});
+	
+	//加载优秀机构charts
+	function loadExcellentOrgBar(){
+		$.ajax({
+ 			type : 'GET',
+ 			url : '/fdoctor-appraisal/main/getMonthSignExcellentOrgList',
+ 			data : {
+ 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				target : signParamTarget($('#sign_item_type').val())
+ 			},
+ 			success : function(data) {
+ 				if(data.code == '200'){
+ 					var orgNameArr = [];
+ 					var incrementArr = [];
+ 					//分别封装机构名数组、机构对应数据数组
+ 					for(var i = 0; i < data.data.length; i++){
+ 						orgNameArr.push(data.data[i].orgName);
+ 						var dataObj = {
+ 								orgId : data.data[i].orgId,
+ 								value : data.data[i][$('#sign_item_type').val() + 'Increment']
+ 						}
+ 						incrementArr.push(dataObj);
+ 					}
+ 					
+ 					//加载柱状图
+ 					loadCommonBarCharts(signExcellentOrgBarChart, '签约量', '人', orgNameArr, incrementArr);
+ 					
+ 					if(data.data.length > 0){
+ 						//发送请求获取第一个机构的信息
+ 						$.ajax({
+ 				 			type : 'GET',
+ 				 			url : '/fdoctor-appraisal/main/getOrgDetail',
+ 				 			data : {
+ 				 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				 				orgId : data.data[0].orgId
+ 				 			},
+ 				 			success : function(orgScoreInfo) {
+ 				 				if(orgScoreInfo.code == 200){
+ 				 					//展示机构得分详情
+ 				 					$('#org_detail_div').removeAttr('style');
+ 				 					$('#org_not_found_div').attr('style', 'display:none;');
+ 				 					
+ 				 					$("[org-field-name]").text('');
+ 				 					
+ 				 					$.each(orgScoreInfo.data, function(name, value) {
+ 				 						$("[org-field-name='" + name + "']").text(value);
+ 				 					});
+ 				 				}else{
+ 				 					//隐藏机构得分详情，展示提示信息
+ 				 					$('#org_not_found_div').removeAttr('style');
+ 				 					$('#org_detail_div').attr('style', 'display:none;');
+ 				 				}
+ 				 			}
+ 				 		});
+ 					}else{
+ 						//隐藏机构得分详情，展示提示信息
+	 					$('#org_not_found_div').removeAttr('style');
+	 					$('#org_detail_div').attr('style', 'display:none;');
+ 					}
+ 				}
+ 			}
+ 		});
+	}
+	
+	loadExcellentOrgBar();
+	
+	//============================页面第三排相关======================
+		
+	//实例化优秀团队柱状图charts
+	var signExcellentTeamBarChart = echarts.init(document.getElementById('excellent_team_charts_div'));
+	signExcellentTeamBarChart.on('click', function (params) {
+		console.log(params);
+	});
+	
 </script>
 
 </html>

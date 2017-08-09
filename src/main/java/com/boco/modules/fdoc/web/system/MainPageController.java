@@ -13,11 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.boco.common.enums.ApiStatusEnum;
 import com.boco.common.json.BaseJsonVo;
 import com.boco.common.utils.DateUtils;
 import com.boco.common.utils.JsonUtils;
+import com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity;
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTotalIncrementEntity;
+import com.boco.modules.fdoc.service.score.AppraisalMonthOrgScoreService;
+import com.boco.modules.fdoc.service.sign.AppraisalMonthSignOrgIncrementService;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignTotalIncrementService;
+import com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo;
+import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignTotalIncrementVo;
 
 /**
@@ -31,6 +37,10 @@ public class MainPageController {
 	
 	@Resource
 	AppraisalMonthSignTotalIncrementService totalIncrementService;
+	@Resource
+	AppraisalMonthSignOrgIncrementService orgIncrementService;
+	@Resource
+	AppraisalMonthOrgScoreService orgScoreService;
 	
 	/**
 	 * 首页跳转
@@ -73,5 +83,45 @@ public class MainPageController {
 		return JsonUtils.getJson(BaseJsonVo.success(yearSignDataList));
 	}
 	
+	/**
+	 * 获取月度优秀签约机构集合
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/getMonthSignExcellentOrgList", method = RequestMethod.GET)
+	@ResponseBody
+	public String getMonthSignExcellentOrgList(HttpServletRequest request, String month, String target) {
+		
+		try {
+			//返回优秀机构集合
+			List<AppraisalMonthSignOrgIncrementVo> list = orgIncrementService.getMonthSignExcellentOrgDataList(month, target);
+			return JsonUtils.getJson(BaseJsonVo.success(list));
+			
+		} catch (Exception e) {
+			//出现反射调用异常，提示后台错误
+			e.printStackTrace();
+			return JsonUtils.getJson(BaseJsonVo.empty(ApiStatusEnum.ERROR_CODE.getKey(),
+					ApiStatusEnum.ERROR_CODE.getValue()));
+		}
+		
+	}
 	
+	/**
+	 * 获取机构得分详情
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/getOrgDetail", method = RequestMethod.GET)
+	@ResponseBody
+	public String getOrgDetail(HttpServletRequest request, String month, String orgId) {
+		//封装查询参数
+		AppraisalMonthOrgScoreEntity entity = new AppraisalMonthOrgScoreEntity();
+		entity.setMonth(month);
+		entity.setOrgId(orgId);
+		
+		//调用service获取结果
+		AppraisalMonthOrgScoreVo orgScore = orgScoreService.getAppraisalMonthOrgScoreByMonth(entity);
+		
+		return JsonUtils.getJson(BaseJsonVo.success(orgScore));
+	}
 }
