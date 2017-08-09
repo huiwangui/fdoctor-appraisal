@@ -1,5 +1,7 @@
 package com.boco.modules.fdoc.web.appraise;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,6 +12,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.weaver.reflect.ReflectionBasedReferenceTypeDelegate;
+import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,13 +65,29 @@ public class SignRecordController {
 		//获取签约总人数详情
 		StatisticsDayBasedataEntity baseEntity=new StatisticsDayBasedataEntity();
 		baseEntity=baseService.getBasedata();
+		StatisticsDayTeamBasedataEntity dataEntity=new StatisticsDayTeamBasedataEntity();
+		baseEntity=baseService.getBasedata();
+		dataEntity.setSignCount(baseEntity.getSignCount());
+		dataEntity.setHyperCount(baseEntity.getHyperCount());
+		dataEntity.setDiabetesCount(baseEntity.getDiabetesCount());
+		dataEntity.setChildrenCount(baseEntity.getChildrenCount());
+		dataEntity.setMajorPsychosisCount(baseEntity.getMajorPsychosisCount());
+		dataEntity.setOldCount(baseEntity.getOldCount());
+		dataEntity.setMaternalCount(baseEntity.getMaternalCount());
+		//求占比
+		dataEntity.setHyperPercent(getPercent(baseEntity.getHyperCount(), baseEntity.getSignCount()));
+		dataEntity.setDiabetesPercent(getPercent(baseEntity.getDiabetesCount(), baseEntity.getSignCount()));
+		dataEntity.setChildrenPercent(getPercent(baseEntity.getChildrenCount(), baseEntity.getSignCount()));
+		dataEntity.setMajorPsychosisPercent(getPercent(baseEntity.getMajorPsychosisCount(),baseEntity.getSignCount()));
+		dataEntity.setOldPercent(getPercent(baseEntity.getOldCount(), baseEntity.getSignCount()));
+		dataEntity.setMaternalPercent(getPercent(baseEntity.getMaternalCount(), baseEntity.getSignCount()));
 		
 		//获取医院列表
 		List<HospitalEntity> hospitalList = hospitalService.getHospitalList();
 		//设置作用域对象
 		model.addAttribute("hospitalList", hospitalList);
 		model.addAttribute("hospitalList2",JsonUtils.getJson(hospitalList));
-		model.addAttribute("baseEntity", baseEntity);
+		model.addAttribute("dataEntity", dataEntity);
 		
 		return "/sign/signCount";
 	}
@@ -137,6 +157,12 @@ public class SignRecordController {
 				StatisticsDayTeamBasedataEntity dataEntity=new StatisticsDayTeamBasedataEntity();
 				if(teamId !=null && !"".equals(teamId)){
 					dataEntity=baseService.getLastInfo(teamId);
+					dataEntity.setHyperPercent(getPercent(dataEntity.getHyperCount(), dataEntity.getSignCount()));
+					dataEntity.setDiabetesPercent(getPercent(dataEntity.getDiabetesCount(), dataEntity.getSignCount()));
+					dataEntity.setChildrenPercent(getPercent(dataEntity.getChildrenCount(), dataEntity.getSignCount()));
+					dataEntity.setMajorPsychosisPercent(getPercent(dataEntity.getMajorPsychosisCount(),dataEntity.getSignCount()));
+					dataEntity.setOldPercent(getPercent(dataEntity.getOldCount(), dataEntity.getSignCount()));
+					dataEntity.setMaternalPercent(getPercent(dataEntity.getMaternalCount(), dataEntity.getSignCount()));
 				}else if(orgId !=null && !"".equals(orgId)){
 					DoctorDetailVo docVo=new DoctorDetailVo();
 					docVo.setOrgId(orgId);
@@ -167,6 +193,13 @@ public class SignRecordController {
 					dataEntity.setMajorPsychosisCount(majorPsychosis);
 					dataEntity.setOldCount(old);
 					dataEntity.setMaternalCount(maternal);
+					//求占比
+					dataEntity.setHyperPercent(getPercent(hyper, sign));
+					dataEntity.setDiabetesPercent(getPercent(diabetes,sign));
+					dataEntity.setChildrenPercent(getPercent(children,sign));
+					dataEntity.setMajorPsychosisPercent(getPercent(majorPsychosis,sign));
+					dataEntity.setOldPercent(getPercent(old,sign));
+					dataEntity.setMaternalPercent(getPercent(maternal,sign));
 				}
 				StatisticsDayBasedataEntity baseEntity=new StatisticsDayBasedataEntity();
 				if(StringUtils.isEmpty(teamId) && StringUtils.isEmpty(orgId)){
@@ -179,7 +212,27 @@ public class SignRecordController {
 					dataEntity.setMajorPsychosisCount(baseEntity.getMajorPsychosisCount());
 					dataEntity.setOldCount(baseEntity.getOldCount());
 					dataEntity.setMaternalCount(baseEntity.getMaternalCount());
+					//求占比
+					dataEntity.setHyperPercent(getPercent(baseEntity.getHyperCount(), baseEntity.getSignCount()));
+					dataEntity.setDiabetesPercent(getPercent(baseEntity.getDiabetesCount(), baseEntity.getSignCount()));
+					dataEntity.setChildrenPercent(getPercent(baseEntity.getChildrenCount(), baseEntity.getSignCount()));
+					dataEntity.setMajorPsychosisPercent(getPercent(baseEntity.getMajorPsychosisCount(),baseEntity.getSignCount()));
+					dataEntity.setOldPercent(getPercent(baseEntity.getOldCount(), baseEntity.getSignCount()));
+					dataEntity.setMaternalPercent(getPercent(baseEntity.getMaternalCount(), baseEntity.getSignCount()));
 				}
 			return JsonUtils.getJson(dataEntity);
+	}
+	
+	public static String getPercent(int a,int b){
+		if(b==0 ){
+			return "0%";
+		}else{
+		NumberFormat numberFormat = NumberFormat.getInstance();
+		DecimalFormat decimalFormat = new DecimalFormat(".#");
+		double s=(float) a / (float) b * 100;
+		s=Double.parseDouble(decimalFormat.format(s));
+		String result = numberFormat.format(s);
+		return result+"%";
+		}
 	}
 }

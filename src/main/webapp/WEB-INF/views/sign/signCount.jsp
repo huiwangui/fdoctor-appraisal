@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="/fdoctor-appraisal/statics/beginnerAdmin/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/fdoctor-appraisal/statics/beginnerAdmin/css/btable.css" />
+    <link rel="stylesheet" href="/fdoctor-appraisal/statics/css/ecstyle.css" />
     
     <script type="text/javascript" src="/fdoctor-appraisal/statics/beginnerAdmin/plugins/layui/layui.js"></script>
     <script type="text/javascript" src="/fdoctor-appraisal/statics/js/jquery-2.1.4.min.js"></script>
@@ -26,9 +27,9 @@
 </head>
 
 <body style=" background-color: gainsboro;">
-
+<div class="right_part">
     <div style="margin:0px; background-color: white;">
-        <blockquote class="layui-elem-quote">
+        <blockquote class="layui-elem-quote" style=" height: 175px;">
         <form class="layui-form" action="">
         	<div class="layui-form-item" align="left" style="margin-left: 0px;margin-top: 10px;">
 			  	<div class="layui-inline"  >
@@ -52,49 +53,155 @@
 						</select> 
 					</div>     
 			    </div>
-			    </div>
-			    
-			    <div class="layui-inline" >
-			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" id="p0" title="总人数${baseEntity.signCount}人" value="0" checked>
-			    	</div>
-			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" id="p1" title="高血压${baseEntity.hyperCount}人" value="1">
-			    	</div>
-			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" id="p2" title="糖尿病${baseEntity.diabetesCount}人" value="2">
-			    	</div>
-			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" id="p3" title="重症精神病${baseEntity.majorPsychosisCount}人" value="3">
-			    	</div>
-			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" id="p4" title="老年人${baseEntity.oldCount}人" value="4">
-			    	</div>
-			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" id="p5" title="孕产妇${baseEntity.maternalCount}人" value="5">
-			    	</div>
-			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" id="p6" title="儿童${baseEntity.childrenCount}人" value="6">
-			    	</div>
-			    
-			    </div>
-				
 			    
 			    <div class="layui-inline" >
 			    	 <div class="layui-input-inline">
 			    	<button class="layui-btn layui-btn-radius" style="width: 150px;margin-left: 50px;" id="selectButton" type="button">查询</button>
 			    	</div>
 			    </div>
+			    </div> 
 			    
-			 </div>
+			    <%-- <div class="layui-input-inline">
+			    		<input type="radio" name="personType" id="p0" title="总人数${dataEntity.signCount}人" value="0" checked>
+			    		
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" id="p1" title="高血压${dataEntity.hyperCount}人" value="1">
+			    		<br/><span id=d1>占比&nbsp;${dataEntity.hyperPercent}</span>
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" id="p2" title="糖尿病${dataEntity.diabetesCount}人" value="2">
+			    		<br/><span id=d2>占比&nbsp;${dataEntity.diabetesPercent}</span>
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" id="p3" title="重症精神病${dataEntity.majorPsychosisCount}人" value="3">
+			    		<br/><span id=d3>占比&nbsp;${dataEntity.majorPsychosisPercent}</span>
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" id="p4" title="老年人${dataEntity.oldCount}人" value="4">
+			    		<br/><span id=d4>占比&nbsp;${dataEntity.oldPercent}</span>
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" id="p5" title="孕产妇${dataEntity.maternalCount}人" value="5">
+			    		<br/><span id=d5>占比&nbsp;${dataEntity.maternalPercent}</span>
+			    	</div>
+			    	<div class="layui-input-inline">
+			    		<input type="radio" name="personType" id="p6" title="儿童${dataEntity.childrenCount}人" value="6">
+			    		<br/><span id=d6>占比&nbsp;${dataEntity.hyperPercent}</span>
+			    	</div> --%>
+		</form>
+		<form class="" action="">
+		<div class="" style=" width: 1100px;">
+		<div class="clearfix">
+		<ul class="num_blocks1">
+					<li class="item">
+						<input type="radio" name="personType" title=" "  value="0" checked class="radio">
+						<a href="/">
+							<p>
+								<span class="num" id="p0">${dataEntity.signCount}</span><span>人</span>
+							</p>
+							<p>
+							</p>
+							<p class="p2">
+								总签约人数 
+							</p>
+						</a>
+					</li>
+					<li class="item">
+						<a href="/">
+						<input type="radio" name="personType" title=" "  value="1"  class="radio">
+							<p>
+								<span class="num" id="p1">${dataEntity.hyperCount}</span><span>人</span>
+							</p>
+							<p>
+							高血压&nbsp;
+							</p>
+							<p class="p2">
+								 占比 : <span id="d1">${dataEntity.hyperPercent}</span>
+							</p>
+						</a>
+					</li>
+					<li class="item">
+						<input type="radio" name="personType" title=" "  value="2" class="radio">
+						<a href="/">
+							<p>
+								<span class="num" id="p2">${dataEntity.diabetesCount}</span><span>人</span>
+							</p>
+							<p>
+							糖尿病&nbsp;
+							</p>
+							<p class="p2">
+								 占比 : <span id="d2">${dataEntity.diabetesPercent}</span>
+							</p>
+						</a>
+					</li>
+					<li class="item">
+						<input type="radio" name="personType" title=" "  value="3" class="radio">
+						<a href="/">
+							<p>
+								<span class="num" id="p3">${dataEntity.majorPsychosisCount}</span><span>人</span>
+							</p>
+							<p>
+							重症精神病&nbsp;
+							</p>
+							<p class="p2">
+								 占比 : <span id="d3">${dataEntity.majorPsychosisPercent}</span>
+							</p>
+						</a>
+					</li>
+					<li class="item">
+					<input type="radio" name="personType" title=" "  value="4" class="radio">
+						<a href="/">
+							<p>
+								<span class="num" id="p4">${dataEntity.oldCount}</span><span>人</span>
+							</p>
+							<p>
+							老年人 &nbsp; 
+							</p>
+							<p class="p2">
+								占比 : <span id="d4">${dataEntity.oldPercent}</span>
+							</p>
+						</a>
+					</li>
+					<li class="item">
+					<input type="radio" name="personType" title=" "  value="5" class="radio">
+						<a href="/">
+							<p>
+								<span class="num" id="p5">${dataEntity.maternalCount}</span><span>人</span>
+							</p>
+							<p>
+							孕产妇 &nbsp
+							</p>
+							<p class="p2">
+								 占比 : <span id="d5">${dataEntity.maternalPercent}</span>
+							</p>
+						</a>
+					</li>
+					<li class="item">
+						<input type="radio" name="personType" title=" "  value="6" class="radio">
+						<a href="/">
+							<p>
+								<span class="num" id="p6">${dataEntity.childrenCount}</span><span>人</span>
+							</p>
+							<p>
+							儿童 &nbsp;
+							</p>
+							<p class="p2">
+								 占比 : <span id="d6">${dataEntity.hyperPercent}</span>
+							</p>
+						</a>
+					</li>
+				</ul>
+				</div>
+		 </div>
 		</form>
         </blockquote>
-		<div class="layui-btn-group">
+		<!-- <div class="layui-btn-group">
 			<button class="layui-btn layui-btn-primary layui-btn-small" id="detailButton"><i class="layui-icon">&#xe654;</i>签约详情</button>
-		</div>
+		</div> -->
         <div id="content" style="width: 100%;height: 500px;"></div>
     	</div>
-
+</div>
     <script>
     
     	function tableConfig(){
@@ -143,7 +250,7 @@
                     }],
                     even: true,
                     //skin: 'row',
-                    checkbox: true,
+                    checkbox: false,
                     field: 'id',
                     paged: true,
                     singleSelect: true,
@@ -187,6 +294,13 @@
 		     form = layui.form();
 		     $form = $('form');
 		     
+		     $('.num_blocks1 li.item').on('click',function(){
+					$(this).addClass('active').siblings().removeClass('active');
+					$(this).find("input[type=radio]").prop("checked","checked");
+					form.render();
+					return false;
+			 })
+		     
 		     form.on('select(orgId)', function(data) {
 		    	 if(data.value != '0'){
 			    	$.ajax({
@@ -224,20 +338,26 @@
 			 			type : 'GET',
 			 			url : '/fdoctor-appraisal/sign/getCountData',
 			 			data :{
-			 				orgId:$("#orgId").val(),
-			 				teamId:$("#teamId").val()
+			 				orgId:$("#orgId").val()=='0'?'':$("#orgId").val(),
+			 				teamId:$("#teamId").val()=='0'?'':$("#teamId").val()
 			 			},
 			 			success : function(data) {
 			 				console.log(data);
-			 	        	$('#p0').prop("title","总人数"+data.signCount+"人");
-			 	        	$('#p1').prop("title","高血压"+data.hyperCount+"人");
-			 	        	$('#p2').prop("title","糖尿病"+data.diabetesCount+"人");
-			 	        	$('#p3').prop("title","重症精神病"+data.majorPsychosisCount+"人");
-			 	        	$('#p4').prop("title","老年人"+data.oldCount+"人");
-			 	        	$('#p5').prop("title","孕产妇"+data.maternalCount+"人");
-			 	        	$('#p6').prop("title","儿童"+data.childrenCount+"人");
+			 	        	$('#p0').text(data.signCount);
+			 	        	$('#p1').text(data.hyperCount);
+			 	        	$('#p2').text(data.diabetesCount);
+			 	        	$('#p3').text(data.majorPsychosisCount);
+			 	        	$('#p4').text(data.oldCount);
+			 	        	$('#p5').text(data.maternalCount);
+			 	        	$('#p6').text(data.childrenCount);
+			 	        	
+			 	        	$('#d1').text(data.hyperPercent);
+			 	        	$('#d2').text(data.diabetesPercent);
+			 	        	$('#d3').text(data.majorPsychosisPercent);
+			 	        	$('#d4').text(data.oldPercent);
+			 	        	$('#d5').text(data.maternalPercent);
+			 	        	$('#d6').text(data.childrenPercent);
 			 	        	form.render();
-			 				form.render();
 			 			}
 			 	});
             })
@@ -287,6 +407,7 @@
         		return data+'的团队';
         	}
         }
+        
     </script>
 </body>
 </html>

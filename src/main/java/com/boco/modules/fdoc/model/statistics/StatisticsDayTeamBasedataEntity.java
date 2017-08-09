@@ -24,14 +24,29 @@ public class StatisticsDayTeamBasedataEntity {
     private int hyperCount;
 
     /**
+     * 高血压占比
+     */
+    private String hyperPercent;
+    
+    /**
     * 糖尿病人数
     */
     private int diabetesCount;
+    
+    /**
+     * 糖尿病占比
+     */
+    private String diabetesPercent;
 
     /**
     * 儿童人数
     */
     private int childrenCount;
+    
+    /**
+     * 儿童占比
+     */
+    private String childrenPercent;
 
     /**
     * 重度精神病人数
@@ -39,14 +54,29 @@ public class StatisticsDayTeamBasedataEntity {
     private int majorPsychosisCount;
     
     /**
+     * 重度精神病占比
+     */
+    private String majorPsychosisPercent;
+    
+    /**
      * 老年人人数
      */
     private int oldCount;
     
     /**
+     * 老年人占比
+     */
+    private String oldPercent;
+    
+    /**
      * 孕产妇人数 
      */
     private int maternalCount;
+    
+    /**
+     * 孕产妇占比
+     */
+    private String maternalPercent;
     
     /**
     * 统计日期
@@ -157,6 +187,54 @@ public class StatisticsDayTeamBasedataEntity {
 
 	public void setMaternalCount(int maternalCount) {
 		this.maternalCount = maternalCount;
+	}
+
+	public String getHyperPercent() {
+		return hyperPercent;
+	}
+
+	public void setHyperPercent(String hyperPercent) {
+		this.hyperPercent = hyperPercent;
+	}
+
+	public String getDiabetesPercent() {
+		return diabetesPercent;
+	}
+
+	public void setDiabetesPercent(String diabetesPercent) {
+		this.diabetesPercent = diabetesPercent;
+	}
+
+	public String getChildrenPercent() {
+		return childrenPercent;
+	}
+
+	public void setChildrenPercent(String childrenPercent) {
+		this.childrenPercent = childrenPercent;
+	}
+
+	public String getMajorPsychosisPercent() {
+		return majorPsychosisPercent;
+	}
+
+	public void setMajorPsychosisPercent(String majorPsychosisPercent) {
+		this.majorPsychosisPercent = majorPsychosisPercent;
+	}
+
+	public String getOldPercent() {
+		return oldPercent;
+	}
+
+	public void setOldPercent(String oldPercent) {
+		this.oldPercent = oldPercent;
+	}
+
+	public String getMaternalPercent() {
+		return maternalPercent;
+	}
+
+	public void setMaternalPercent(String maternalPercent) {
+		this.maternalPercent = maternalPercent;
 	}
     
     

@@ -1,0 +1,30 @@
+.num_blocks1 li.item {
+  position: relative;
+  text-align: center;
+  width: 13.05085%;
+  height: 90px;
+  float: left;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px 1px 0 1px;
+  box-sizing: border-box;
+  margin-right: 10px;
+  background: #f2f6fa; }
+  .num_blocks1 li.item .radio {
+    position: absolute;
+    z-index: -1;
+    top: 0; }
+  .num_blocks1 li.item .num {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #5a90ff; }
+  .num_blocks1 li.item .p2 {
+    margin-top: 2px; }
+
+.num_blocks1 li.active {
+  background: #4f7fe1;
+  border: 1px solid transparent; }
+  .num_blocks1 li.active p {
+    color: white; }
+  .num_blocks1 li.active .num {
+    color: white; }
