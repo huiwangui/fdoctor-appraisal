@@ -31,4 +31,16 @@
 		WHERE
 			`month` LIKE CONCAT(#{0}, '%') order by `month`
 	</select>
+	
+	<!-- 获取有签约数据的年份集合 -->
+	<select id="getYears" resultType="string">
+		SELECT
+			LEFT (`month`, 4) AS months
+		FROM
+			t_appraisal_month_sign_total_increment
+		GROUP BY
+			months
+		ORDER BY
+			months DESC
+	</select>
 </mapper>

@@ -18,7 +18,8 @@ public interface AppraisalMonthSignOrgIncrementService {
 	
 	/**
 	 * 获取优秀的机构签约管理数据
+	 * @param target：判断优秀的目标字段，比如需要查找“高血压得分”的优秀机构，传入signHyperScore(AppraisalFieldTargetConstans中的静态属性)
 	 * @return
 	 */
-	public List<AppraisalMonthSignOrgIncrementVo> getMonthSignExcellentOrgDataList(String month);
+	public List<AppraisalMonthSignOrgIncrementVo> getMonthSignExcellentOrgDataList(String month, String target)  throws Exception;
 }

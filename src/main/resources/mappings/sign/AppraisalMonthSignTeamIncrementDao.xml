@@ -11,7 +11,14 @@
 	<select id="getMonthSignTeamDataList" parameterType="string" resultType="com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo">
 		SELECT
 			b.doc_name doctorName,
-			a.*, c.result_score
+			a.*,
+			c.result_score, c.sign_hyper_score, c.sign_diabetes_score,
+			c.sign_phychosis_score, c.sign_old_score, c.sign_maternal_score,
+			c.sign_children_score, c.sign_manage_score, c.public_health_hyper_score,
+			c.public_health_diabetes_score, c.public_health_phychosis_score, c.public_health_old_score,
+			c.public_health_maternal_score, c.public_health_children_score, c.public_health_score,
+			c.health_manage_edu_score, c.health_manage_daily_activity_score, c.health_manage_assessment_score,
+			c.health_manage_document_score, c.health_manage_score, c.customer_score
 		FROM
 			t_appraisal_month_sign_team_increment a
 		LEFT JOIN (

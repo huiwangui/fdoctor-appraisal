@@ -75,4 +75,9 @@ public class AppraisalMonthSignTotalIncrementServiceImpl implements AppraisalMon
 		return yearSignDataList;
 	}
 
+	@Override
+	public List<String> getYears() {
+		return signTotalDao.getYears();
+	}
+
 }
