@@ -176,46 +176,41 @@
 			<div class="section mt10 clearfix">
 				<div class="box3" id="excellent_team_charts_div"></div>
 				<div class="box4">
-					<div style="display: none;">
-						<h5 class="tc">成都天爱基层卫生院</h5>
+					<div id="team_detail_div">
+						<h5 class="tc" team-field-name="doctorName"></h5>
 						<table>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i8.png" alt="" /></td>
-								<td>成都市xxxxxxxxxxxxxxxxxxxx</td>
+								<td team-field-name="orgAddress"></td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i1.png" alt="" /></td>
-								<td>啥爽肤水的根深蒂固街道</td>
+								<td team-field-name="orgName"></td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i3.png" alt="" /></td>
-								<td>签约户数：<span class="blue_color">400</span>户
+								<td>签约户数：<span class="blue_color" team-field-name="familyIncrement"></span>户
 								</td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i4.png" alt="" /></td>
-								<td>签约居民数：<span class="blue_color">366</span>人
+								<td>签约居民数：<span class="blue_color" team-field-name="signIncrement"></span>人
 								</td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i5.png" alt="" /></td>
-								<td>慢病人数：<span class="blue_color">400</span>户
-								</td>
-							</tr>
-							<tr>
-								<td><img src="/fdoctor-appraisal/statics/image/main/i6.png" alt="" /></td>
-								<td>特殊人群：<span class="blue_color">400</span>户
+								<td>慢病人数：<span class="blue_color" team-field-name="chronicDiseaseNumber"></span>户
 								</td>
 							</tr>
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i7.png" alt="" /></td>
-								<td>考核得分：<span class="blue_color">98</span> <a href="/"
-									class="treat">医疗机构实力</a>
+								<td>考核得分：<span class="blue_color" team-field-name="resultScore"></span> <a href="javascript:void(0)"
+									class="treat">医疗团队实力</a>
 								</td>
 							</tr>
 						</table>
 					</div>
-					<div>
+					<div id="team_not_found_div" style="display: none;">
 						
 						暂无优秀签约团队数据.
 					</div>
@@ -246,6 +241,7 @@
 		
 		loadSignBar(type);	//重新加载签约总量数据
 		loadExcellentOrgBar();	//重新加载优秀机构数据
+		loadExcellentTeamBar();	//重新加载优秀团队数据
 	}
 	
 	//切换“签约管理”下面的月份
@@ -257,6 +253,7 @@
 		$('#sign_month').val(month);	//设置隐藏域中的值为点击的值
 		
 		loadExcellentOrgBar();	//重新加载优秀机构数据
+		loadExcellentTeamBar();	//重新加载优秀团队数据
 	}
 	
 	//加载通用柱状图
@@ -507,8 +504,99 @@
 	//实例化优秀团队柱状图charts
 	var signExcellentTeamBarChart = echarts.init(document.getElementById('excellent_team_charts_div'));
 	signExcellentTeamBarChart.on('click', function (params) {
-		console.log(params);
+		//发送请求获取团队的信息
+		$.ajax({
+ 			type : 'GET',
+ 			url : '/fdoctor-appraisal/main/getTeamDetail',
+ 			data : {
+ 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				teamId : params.data.teamId
+ 			},
+ 			success : function(teamScoreInfo) {
+ 				if(teamScoreInfo.code == 200){
+ 					//展示团队得分详情
+ 					$('#team_detail_div').removeAttr('style');
+ 					$('#team_not_found_div').attr('style', 'display:none;');
+ 					
+ 					$("[team-field-name]").text('');
+ 					
+ 					$.each(teamScoreInfo.data, function(name, value) {
+ 						$("[team-field-name='" + name + "']").text(value);
+ 					});
+ 					$("[team-field-name='doctorName']").text(teamScoreInfo.data.doctorName + '医生团队');
+ 				}else{
+ 					//隐藏团队得分详情，展示提示信息
+ 					$('#team_not_found_div').removeAttr('style');
+ 					$('#team_detail_div').attr('style', 'display:none;');
+ 				}
+ 			}
+ 		});
 	});
+	
+	//加载优秀团队charts
+	function loadExcellentTeamBar(){
+		$.ajax({
+ 			type : 'GET',
+ 			url : '/fdoctor-appraisal/main/getMonthSignExcellentTeamList',
+ 			data : {
+ 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				target : signParamTarget($('#sign_item_type').val())
+ 			},
+ 			success : function(data) {
+ 				if(data.code == '200'){
+ 					var teamNameArr = [];
+ 					var incrementArr = [];
+ 					//分别封装机构名数组、机构对应数据数组
+ 					for(var i = 0; i < data.data.length; i++){
+ 						teamNameArr.push(data.data[i].doctorName + '医生团队');
+ 						var dataObj = {
+ 								teamId : data.data[i].teamId,
+ 								value : data.data[i][$('#sign_item_type').val() + 'Increment']
+ 						}
+ 						incrementArr.push(dataObj);
+ 					}
+ 					
+ 					//加载柱状图
+ 					loadCommonBarCharts(signExcellentTeamBarChart, '签约量', '人', teamNameArr, incrementArr);
+ 					
+ 					if(data.data.length > 0){
+ 						$.ajax({
+ 				 			type : 'GET',
+ 				 			url : '/fdoctor-appraisal/main/getTeamDetail',
+ 				 			data : {
+ 				 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				 				teamId : data.data[0].teamId
+ 				 			},
+ 				 			success : function(teamScoreInfo) {
+ 				 				if(teamScoreInfo.code == 200){
+ 				 					//展示团队得分详情
+ 				 					$('#team_detail_div').removeAttr('style');
+ 				 					$('#team_not_found_div').attr('style', 'display:none;');
+ 				 					
+ 				 					$("[team-field-name]").text('');
+ 				 					
+ 				 					$.each(teamScoreInfo.data, function(name, value) {
+ 				 						$("[team-field-name='" + name + "']").text(value);
+ 				 					});
+ 				 					$("[team-field-name='doctorName']").text(teamScoreInfo.data.doctorName + '医生团队');
+ 				 				}else{
+ 				 					//隐藏团队得分详情，展示提示信息
+ 				 					$('#team_not_found_div').removeAttr('style');
+ 				 					$('#team_detail_div').attr('style', 'display:none;');
+ 				 				}
+ 				 			}
+ 				 		});
+ 					}else{
+ 						//隐藏团队得分详情，展示提示信息
+	 					$('#team_not_found_div').removeAttr('style');
+	 					$('#team_detail_div').attr('style', 'display:none;');
+ 					}
+ 				}
+ 			}
+ 		});
+	}
+	
+	loadExcellentTeamBar();
 	
 </script>
 

@@ -18,13 +18,18 @@ import com.boco.common.json.BaseJsonVo;
 import com.boco.common.utils.DateUtils;
 import com.boco.common.utils.JsonUtils;
 import com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity;
+import com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity;
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTotalIncrementEntity;
 import com.boco.modules.fdoc.service.score.AppraisalMonthOrgScoreService;
+import com.boco.modules.fdoc.service.score.AppraisalMonthTeamScoreService;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignOrgIncrementService;
+import com.boco.modules.fdoc.service.sign.AppraisalMonthSignTeamIncrementService;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignTotalIncrementService;
 import com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
+import com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignTotalIncrementVo;
+import com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo;
 
 /**
  * 首页控制器
@@ -41,6 +46,10 @@ public class MainPageController {
 	AppraisalMonthSignOrgIncrementService orgIncrementService;
 	@Resource
 	AppraisalMonthOrgScoreService orgScoreService;
+	@Resource
+	AppraisalMonthSignTeamIncrementService teamIncrementService;
+	@Resource
+	AppraisalMonthTeamScoreService teamScoreService;
 	
 	/**
 	 * 首页跳转
@@ -123,5 +132,46 @@ public class MainPageController {
 		AppraisalMonthOrgScoreVo orgScore = orgScoreService.getAppraisalMonthOrgScoreByMonth(entity);
 		
 		return JsonUtils.getJson(BaseJsonVo.success(orgScore));
+	}
+	
+	/**
+	 * 获取月度优秀签约团队集合
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/getMonthSignExcellentTeamList", method = RequestMethod.GET)
+	@ResponseBody
+	public String getMonthSignExcellentTeamList(HttpServletRequest request, String month, String target) {
+		
+		try {
+			//返回优秀团队集合
+			List<AppraisalMonthSignTeamIncrementVo> list = teamIncrementService.getMonthSignExcellentTeamDataList(month, target);
+			return JsonUtils.getJson(BaseJsonVo.success(list));
+			
+		} catch (Exception e) {
+			//出现反射调用异常，提示后台错误
+			e.printStackTrace();
+			return JsonUtils.getJson(BaseJsonVo.empty(ApiStatusEnum.ERROR_CODE.getKey(),
+					ApiStatusEnum.ERROR_CODE.getValue()));
+		}
+		
+	}
+	
+	/**
+	 * 获取团队得分详情
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/getTeamDetail", method = RequestMethod.GET)
+	@ResponseBody
+	public String getTeamDetail(HttpServletRequest request, String month, String teamId) {
+		//封装查询参数
+		AppraisalMonthTeamScoreEntity entity = new AppraisalMonthTeamScoreEntity();
+		entity.setTeamId(teamId);
+		entity.setMonth(month);
+		//调用service获取结果
+		AppraisalMonthTeamScoreVo teamScore = teamScoreService.getAppraisalMonthTeamScoreByMonth(entity);
+		
+		return JsonUtils.getJson(BaseJsonVo.success(teamScore));
 	}
 }
