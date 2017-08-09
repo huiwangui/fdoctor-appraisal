@@ -102,6 +102,11 @@ public class DoctorTeamController {
 		AppraisalMonthTeamScoreVo vo = appraisalMonthTeamScoreService.getAppraisalMonthTeamScoreByMonth(entity);
 		//获取指定团队的实力
 		AppraisalMonthTeamScoreVo scoreVo =appraisalMonthTeamScoreService.getAppraisalMonthTeamScoreByTeamId(teamId);
+		if(scoreVo==null){
+			//设置作用域对象
+			model.addAttribute("team", new AppraisalMonthTeamScoreVo()); 
+			return "/appraise/doctorTeam/teamStrength";
+		}
 		if(vo.getResultScore()==null){
 			scoreVo.setResultScore(0.0);
 		}else{

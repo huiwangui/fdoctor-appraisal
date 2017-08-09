@@ -71,22 +71,39 @@
 			a.result_score,
 			a.sign_increment,
 			a.family_increment,
-			count(DISTINCT(e.person_id)) chronic_disease_number,
 			f.address org_address,
 			f.org_name,
-			b.doc_name doctor_name
+			b.doc_name doctor_name,
+			(SELECT
+				COUNT(a.person_id)
+			FROM
+				t_person_desease_info a,
+				t_person_information b,
+				t_user_doc_sign c,
+				t_appraisal_month_team_score d	 
+			WHERE
+				a.person_id = b.person_id
+			AND b.family_id = c.family_id
+			and d.team_id =c.doc_team_id
+			<if test="teamId != null and teamId != ''">
+			  AND c.doc_team_id  =#{teamId}
+			</if>
+			<if test="month != null and month != ''">
+			 and  date_format(a.create_time, '%Y%m') = #{month}			   
+			</if>	 
+			AND( a.adult_flag = '1'
+			OR a.child_flag = '1'
+			OR a.diabetes_flag = '1'
+			OR a.hyper_flag = '1'
+			OR a.major_psychosis_flag = '1'
+			OR a.maternal_flag = '1'
+			OR a.oldm_flag ='1')) chronic_disease_number
 		FROM
 			t_appraisal_month_team_score a,
-			t_doctor b,
-			t_user_doc_sign c,
-			t_person_information d,
-			t_person_desease_info e,
+			t_doctor b,		 
 			t_hospital f
 		WHERE
 			a.team_id = b.team_id
-		AND b.team_id = c.doc_team_id
-		AND c.family_id = d.family_id
-		AND d.person_id = e.person_id
 		AND b.org_id = f.id
 		and b.leader_flag="1"
 		<if test="teamId != null and teamId != ''">
