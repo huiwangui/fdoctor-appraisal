@@ -94,13 +94,14 @@
 		<div class="" style=" width: 1100px;">
 		<div class="clearfix">
 		<ul class="num_blocks1">
-					<li class="item">
+					<li class="item active">
 						<input type="radio" name="personType" title=" "  value="0" checked class="radio">
 						<a href="/">
 							<p>
 								<span class="num" id="p0">${dataEntity.signCount}</span><span>人</span>
 							</p>
 							<p>
+							&nbsp;
 							</p>
 							<p class="p2">
 								总签约人数 
