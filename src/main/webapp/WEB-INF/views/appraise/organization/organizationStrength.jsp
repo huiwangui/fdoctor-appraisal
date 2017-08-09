@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 	</table>
 	<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-    <div id="main" style="width: 500px;height:420px;"></div>
+    <div id="main" style="width: 500px;height:150px;"></div>  
      <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var comprehensiveChart = echarts.init(document.getElementById('comprehensive'));
