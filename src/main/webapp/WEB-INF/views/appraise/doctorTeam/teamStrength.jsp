@@ -27,19 +27,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
   <tbody>
     <tr>
-      <td>${team.orgName }</td>
-      <td>${team.orgAddress }</td>
+      <td><img src="statics/image/appraisal/hospital.png" /> ${team.orgName }</td>
+      <td><img src="statics/image/appraisal/address.png" /> ${team.orgAddress }</td>
       
     </tr>
     <tr>
-      <td>签约户数：${team.familyIncrement }户</td>
-      <td>签约居民数：${team.signIncrement }人</td>
+      <td><img src="statics/image/appraisal/sign.png" /> 签约户数：${team.familyIncrement }户</td>
+      <td><img src="statics/image/appraisal/person.png" /> 签约居民数：${team.signIncrement }人</td>
       
     </tr>
     
     <tr>
-      <td>慢病人数：${team.chronicDiseaseNumber }人</td>
-      <td>考核得分：${team.resultScore }</td>
+      <td><img src="statics/image/appraisal/sick.png" /> 慢病人数：${team.chronicDiseaseNumber }人</td>
+      <td><img src="statics/image/appraisal/score.png" /> 考核得分：${team.resultScore }</td>
       
     </tr>
     <tr>
