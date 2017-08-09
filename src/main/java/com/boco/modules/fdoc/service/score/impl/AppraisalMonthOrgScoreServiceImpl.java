@@ -72,4 +72,19 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 		return returnMap;
 	}
 
+	@Override
+	public List<AppraisalMonthOrgScoreVo> getOrganizationScoreList(AppraisalMonthOrgScoreVo vo) {		 
+		return appraisalMonthOrgScoreDao.getOrganizationScoreList(vo);
+	}
+
+	@Override
+	public int getOrganizationScoreListCount(AppraisalMonthOrgScoreVo vo) {		 
+		return appraisalMonthOrgScoreDao.getOrganizationScoreListCount(vo);
+	}
+
+	@Override
+	public AppraisalMonthOrgScoreVo getAppraisalMonthOrgScoreByOrgId(String orgId) {		 
+		return appraisalMonthOrgScoreDao.getAppraisalMonthOrgScoreByOrgId(orgId);
+	}
+
 }

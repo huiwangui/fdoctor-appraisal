@@ -63,5 +63,71 @@
 			a.org_id = b.id
 		 and a.`month` =#{0}
 	  </select>
-	 
+	  <!--根据月份获取所有医疗机构总数 -->
+	  <select id="getOrganizationScoreListCount" parameterType="com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo" resultType="integer">	  
+	   SELECT
+			count(a.org_id )		    
+		 FROM
+			t_appraisal_month_org_score a,
+			t_hospital b
+		 WHERE
+			a.org_id = b.id
+		<if test="month != null  and month != ''">
+			and a.month=#{month}
+		</if>	
+		<if test="orgId != null  and orgId != ''">
+			and a.org_id=#{orgId}
+		</if>
+	  </select>
+	  <!-- 根据月份获取所有医疗机构 -->
+	  <select id="getOrganizationScoreList" parameterType="com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo" resultType="com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo">	  
+	   SELECT
+			a.org_id, a.sign_increment, a.family_increment, a.sign_hyper_score, a.sign_diabetes_score, 
+		    a.sign_phychosis_score, a.sign_old_score, a.sign_maternal_score, a.sign_children_score, a.sign_manage_score, 
+		    a.public_health_hyper_score, a.public_health_diabetes_score, a.public_health_phychosis_score, 
+		    a.public_health_old_score, a.public_health_maternal_score, a.public_health_children_score, 
+		    a.public_health_score, a.health_manage_edu_score, a.health_manage_daily_activity_score, 
+		    a.health_manage_assessment_score, a.health_manage_document_score, a.health_manage_score, 
+		    a.customer_score, a.result_score, a.team_total, a.un_qualified_increment, a.qualified_increment, 
+		    a.excellent_increment, a.month, a.create_time,b.org_name
+		 FROM
+			t_appraisal_month_org_score a,
+			t_hospital b
+		 WHERE
+			a.org_id = b.id
+		 <if test="month != null  and month != ''">
+			and a.month=#{month}
+		</if>	
+		<if test="orgId != null  and orgId != ''">
+			and a.org_id=#{orgId}
+		</if>
+	  </select>
+	  <!-- 获取指定机构的实力 -->
+	  <select id="getAppraisalMonthOrgScoreByOrgId" parameterType="string" resultType="com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo">	  
+	  SELECT
+			AVG(a.sign_hyper_score) sign_hyper_score,
+			AVG(a.sign_diabetes_score) sign_diabetes_score,
+			AVG(a.sign_phychosis_score) sign_phychosis_score,
+			AVG(a.sign_old_score) sign_old_score,
+			AVG(a.sign_maternal_score) sign_maternal_score,
+			AVG(a.sign_children_score) sign_children_score,
+			AVG(a.sign_manage_score) sign_manage_score,
+			AVG(a.public_health_hyper_score) public_health_hyper_score,
+			AVG(a.public_health_diabetes_score) public_health_diabetes_score,
+			AVG(a.public_health_phychosis_score) public_health_phychosis_score,
+			AVG(a.public_health_old_score) public_health_old_score,
+			AVG(a.public_health_maternal_score) public_health_maternal_score,
+			AVG(a.public_health_children_score) public_health_children_score,
+			AVG(a.public_health_score) public_health_score,
+		    AVG(a.health_manage_edu_score) health_manage_edu_score,
+			AVG(a.health_manage_daily_activity_score) health_manage_daily_activity_score,
+			AVG(a.health_manage_assessment_score) health_manage_assessment_score,
+			AVG(a.health_manage_document_score) health_manage_document_score,
+			AVG(a.health_manage_score) health_manage_score,
+			AVG(a.customer_score) customer_score
+		FROM
+			t_appraisal_month_org_score a	 
+		WHERE
+        a.org_id=#{0}
+	  </select>
 </mapper>

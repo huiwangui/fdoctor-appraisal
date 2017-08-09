@@ -38,14 +38,10 @@ public class DoctorTeamController {
 	@RequestMapping(value = "/homePage",method = RequestMethod.GET)
 	public String showPage(HttpServletRequest request, Model model){
 		//获取所有医疗机构
-		List<HospitalEntity> organizationList = appraisalMonthOrgScoreService.getHospitalList();
-		//获取所有医疗团队
-		//List<AppraisalMonthTeamScoreVo> teamScoreList = appraisalMonthTeamScoreService.getTeamScoreList();
+		List<HospitalEntity> organizationList = appraisalMonthOrgScoreService.getHospitalList();		 
 		//设置作用域对象
 		model.addAttribute("organizationList", organizationList);
-		//model.addAttribute("teamScoreList", teamScoreList);
-		
-		return "/doctorTeam/homePage";
+		return "/appraise/doctorTeam/homePage";
 	}
 	
 	@ResponseBody
@@ -106,10 +102,23 @@ public class DoctorTeamController {
 		AppraisalMonthTeamScoreVo vo = appraisalMonthTeamScoreService.getAppraisalMonthTeamScoreByMonth(entity);
 		//获取指定团队的实力
 		AppraisalMonthTeamScoreVo scoreVo =appraisalMonthTeamScoreService.getAppraisalMonthTeamScoreByTeamId(teamId);
-		scoreVo.setResultScore(vo.getResultScore());
-		scoreVo.setSignIncrement(vo.getSignIncrement());
-		scoreVo.setFamilyIncrement(vo.getFamilyIncrement());
-		scoreVo.setChronicDiseaseNumber(vo.getChronicDiseaseNumber());
+		if(vo.getResultScore()==null){
+			scoreVo.setResultScore(0.0);
+		}else{
+			scoreVo.setResultScore(vo.getResultScore());
+		}if(vo.getSignIncrement()==null){
+			scoreVo.setSignIncrement(0);
+		}else{
+			scoreVo.setSignIncrement(vo.getSignIncrement());
+		}if(vo.getFamilyIncrement()==null){
+			scoreVo.setFamilyIncrement(0);
+		}else{
+			scoreVo.setFamilyIncrement(vo.getFamilyIncrement());
+		}if(vo.getChronicDiseaseNumber()==null){
+			scoreVo.setChronicDiseaseNumber(0);
+		}else{
+			scoreVo.setChronicDiseaseNumber(vo.getChronicDiseaseNumber());
+		}
 		scoreVo.setOrgAddress(vo.getOrgAddress());
 	    scoreVo.setOrgName(vo.getOrgName());
 		scoreVo.setDoctorName(vo.getDoctorName());
@@ -117,6 +126,6 @@ public class DoctorTeamController {
 		//设置作用域对象
 		model.addAttribute("team", scoreVo);
  
-		return "/doctorTeam/teamStrength";
+		return "/appraise/doctorTeam/teamStrength";
 	}
 }

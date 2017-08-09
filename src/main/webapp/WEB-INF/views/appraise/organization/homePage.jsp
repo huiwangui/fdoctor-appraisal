@@ -1,6 +1,6 @@
 <%@ page language="Java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../../views/include/taglib.jsp"%>
+<%@ include file="../../../../views/include/taglib.jsp"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">    
-    <title>医生团队考核结果</title>        
+    <title>医疗机构考核结果</title>        
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">    
@@ -47,17 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="text" id="month" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'})" class="Wdate" style="color:#666;height:38px;text-indent:10px;border:1px solid #e6e6e6;line-height:38px;"/> 
 					</div>     
 			    </div>
-			    
-			    
-			 	<div class="layui-inline" >
-				 	<label class="layui-form-label" style="padding:9px 0"> 医生姓名：</label>
-				    <div class="layui-input-inline">
-				      <input id="doctorName" style="height:38px;text-indent:10px;border:1px solid #e6e6e6;color:#666;line-height:38px;">     
-				    </div>
-			    </div>
-			     
-				
-			    
+
 			    <div class="layui-inline" >
 			    	 <div class="layui-input-inline">
 			    	<button class="layui-btn layui-btn-radius" style="width: 150px;" id="selectButton" type="button">查询</button>
@@ -86,22 +76,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                
 	                btable.set({
 	                    elem: '#content',
-	                    url: '/fdoctor-appraisal/doctorTeam/teamScoreList',
+	                    url: '/fdoctor-appraisal/organization/organizationScoreList',
 	                    type: 'GET',
 	                    pageSize: 15,
 	                    columns: [{
-	                        fieldName: '医生团队',
-	                        field: 'doctorName'                        
+	                        fieldName: '医疗机构名称',
+	                        field: 'orgName'                        
 	                    },{
 	                        fieldName: '签约户数/人数',
 	                        field: 'signFamilyAndPerson'                        
-	                    },/* {
-	                        fieldName: '签约户数/人数',
-	                        field: 'familyIncrement'
 	                    },{
-	                        fieldName: '签约人数',
-	                        field: 'signIncrement'	                        
-	                    }, */{
 	                        fieldName: '签约管理考评',
 	                        field: 'signManageScore'
 	                    },{
@@ -116,8 +100,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    },{
 	                    	fieldName: '考核结果',
 	                    	field : 'resultScore'                        
-	                    },{
-	                    	fieldName: '团队实力',
+	                    } ,{
+	                    	fieldName: '机构实力',
 	                    	field : 'map', 
 	                    	colRender : 'typeRender'	                        
 	                    }],
@@ -155,29 +139,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        	
 	    		var param = {
 	    				orgId:orgId,
-	    				month:$("#month").val(),
-	    				doctorName:$("#doctorName").val()
+	    				month:$("#month").val()
 	    				 
 	    		}
 	    		return param;
 	    	}
-	        function typeRender(data){
+	         function typeRender(data){
 	        	var data=eval(data);
-	        	return '<button data-method="offset" data-type="auto" style="width:125px" class="layui-btn" onclick="goHand(\''+data.teamId+'\',\''+data.month+'\')" >查看</button>';
+	        	return '<button data-method="offset" data-type="auto" style="width:125px" class="layui-btn" onclick="goHand(\''+data.orgId+'\',\''+data.month+'\')" >查看</button>';
+	        	 
 		 
-	        }
-			function goHand(teamId,month){
+	        } 
+			 function goHand(orgId,month){
 				layer.open({
              		  type: 2,
              		  title: false,
              		  id : Math.ceil(150),
              		  area: ['1100px', '580px'],
              		  closeBtn: 1,
-             		  content: "/fdoctor-appraisal/doctorTeam/teamStrength?month="+month+"&teamId="+teamId
+             		  content: "/fdoctor-appraisal/organization/organizationStrength?month="+month+"&orgId="+orgId
               	});
-				//window.open("/fdoctor-appraisal/doctorTeam/teamStrength?month="+month+"&teamId="+teamId);
-				//window.location.href="/fdoctor-appraisal/doctorTeam/teamStrength?month="+month+"&teamId="+teamId;
-			}
+ 
+			} 
 	</script>
  </body>
 </html>

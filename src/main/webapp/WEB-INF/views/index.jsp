@@ -138,7 +138,7 @@
 							        {
 							            title: "医疗机构",
 							            icon: "&#xe629;",
-							            href: "/fdoctor-appraisal/sign/showPage"
+							            href: "/fdoctor-appraisal/organization/homePage"
 							        },
 							        {
 							            title: "医生团队",
