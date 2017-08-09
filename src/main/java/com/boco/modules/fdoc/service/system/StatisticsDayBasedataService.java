@@ -1,6 +1,7 @@
 package com.boco.modules.fdoc.service.system;
 
 import com.boco.modules.fdoc.model.statistics.StatisticsDayBasedataEntity;
+import com.boco.modules.fdoc.model.statistics.StatisticsDayTeamBasedataEntity;
 import com.boco.modules.fdoc.vo.statistics.StatisticsDayBasedataVo;
 import com.boco.modules.fdoc.vo.statistics.StatisticsDayTwoBasedataVo;
 
@@ -67,6 +68,8 @@ public interface StatisticsDayBasedataService {
 	* 第二屏统计
 	* */
 	StatisticsDayTwoBasedataVo getStatisticDayTwoBasedata(String teamId, String orgId, String type);
+
+	public StatisticsDayTeamBasedataEntity getLastInfo(String teamId);
 
 	//add by pdk
 	

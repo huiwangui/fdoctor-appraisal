@@ -56,25 +56,25 @@
 			    
 			    <div class="layui-inline" >
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="总人数${baseEntity.signCount}人" value="0" checked>
+			    		<input type="radio" name="personType" id="p0" title="总人数${baseEntity.signCount}人" value="0" checked>
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="高血压${baseEntity.hyperCount}人" value="1">
+			    		<input type="radio" name="personType" id="p1" title="高血压${baseEntity.hyperCount}人" value="1">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="糖尿病${baseEntity.diabetesCount}人" value="2">
+			    		<input type="radio" name="personType" id="p2" title="糖尿病${baseEntity.diabetesCount}人" value="2">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="重症精神病${baseEntity.majorPsychosisCount}人" value="3">
+			    		<input type="radio" name="personType" id="p3" title="重症精神病${baseEntity.majorPsychosisCount}人" value="3">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="老年人${baseEntity.oldCount}人" value="4">
+			    		<input type="radio" name="personType" id="p4" title="老年人${baseEntity.oldCount}人" value="4">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="孕产妇${baseEntity.maternalCount}人" value="5">
+			    		<input type="radio" name="personType" id="p5" title="孕产妇${baseEntity.maternalCount}人" value="5">
 			    	</div>
 			    	<div class="layui-input-inline">
-			    		<input type="radio" name="personType" title="儿童${baseEntity.childrenCount}人" value="6">
+			    		<input type="radio" name="personType" id="p6" title="儿童${baseEntity.childrenCount}人" value="6">
 			    	</div>
 			    
 			    </div>
@@ -93,7 +93,7 @@
 			<button class="layui-btn layui-btn-primary layui-btn-small" id="detailButton"><i class="layui-icon">&#xe654;</i>签约详情</button>
 		</div>
         <div id="content" style="width: 100%;height: 500px;"></div>
-    </div>
+    	</div>
 
     <script>
     
@@ -196,12 +196,11 @@
 					 				orgId:data.value
 					 			},
 					 			success : function(data) {
-					 				console.log(data);
 					 				var proHtml = '';
 					 				for(i = 0; i < data.length; i++){
 					 					proHtml += '<option value="'+data[i].teamId+'">'+data[i].docName+'</option>';
 					 				}
-					 				$('#teamId').html('<option value="0">--请选择医生--</option>');
+					 				$('#teamId').html('<option value="">--请选择医生--</option>');
 					 				$('#teamId').append(proHtml);
 					 				form.render();
 					 			}
@@ -213,8 +212,41 @@
 		     })
     	})
     	
+    	function dataRefresh(){
+    		layui.config({
+                base: '/fdoctor-appraisal/statics/beginnerAdmin/js/'
+            }).use(['layer'], function () {
+                var layer = layui.layer;
+                 $ = layui.jquery;
+                
+                 
+                 $.ajax({
+			 			type : 'GET',
+			 			url : '/fdoctor-appraisal/sign/getCountData',
+			 			data :{
+			 				orgId:$("#orgId").val(),
+			 				teamId:$("#teamId").val()
+			 			},
+			 			success : function(data) {
+			 				console.log(data);
+			 	        	$('#p0').prop("title","总人数"+data.signCount+"人");
+			 	        	$('#p1').prop("title","高血压"+data.hyperCount+"人");
+			 	        	$('#p2').prop("title","糖尿病"+data.diabetesCount+"人");
+			 	        	$('#p3').prop("title","重症精神病"+data.majorPsychosisCount+"人");
+			 	        	$('#p4').prop("title","老年人"+data.oldCount+"人");
+			 	        	$('#p5').prop("title","孕产妇"+data.maternalCount+"人");
+			 	        	$('#p6').prop("title","儿童"+data.childrenCount+"人");
+			 	        	form.render();
+			 				form.render();
+			 			}
+			 	});
+            })
+    		
+    	}
     	//查询按钮声明点击事件，查询逻辑
         $('#selectButton').on('click', function(){
+        	
+        	dataRefresh();
         	tableConfig();
         });
         function packParams(){

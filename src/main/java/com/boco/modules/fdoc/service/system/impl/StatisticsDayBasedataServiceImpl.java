@@ -280,4 +280,9 @@ public class StatisticsDayBasedataServiceImpl implements StatisticsDayBasedataSe
 		return new StatisticsDayTwoBasedataVo(entity);
 	}
 
+	@Override
+	public StatisticsDayTeamBasedataEntity getLastInfo(String teamId) {
+		return teamDao.getLastInfo(teamId);
+	}
+
 }

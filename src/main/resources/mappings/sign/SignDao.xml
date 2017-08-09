@@ -23,25 +23,26 @@
 		select family_id 
 		from t_person_information e
 		left join t_person_desease_info f on e.person_id=f.person_id 
-		where 1=1
-			<if test="personType=='1'">
-			and hyper_flag='1'
+		<where>
+			<if test='personType=="1"'>
+			 f.hyper_flag='1'
 			</if>
-			<if test="personType=='2'">
-			and diabetes_flag='1'
+			<if test='personType=="2"'>
+			and f.diabetes_flag='1'
 			</if>
-			<if test="personType=='3'">
-			and major_psychosis_flag='1'
+			<if test='personType=="3"'>
+			and f.major_psychosis_flag='1'
 			</if>
-			<if test="personType=='4'">
-			and oldm_flag='1'
+			<if test='personType=="4"'>
+			and f.oldm_flag='1'
 			</if>
-			<if test="personType=='5'">
-			and maternal_flag='1'
+			<if test='personType=="5"'>
+			and f.maternal_flag='1'
 			</if>
-			<if test="personType=='6'">
-			and child_flag='1'
+			<if test='personType=="6"'>
+			and f.child_flag='1'
 			</if>
+		</where>
 		)	
 	
 	</select>
@@ -65,25 +66,26 @@
 		select family_id 
 		from t_person_information e
 		left join t_person_desease_info f on e.person_id=f.person_id 
-		where 1=1
-			<if test="personType=='1'">
-			and hyper_flag='1'
+		<where>
+			<if test='personType=="1"'>
+			 f.hyper_flag='1'
 			</if>
-			<if test="personType=='2'">
-			and diabetes_flag='1'
+			<if test='personType=="2"'>
+			and f.diabetes_flag='1'
 			</if>
-			<if test="personType=='3'">
-			and major_psychosis_flag='1'
+			<if test='personType=="3"'>
+			and f.major_psychosis_flag='1'
 			</if>
-			<if test="personType=='4'">
-			and oldm_flag='1'
+			<if test='personType=="4"'>
+			and f.oldm_flag='1'
 			</if>
-			<if test="personType=='5'">
-			and maternal_flag='1'
+			<if test='personType=="5"'>
+			and f.maternal_flag='1'
 			</if>
-			<if test="personType=='6'">
-			and child_flag='1'
+			<if test='personType=="6"'>
+			and f.child_flag='1'
 			</if>
+		</where>
 		)	
 	
 	</select>

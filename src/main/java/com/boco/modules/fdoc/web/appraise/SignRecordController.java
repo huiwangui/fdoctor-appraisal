@@ -20,9 +20,11 @@ import com.boco.common.json.BaseJsonVo;
 import com.boco.common.persistence.Page;
 import com.boco.common.utils.JsonUtils;
 import com.boco.common.utils.NumberUtils;
+import com.boco.common.utils.StringUtils;
 import com.boco.modules.fdoc.model.score.HospitalEntity;
 import com.boco.modules.fdoc.model.sign.SigServicepackEntity;
 import com.boco.modules.fdoc.model.statistics.StatisticsDayBasedataEntity;
+import com.boco.modules.fdoc.model.statistics.StatisticsDayTeamBasedataEntity;
 import com.boco.modules.fdoc.service.sign.SigServicepackService;
 import com.boco.modules.fdoc.service.sign.SignService;
 import com.boco.modules.fdoc.service.system.DocService;
@@ -30,6 +32,7 @@ import com.boco.modules.fdoc.service.system.HospitalService;
 import com.boco.modules.fdoc.service.system.StatisticsDayBasedataService;
 import com.boco.modules.fdoc.vo.DoctorDetailVo;
 import com.boco.modules.fdoc.vo.SignFamilyTeamVo;
+import com.taobao.api.internal.toplink.embedded.websocket.util.StringUtil;
 
 /**
  * Description
@@ -126,4 +129,57 @@ public class SignRecordController {
 		return JsonUtils.getJson(BaseJsonVo.pageList(list, count));
 	}
 
+	
+	@ResponseBody
+	@RequestMapping(value="/getCountData",method=RequestMethod.GET)
+	public String getCountData(HttpServletRequest request, Model model,String orgId,String teamId){
+		//查询人数变化
+				StatisticsDayTeamBasedataEntity dataEntity=new StatisticsDayTeamBasedataEntity();
+				if(teamId !=null && !"".equals(teamId)){
+					dataEntity=baseService.getLastInfo(teamId);
+				}else if(orgId !=null && !"".equals(orgId)){
+					DoctorDetailVo docVo=new DoctorDetailVo();
+					docVo.setOrgId(orgId);
+					List<DoctorDetailVo> dlist=docService.getLeaderList(docVo);
+					
+					int sign=0;
+					int hyper=0;
+					int diabetes=0;
+					int children=0;
+					int majorPsychosis=0;
+					int old=0;
+					int maternal=0;
+					for(DoctorDetailVo dVo:dlist){
+						teamId=dVo.getTeamId();
+						StatisticsDayTeamBasedataEntity dEntity=baseService.getLastInfo(teamId);
+						sign+=dEntity.getSignCount();
+						hyper+=dEntity.getHyperCount();
+						diabetes+=dEntity.getDiabetesCount();
+						children+=dEntity.getChildrenCount();
+						majorPsychosis+=dEntity.getMajorPsychosisCount();
+						old+=dEntity.getOldCount();
+						maternal+=dEntity.getMaternalCount();
+					}
+					dataEntity.setSignCount(sign);
+					dataEntity.setHyperCount(hyper);
+					dataEntity.setDiabetesCount(diabetes);
+					dataEntity.setChildrenCount(children);
+					dataEntity.setMajorPsychosisCount(majorPsychosis);
+					dataEntity.setOldCount(old);
+					dataEntity.setMaternalCount(maternal);
+				}
+				StatisticsDayBasedataEntity baseEntity=new StatisticsDayBasedataEntity();
+				if(StringUtils.isEmpty(teamId) && StringUtils.isEmpty(orgId)){
+					//获取签约总人数详情
+					baseEntity=baseService.getBasedata();
+					dataEntity.setSignCount(baseEntity.getSignCount());
+					dataEntity.setHyperCount(baseEntity.getHyperCount());
+					dataEntity.setDiabetesCount(baseEntity.getDiabetesCount());
+					dataEntity.setChildrenCount(baseEntity.getChildrenCount());
+					dataEntity.setMajorPsychosisCount(baseEntity.getMajorPsychosisCount());
+					dataEntity.setOldCount(baseEntity.getOldCount());
+					dataEntity.setMaternalCount(baseEntity.getMaternalCount());
+				}
+			return JsonUtils.getJson(dataEntity);
+	}
 }

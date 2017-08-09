@@ -4,7 +4,7 @@
 <mapper namespace="com.boco.modules.fdoc.dao.statistics.StatisticsDayTeamBasedataDao">
 	<sql id="Base_Column_List" >
 		id, team_id, sign_count, hyper_count, diabetes_count, children_count, major_psychosis_count, 
-    	statistics_date, create_time,family_count
+		old_count,maternal_count,statistics_date, create_time,family_count
 	</sql>
 	
 	<!-- 获取最近一条统计信息 -->

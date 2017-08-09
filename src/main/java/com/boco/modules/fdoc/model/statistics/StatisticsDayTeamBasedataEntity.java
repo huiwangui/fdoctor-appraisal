@@ -37,7 +37,17 @@ public class StatisticsDayTeamBasedataEntity {
     * 重度精神病人数
     */
     private int majorPsychosisCount;
-
+    
+    /**
+     * 老年人人数
+     */
+    private int oldCount;
+    
+    /**
+     * 孕产妇人数 
+     */
+    private int maternalCount;
+    
     /**
     * 统计日期
     */
@@ -132,4 +142,22 @@ public class StatisticsDayTeamBasedataEntity {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	public int getOldCount() {
+		return oldCount;
+	}
+
+	public void setOldCount(int oldCount) {
+		this.oldCount = oldCount;
+	}
+
+	public int getMaternalCount() {
+		return maternalCount;
+	}
+
+	public void setMaternalCount(int maternalCount) {
+		this.maternalCount = maternalCount;
+	}
+    
+    
 }
