@@ -18,6 +18,8 @@
 	src="/fdoctor-appraisal/statics/echarts.min.js"></script>
 <script type="text/javascript"
 	src="/fdoctor-appraisal/statics/js/inputTools.js"></script>
+<script type="text/javascript"
+	src="/fdoctor-appraisal/statics/js/layer/layer.js"></script>
 </head>
 
 <body>
@@ -123,6 +125,9 @@
 				<div class="box3" id="excellent_org_charts_div"></div>
 				<div class="box4">
 					<div id="org_detail_div">
+						<!-- 隐藏域，用于装现在所展示的机构的id -->
+						<input type="hidden" id="current_org_id_div">
+						
 						<h5 class="tc" org-field-name="orgName"></h5>
 						<table>
 							<tr>
@@ -160,7 +165,7 @@
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i7.png" alt="" /></td>
 								<td>考核得分：<span class="blue_color" org-field-name="resultScore"></span> <a href="javascript:void(0)"
-									class="treat">医疗机构实力</a>
+									class="treat" onclick="showOrgStrength()">医疗机构实力</a>
 								</td>
 							</tr>
 						</table>
@@ -169,7 +174,8 @@
 						暂无优秀签约机构数据.
 					</div>
 				</div>
-				<div class="box5"></div>
+				<div class="box5" id="org_pie_div">
+				</div>
 			</div>
 
 			<!--第三排的-->
@@ -177,6 +183,7 @@
 				<div class="box3" id="excellent_team_charts_div"></div>
 				<div class="box4">
 					<div id="team_detail_div">
+						<input type="hidden" id="current_team_id_div">
 						<h5 class="tc" team-field-name="doctorName"></h5>
 						<table>
 							<tr>
@@ -205,7 +212,7 @@
 							<tr>
 								<td><img src="/fdoctor-appraisal/statics/image/main/i7.png" alt="" /></td>
 								<td>考核得分：<span class="blue_color" team-field-name="resultScore"></span> <a href="javascript:void(0)"
-									class="treat">医疗团队实力</a>
+									class="treat" onclick="showTeamStrength()">医疗团队实力</a>
 								</td>
 							</tr>
 						</table>
@@ -215,7 +222,7 @@
 						暂无优秀签约团队数据.
 					</div>
 				</div>
-				<div class="box5"></div>
+				<div class="box5" id="team_pie_div"></div>
 			</div>
 
 
@@ -242,6 +249,8 @@
 		loadSignBar(type);	//重新加载签约总量数据
 		loadExcellentOrgBar();	//重新加载优秀机构数据
 		loadExcellentTeamBar();	//重新加载优秀团队数据
+		loadOrgGradePie();	//重新加载机构分级数据
+		loadTeamGradePie();	//重新加载团队分级数据
 	}
 	
 	//切换“签约管理”下面的月份
@@ -254,6 +263,8 @@
 		
 		loadExcellentOrgBar();	//重新加载优秀机构数据
 		loadExcellentTeamBar();	//重新加载优秀团队数据
+		loadOrgGradePie();	//重新加载机构分级数据
+		loadTeamGradePie();	//重新加载团队分级数据
 	}
 	
 	//加载通用柱状图
@@ -296,6 +307,39 @@
 		chartsObj.setOption(option);
 	}
 	
+	//加载通用饼图
+	function loadCommonPieCharts(chartsObj, legend, title, data){
+		var option = {
+			    title : {
+			        text: title,
+			        x:'center'
+			    },
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: "{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        left: 'left',
+			        data: legend
+			    },
+			    series : [
+			        {
+			            type: 'pie',
+			            data: data,
+			            stillShowZeroSum : false,
+			            label : {
+			                normal : {
+			                    show :false
+			                }
+			            }
+			        }
+			    ],
+			    color : ['#6699FF', '#FF9933', '#FFCC66', '#C0C0C0']
+			};
+		chartsObj.setOption(option);
+	}
+	
 	$('#sign_item_type').val('sign');	//默认查看总人数
 	$('#sign_month').val('01');	//默认月份为1月
 	
@@ -305,6 +349,32 @@
 	/**
 	*	----------------------------------------签约管理------------------------------------------------
 	*/
+	//查看机构实力
+	function showOrgStrength(){
+		layer.open({
+     		  type: 2,
+     		  title: false,
+     		  id : Math.ceil(150),
+     		  area: ['70%', '70%'],
+     		  closeBtn: 1,
+     		  content: "/fdoctor-appraisal/organization/organizationStrength?month=" + $('#select_year').val() + $('#sign_month').val()
+     				  + "&orgId=" + $('#current_org_id_div').val()
+      	});
+	}
+	
+	//查看团队实力
+	function showTeamStrength(teamId,month){
+		layer.open({
+			type: 2,
+			title: false,
+			id : Math.ceil(150),
+			area: ['70%', '70%'],
+			closeBtn: 1,
+			content: "/fdoctor-appraisal/doctorTeam/teamStrength?month=" + $('#select_year').val() + $('#sign_month').val()
+					+ "&teamId=" + $('#current_team_id_div').val()
+		});
+		 
+	}
 	
 	//============================页面第一排相关======================
 	//加载签约总量数据
@@ -406,6 +476,7 @@
 	//实例化优秀团队柱状图charts
 	var signExcellentOrgBarChart = echarts.init(document.getElementById('excellent_org_charts_div'));
 	signExcellentOrgBarChart.on('click', function (params) {
+		$('#current_org_id_div').val(params.data.orgId);
 		//发送请求获取机构的信息
 		$.ajax({
  			type : 'GET',
@@ -425,6 +496,7 @@
  					$.each(orgScoreInfo.data, function(name, value) {
  						$("[org-field-name='" + name + "']").text(value);
  					});
+ 					
  				}else{
  					//隐藏机构得分详情，展示提示信息
  					$('#org_not_found_div').removeAttr('style');
@@ -461,6 +533,7 @@
  					loadCommonBarCharts(signExcellentOrgBarChart, '签约量', '人', orgNameArr, incrementArr);
  					
  					if(data.data.length > 0){
+ 						$('#current_org_id_div').val(data.data[0].orgId);
  						//发送请求获取第一个机构的信息
  						$.ajax({
  				 			type : 'GET',
@@ -480,6 +553,7 @@
  				 					$.each(orgScoreInfo.data, function(name, value) {
  				 						$("[org-field-name='" + name + "']").text(value);
  				 					});
+ 				 					
  				 				}else{
  				 					//隐藏机构得分详情，展示提示信息
  				 					$('#org_not_found_div').removeAttr('style');
@@ -499,11 +573,47 @@
 	
 	loadExcellentOrgBar();
 	
+	//实例化机构分级饼图
+	var orgGradePieCharts = echarts.init(document.getElementById('org_pie_div'));
+	
+	//加载机构分级饼图
+	function loadOrgGradePie(){
+		$.ajax({
+ 			type : 'GET',
+ 			url : '/fdoctor-appraisal/main/getOrgWithGrade',
+ 			data : {
+ 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				target : signParamTarget($('#sign_item_type').val())
+ 			},
+ 			success : function(data) {
+ 				if(data.code == '200'){
+	 				//组合数据
+	 				var legend = [];
+	 				var pieData = [];
+	 				
+	 				
+	 				$.each(data.data, function(name, value) {
+	 					legend.push(name);
+	 					var pieItem = {
+	 							value : value.length,
+	 							name : name
+	 					}
+	 					pieData.push(pieItem);
+					});
+	 				
+	 				loadCommonPieCharts(orgGradePieCharts, legend, "医疗机构考核结果等级分布", pieData);
+ 				}
+ 			}
+ 		});
+	}
+	loadOrgGradePie();
+	
 	//============================页面第三排相关======================
 		
 	//实例化优秀团队柱状图charts
 	var signExcellentTeamBarChart = echarts.init(document.getElementById('excellent_team_charts_div'));
 	signExcellentTeamBarChart.on('click', function (params) {
+		$('#current_team_id_div').val(params.data.teamId);
 		//发送请求获取团队的信息
 		$.ajax({
  			type : 'GET',
@@ -560,6 +670,7 @@
  					loadCommonBarCharts(signExcellentTeamBarChart, '签约量', '人', teamNameArr, incrementArr);
  					
  					if(data.data.length > 0){
+ 						$('#current_team_id_div').val(data.data[0].teamId);
  						$.ajax({
  				 			type : 'GET',
  				 			url : '/fdoctor-appraisal/main/getTeamDetail',
@@ -597,6 +708,40 @@
 	}
 	
 	loadExcellentTeamBar();
+	
+	//实例化团队分级饼图
+	var teamGradePieCharts = echarts.init(document.getElementById('team_pie_div'));
+	
+	//加载团队分级饼图
+	function loadTeamGradePie(){
+		$.ajax({
+ 			type : 'GET',
+ 			url : '/fdoctor-appraisal/main/getTeamWithGrade',
+ 			data : {
+ 				month : $('#select_year').val() + $('#sign_month').val(),
+ 				target : signParamTarget($('#sign_item_type').val())
+ 			},
+ 			success : function(data) {
+ 				if(data.code == '200'){
+	 				//组合数据
+	 				var legend = [];
+	 				var pieData = [];
+	 				
+	 				$.each(data.data, function(name, value) {
+	 					legend.push(name);
+	 					var pieItem = {
+	 							value : value.length,
+	 							name : name
+	 					}
+	 					pieData.push(pieItem);
+					});
+	 				
+	 				loadCommonPieCharts(teamGradePieCharts, legend, "医生团队考核结果等级分布", pieData);
+ 				}
+ 			}
+ 		});
+	}
+	loadTeamGradePie();
 	
 </script>
 
