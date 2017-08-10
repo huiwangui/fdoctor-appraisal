@@ -85,4 +85,14 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 		return returnMap;
 	}
 
+	@Override
+	public int insert(AppraisalMonthTeamScoreEntity entity) {
+		return appraisalMonthTeamScoreDao.insert(entity);
+	}
+
+	@Override
+	public int update(AppraisalMonthTeamScoreEntity entity) {
+		return appraisalMonthTeamScoreDao.update(entity);
+	}
+
 }

@@ -60,5 +60,18 @@ public interface AppraisalMonthTeamScoreService {
 	 * @return
 	 */
 	public Map<String, Object> getAppraisalMonthTeamScoreWithGrade(String month, String target) throws Exception;
-
+    
+	/**
+	 * 插入数据
+	 * @param entity
+	 * @return
+	 */
+	public int insert(AppraisalMonthTeamScoreEntity entity);
+	
+	/**
+	 * 更新数据
+	 * @param entity
+	 * @return 影响行数
+	 */
+	public int update(AppraisalMonthTeamScoreEntity entity);
 }

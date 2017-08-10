@@ -162,4 +162,117 @@
 		  AND b.leader_flag = "1"
 		  and a.`month` =#{0}
 	  </select>
+	  
+	  <!-- 新增数据 -->
+	  <insert id="insert" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity" >
+	    insert into t_appraisal_month_team_score (id, team_id, sign_increment, 
+	      family_increment, sign_hyper_score, sign_diabetes_score, 
+	      sign_phychosis_score, sign_old_score, sign_maternal_score, 
+	      sign_children_score, sign_manage_score, public_health_hyper_score, 
+	      public_health_diabetes_score, public_health_phychosis_socre, 
+	      public_health_old_score, public_health_maternal_score, 
+	      public_health_children_score, public_health_score, 
+	      health_manage_edu_score, health_manage_daily_activity_score, 
+	      health_manage_assessment_score, health_manage_document_score, 
+	      health_manage_score, customer_score, result_socre, 
+	      month, create_time)
+	    values (#{id,jdbcType=INTEGER}, #{teamId,jdbcType=VARCHAR}, #{signIncrement,jdbcType=INTEGER}, 
+	      #{familyIncrement,jdbcType=INTEGER}, #{signHyperScore,jdbcType=DOUBLE}, #{signDiabetesScore,jdbcType=DOUBLE}, 
+	      #{signPhychosisScore,jdbcType=DOUBLE}, #{signOldScore,jdbcType=DOUBLE}, #{signMaternalScore,jdbcType=DOUBLE}, 
+	      #{signChildrenScore,jdbcType=DOUBLE}, #{signManageScore,jdbcType=DOUBLE}, #{publicHealthHyperScore,jdbcType=DOUBLE}, 
+	      #{publicHealthDiabetesScore,jdbcType=DOUBLE}, #{publicHealthPhychosisSocre,jdbcType=DOUBLE}, 
+	      #{publicHealthOldScore,jdbcType=DOUBLE}, #{publicHealthMaternalScore,jdbcType=DOUBLE}, 
+	      #{publicHealthChildrenScore,jdbcType=DOUBLE}, #{publicHealthScore,jdbcType=DOUBLE}, 
+	      #{healthManageEduScore,jdbcType=DOUBLE}, #{healthManageDailyActivityScore,jdbcType=DOUBLE}, 
+	      #{healthManageAssessmentScore,jdbcType=DOUBLE}, #{healthManageDocumentScore,jdbcType=DOUBLE}, 
+	      #{healthManageScore,jdbcType=DOUBLE}, #{customerScore,jdbcType=DOUBLE}, #{resultSocre,jdbcType=DOUBLE}, 
+	      #{month,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+	  </insert>
+	  
+	  
+	  <!-- 更新数据 -->
+	  <update id="update" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity" >
+	    update t_appraisal_month_team_score
+	    <set >
+	      <if test="teamId != null" >
+	        team_id = #{teamId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="signIncrement != null" >
+	        sign_increment = #{signIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="familyIncrement != null" >
+	        family_increment = #{familyIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="signHyperScore != null" >
+	        sign_hyper_score = #{signHyperScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="signDiabetesScore != null" >
+	        sign_diabetes_score = #{signDiabetesScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="signPhychosisScore != null" >
+	        sign_phychosis_score = #{signPhychosisScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="signOldScore != null" >
+	        sign_old_score = #{signOldScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="signMaternalScore != null" >
+	        sign_maternal_score = #{signMaternalScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="signChildrenScore != null" >
+	        sign_children_score = #{signChildrenScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="signManageScore != null" >
+	        sign_manage_score = #{signManageScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="publicHealthHyperScore != null" >
+	        public_health_hyper_score = #{publicHealthHyperScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="publicHealthDiabetesScore != null" >
+	        public_health_diabetes_score = #{publicHealthDiabetesScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="publicHealthPhychosisSocre != null" >
+	        public_health_phychosis_socre = #{publicHealthPhychosisSocre,jdbcType=DOUBLE},
+	      </if>
+	      <if test="publicHealthOldScore != null" >
+	        public_health_old_score = #{publicHealthOldScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="publicHealthMaternalScore != null" >
+	        public_health_maternal_score = #{publicHealthMaternalScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="publicHealthChildrenScore != null" >
+	        public_health_children_score = #{publicHealthChildrenScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="publicHealthScore != null" >
+	        public_health_score = #{publicHealthScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="healthManageEduScore != null" >
+	        health_manage_edu_score = #{healthManageEduScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="healthManageDailyActivityScore != null" >
+	        health_manage_daily_activity_score = #{healthManageDailyActivityScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="healthManageAssessmentScore != null" >
+	        health_manage_assessment_score = #{healthManageAssessmentScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="healthManageDocumentScore != null" >
+	        health_manage_document_score = #{healthManageDocumentScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="healthManageScore != null" >
+	        health_manage_score = #{healthManageScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="customerScore != null" >
+	        customer_score = #{customerScore,jdbcType=DOUBLE},
+	      </if>
+	      <if test="resultSocre != null" >
+	        result_socre = #{resultSocre,jdbcType=DOUBLE},
+	      </if>
+	      <if test="month != null" >
+	        month = #{month,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createTime != null" >
+	        create_time = #{createTime,jdbcType=TIMESTAMP},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=INTEGER}
+	  </update>
 </mapper>

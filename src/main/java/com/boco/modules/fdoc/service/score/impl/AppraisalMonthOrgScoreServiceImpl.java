@@ -98,4 +98,14 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 		return appraisalMonthOrgScoreDao.getAppraisalMonthOrgScoreByOrgId(orgId);
 	}
 
+	@Override
+	public int insert(AppraisalMonthOrgScoreEntity entity) {
+		return appraisalMonthOrgScoreDao.insert(entity);
+	}
+
+	@Override
+	public int update(AppraisalMonthOrgScoreEntity entity) {
+		return appraisalMonthOrgScoreDao.update(entity);
+	}
+
 }

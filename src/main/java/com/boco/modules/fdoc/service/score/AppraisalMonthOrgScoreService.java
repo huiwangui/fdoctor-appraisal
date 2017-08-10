@@ -69,5 +69,19 @@ public interface AppraisalMonthOrgScoreService {
 	 * @author h
 	 */
 	public AppraisalMonthOrgScoreVo getAppraisalMonthOrgScoreByOrgId(String orgId);
+	
+	/**
+	 * 插入数据
+	 * @param entity
+	 * @return
+	 */
+	public int insert(AppraisalMonthOrgScoreEntity entity);
+	
+	/**
+	 * 更新数据
+	 * @param entity
+	 * @return 影响行数
+	 */
+	public int update(AppraisalMonthOrgScoreEntity entity);
 
 }

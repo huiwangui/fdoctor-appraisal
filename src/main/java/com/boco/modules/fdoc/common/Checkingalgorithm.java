@@ -83,6 +83,9 @@ public class Checkingalgorithm implements Calculation {
 		}
 		
 		System.out.println("每项平均值"+JsonUtils.getJsonFormat(avgmaps));
+		
+		
+		
 		// 每项得分(未处理区间值)slist
 		List<Map<String, Object>> slist = new ArrayList<Map<String, Object>>(list.size());
 		// 每项最高分后得到的区间值
@@ -100,10 +103,12 @@ public class Checkingalgorithm implements Calculation {
 				Field field = fields[j];
 				field.setAccessible(true); // 设置些属性是可以访问的
 				if (field != null) {
-					if ("teamId".equals(field.getName()) || "orgId".equals(field.getName())) {
-						xmap.put(field.getName(), (String) field.get(list.get(i)));
+					if ("teamId".equals(field.getName()) || "orgId".equals(field.getName())|| "familyIncrement".equals(field.getName())) {
+						xmap.put(field.getName(),  field.get(list.get(i)));
 					} else {
-
+                        if("signIncrement".equals(field.getName())){
+                        	xmap.put(field.getName(),  field.get(list.get(i)));
+                        }
 						if (!"id".equals(field.getName())) {
 							String type = field.getGenericType().toString();
 							if (type.equals("class java.lang.Integer")) {
@@ -113,16 +118,18 @@ public class Checkingalgorithm implements Calculation {
 //											length)) * 100);// 原始得分
 									
 									Double xscore =value/avgmaps.get(field.getName())*100;
-									xmap.put(field.getName(), xscore);
+									xmap.put(field.getName()+"ScoreYS", xscore);
 									// 得到最高分算区间值 ：100/最高分=区间值
-									if (Highmap.containsKey(field.getName())) {
-										if ((Double) Highmap.get(field.getName()) < xscore) {
+									if (Highmap.containsKey(field.getName()+"ScoreYS")) {
+										if ((Double) Highmap.get(field.getName()+"ScoreYS") >(100/xscore)) {
 											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));
-											Highmap.put(field.getName(),100/xscore);
+											System.out.println("小的分数："+Highmap.get(field.getName()+"ScoreYS"));
+											Highmap.put(field.getName()+"ScoreYS",100/xscore);
+											System.out.println("大的分数："+Highmap.get(field.getName()+"ScoreYS"));
 										}
 									} else {
 										//Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));// 区间值
-										  Highmap.put(field.getName(),100/xscore);
+										  Highmap.put(field.getName()+"ScoreYS",100/xscore);
 									}
 								}
 							}
@@ -148,14 +155,15 @@ public class Checkingalgorithm implements Calculation {
 		for (Map<String, Object> ysmap : slist) {
 			Map<String, Object> endmap = new HashMap<String, Object>();
 			for (Map.Entry<String, Object> entry : ysmap.entrySet()) {
-				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())) {
-					endmap.put(entry.getKey(), (String) entry.getValue());
+				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())|| "familyIncrement".equals(entry.getKey())||"signIncrement".equals(entry.getKey())) {
+					endmap.put(entry.getKey(),  entry.getValue());
 				} else {
+					 
 					if (!"id".equals(entry.getKey())) {
 						Double value = (Double) entry.getValue();
 						Double endscore = (double) (value * Highmap.get(entry.getKey()));// 区间过后的每项得分
 						endscore = NumberUtils.roundHalfUp(endscore, length);
-						endmap.put(entry.getKey(), endscore);
+						endmap.put(entry.getKey().substring(0,entry.getKey().length()-7)+"Score", endscore);
 					} else {
 						endmap.put(entry.getKey(), entry.getValue());
 					}
@@ -176,11 +184,11 @@ public class Checkingalgorithm implements Calculation {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 
-				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())) {
-					resultMap.put(entry.getKey(), (String) entry.getValue());
+				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())|| "familyIncrement".equals(entry.getKey())||"signIncrement".equals(entry.getKey())) {
+					resultMap.put(entry.getKey(),  entry.getValue());
 				} else {
+					 
 					if (!"id".equals(entry.getKey())) {
-
 						Double value = (Double) Double.valueOf(String.valueOf(entry.getValue()));
 						if (zbMap.get(entry.getKey()) != null) {
 							value = value * (zbMap.get(entry.getKey()));
@@ -266,66 +274,66 @@ public class Checkingalgorithm implements Calculation {
 				map.put("signManageScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_COUNT:
-				map.put("signIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("signIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_HY:
-				map.put("hyperIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("hyperIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_DIA:
-				map.put("diabetesIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("diabetesIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_MAT:
-				map.put("maternalIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("maternalIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_OLD:
-				map.put("oldIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("oldIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_CHI:
-				map.put("childrenIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("childrenIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_ZXJ:
-				map.put("phychosisI11ncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("phychosisI11ncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 				
 			case BusinessConstants.UP_ADMIN:
 				map.put("publicHealthScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_COUNT:
-				map.put("serviceIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("serviceIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_HY:
-				map.put("hyperIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("hyperIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_DIA:
-				map.put("diabetesIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("diabetesIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_MAT:
-				map.put("maternalIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("maternalIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_OLD:
-				map.put("oldIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("oldIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_CHI:
-				map.put("childrenIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("childrenIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_ZX:
-				map.put("phychosisIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("phychosisIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 
 			case BusinessConstants.HEALTH_ADMIN:
 				map.put("customerScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_EDU:
-				map.put("educationIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("educationIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_WZ:
-				map.put("dailyActivity", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("dailyActivityScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_CP:
-				map.put("assessmentIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("assessmentIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_DOC:
-				map.put("documentIncrement", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("documentIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 
 			}
