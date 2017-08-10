@@ -238,6 +238,16 @@
 	/**
 	*	---------------------------------------全局事件、函数声明--------------------------------------------
 	*/
+	//切换年份
+	$('#select_year').change(function(){
+		loadSignTotalData();	//加载签约总量
+		loadSignBar($('#sign_item_type').val());	//重新加载签约总量数据
+		loadExcellentOrgBar();	//重新加载优秀机构数据
+		loadExcellentTeamBar();	//重新加载优秀团队数据
+		loadOrgGradePie();	//重新加载机构分级数据
+		loadTeamGradePie();	//重新加载团队分级数据
+	})
+	
 	//切换“签约管理”下面的内容，变换为糖尿病、高血压等
 	function changeSignItem(type, obj){
 		//切换之后的显示效果

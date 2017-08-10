@@ -23,4 +23,10 @@ public interface AppraisalMonthSignTeamIncrementService {
 	 * @return
 	 */
 	public List<AppraisalMonthSignTeamIncrementVo> getMonthSignExcellentTeamDataList(String month, String target) throws Exception;
+	
+	/**
+	 * 统计并插入数据
+	 * @return
+	 */
+	public String doMonthSignTeamIncrementStatistics(AppraisalMonthSignTeamIncrementVo paramVo);
 }

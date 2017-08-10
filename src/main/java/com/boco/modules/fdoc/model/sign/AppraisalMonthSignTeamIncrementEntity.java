@@ -22,42 +22,42 @@ public class AppraisalMonthSignTeamIncrementEntity {
     /**
     * 签约总人数增量
     */
-    private Integer signIncrement;
+    private int signIncrement;
 
     /**
     * 高血压人数增量
     */
-    private Integer hyperIncrement;
+    private int hyperIncrement;
 
     /**
     * 糖尿病人数增量
     */
-    private Integer diabetesIncrement;
+    private int diabetesIncrement;
 
     /**
     * 重性精神病人数增量
     */
-    private Integer phychosisIncrement;
+    private int phychosisIncrement;
 
     /**
     * 老年人人数增量
     */
-    private Integer oldIncrement;
+    private int oldIncrement;
 
     /**
     * 孕产妇人数增量
     */
-    private Integer maternalIncrement;
+    private int maternalIncrement;
 
     /**
     * 儿童人数增量
     */
-    private Integer childrenIncrement;
+    private int childrenIncrement;
 
     /**
     * 签约家庭户数增量
     */
-    private Integer familyIncrement;
+    private int familyIncrement;
 
     /**
     * 统计的目标月份，格式yyyyMM，如201708
@@ -85,67 +85,67 @@ public class AppraisalMonthSignTeamIncrementEntity {
 		this.teamId = teamId;
 	}
 
-	public Integer getSignIncrement() {
+	public int getSignIncrement() {
 		return signIncrement;
 	}
 
-	public void setSignIncrement(Integer signIncrement) {
+	public void setSignIncrement(int signIncrement) {
 		this.signIncrement = signIncrement;
 	}
 
-	public Integer getHyperIncrement() {
+	public int getHyperIncrement() {
 		return hyperIncrement;
 	}
 
-	public void setHyperIncrement(Integer hyperIncrement) {
+	public void setHyperIncrement(int hyperIncrement) {
 		this.hyperIncrement = hyperIncrement;
 	}
 
-	public Integer getDiabetesIncrement() {
+	public int getDiabetesIncrement() {
 		return diabetesIncrement;
 	}
 
-	public void setDiabetesIncrement(Integer diabetesIncrement) {
+	public void setDiabetesIncrement(int diabetesIncrement) {
 		this.diabetesIncrement = diabetesIncrement;
 	}
 
-	public Integer getPhychosisIncrement() {
+	public int getPhychosisIncrement() {
 		return phychosisIncrement;
 	}
 
-	public void setPhychosisIncrement(Integer phychosisIncrement) {
+	public void setPhychosisIncrement(int phychosisIncrement) {
 		this.phychosisIncrement = phychosisIncrement;
 	}
 
-	public Integer getOldIncrement() {
+	public int getOldIncrement() {
 		return oldIncrement;
 	}
 
-	public void setOldIncrement(Integer oldIncrement) {
+	public void setOldIncrement(int oldIncrement) {
 		this.oldIncrement = oldIncrement;
 	}
 
-	public Integer getMaternalIncrement() {
+	public int getMaternalIncrement() {
 		return maternalIncrement;
 	}
 
-	public void setMaternalIncrement(Integer maternalIncrement) {
+	public void setMaternalIncrement(int maternalIncrement) {
 		this.maternalIncrement = maternalIncrement;
 	}
 
-	public Integer getChildrenIncrement() {
+	public int getChildrenIncrement() {
 		return childrenIncrement;
 	}
 
-	public void setChildrenIncrement(Integer childrenIncrement) {
+	public void setChildrenIncrement(int childrenIncrement) {
 		this.childrenIncrement = childrenIncrement;
 	}
 
-	public Integer getFamilyIncrement() {
+	public int getFamilyIncrement() {
 		return familyIncrement;
 	}
 
-	public void setFamilyIncrement(Integer familyIncrement) {
+	public void setFamilyIncrement(int familyIncrement) {
 		this.familyIncrement = familyIncrement;
 	}
 

@@ -3,325 +3,399 @@ package com.boco.modules.fdoc.model.score;
 import java.util.Date;
 
 /**
- * Tilte: AppraisalMonthOrgScoreEntity 
- * Description:考核管理-机构月得分实体类
+ * Tilte: AppraisalMonthOrgScoreEntity Description:考核管理-机构月得分实体类
+ * 
  * @author h
- * @date  2017年8月4日下午5:37:27
+ * @date 2017年8月4日下午5:37:27
  * @version 1.0
- *  
+ * 
  */
 public class AppraisalMonthOrgScoreEntity {
-	    
-	    private Integer id;
-		/**
-		 * 机构ID
-		 */
-	    private String orgId;
-	    /**
-		 * 签约人数
-		 */
-	    private Integer signIncrement;
-	    /**
-		 * 签约家庭户数
-		 */
-	    private Integer familyIncrement;
-	    /**
-		 * 高血压签约得分（二类指标）
-		 */
-	    private Double signHyperScore;
-	    /**
-		 * 糖尿病得分（二类指标）
-		 */
-	    private Double signDiabetesScore;
-	    /**
-		 * 重性精神病签约得分（二类指标）
-		 */
-	    private Double signPhychosisScore;
-	    /**
-		 * 签约管理老年人得分（二类指标）
-		 */
-	    private Double signOldScore;
-	    /**
-		 * 孕产妇签约得分（二类指标）
-		 */
-	    private Double signMaternalScore;
-	    /**
-		 * 儿童签约得分
-		 */
-	    private Double signChildrenScore;
-	    /**
-		 * 签约管理得分（一类指标）
-		 */
-	    private Double signManageScore;
-	    /**
-		 * 公卫服务高血压得分（二类指标）
-		 */
-	    private Double publicHealthHyperScore;
-	    /**
-		 * 公卫服务糖尿病得分（二类指标）
-		 */
-	    private Double publicHealthDiabetesScore;
-	    /**
-		 * 公卫服务重性精神病得分（二类指标）
-		 */
-	    private Double publicHealthPhychosisScore;
-	    /**
-		 * 公卫服务老年人得分（二类指标）
-		 */
-	    private Double publicHealthOldScore;
-	    /**
-		 * 公卫服务孕产妇得分
-		 */
-	    private Double publicHealthMaternalScore;
-	    /**
-		 * 公卫服务儿童得分（二类指标）
-		 */
-	    private Double publicHealthChildrenScore;
-	    /**
-		 * 公卫服务得分（一类指标）
-		 */
-	    private Double publicHealthScore;
-	    /**
-		 * 健康管理健康教育得分（二类指标）
-		 */
-	    private Double healthManageEduScore;
-	    /**
-		 * 健康管理日活跃量得分（二类指标）
-		 */
-	    private Double healthManageDailyActivityScore;
-	    /**
-		 * 健康管理健康评估得分（二类指标）
-		 */
-	    private Double healthManageAssessmentScore;
-	    /**
-		 * 健康管理建档得分（二类指标）
-		 */
-	    private Double healthManageDocumentScore;
-	    /**
-		 * 健康管理得分（一类指标）
-		 */
-	    private Double healthManageScore;
-	    /**
-		 * 居民满意度得分（一类得分）
-		 */
-	    private Double customerScore;
-	    /**
-		 * 总评得分（最终得分）
-		 */
-	    private Double resultScore;
-	    /**
-		 * 团队数量
-		 */
-	    private Integer teamTotal;
-	    /**
-		 * 不合格团队数量
-		 */
-	    private Integer unQualifiedIncrement;
-	    /**
-		 * 合格团队数量
-		 */
-	    private Integer qualifiedIncrement;
-	    /**
-		 * 优秀团队数量
-		 */
-	    private Integer excellentIncrement;
-	    /**
-		 * 统计的目标月份，格式yyyyMM，如201708
-		 */
-	    private String month;
-	    /**
-		 * 统计时间
-		 */
-	    private Date createTime;
-		public Integer getId() {
-			return id;
-		}
-		public void setId(Integer id) {
-			this.id = id;
-		}
-		public String getOrgId() {
-			return orgId;
-		}
-		public void setOrgId(String orgId) {
-			this.orgId = orgId;
-		}
-		public Integer getSignIncrement() {
-			return signIncrement;
-		}
-		public void setSignIncrement(Integer signIncrement) {
-			this.signIncrement = signIncrement;
-		}
-		public Integer getFamilyIncrement() {
-			return familyIncrement;
-		}
-		public void setFamilyIncrement(Integer familyIncrement) {
-			this.familyIncrement = familyIncrement;
-		}
-		public Double getSignHyperScore() {
-			return signHyperScore;
-		}
-		public void setSignHyperScore(Double signHyperScore) {
-			this.signHyperScore = signHyperScore;
-		}
-		public Double getSignDiabetesScore() {
-			return signDiabetesScore;
-		}
-		public void setSignDiabetesScore(Double signDiabetesScore) {
-			this.signDiabetesScore = signDiabetesScore;
-		}
-		public Double getSignPhychosisScore() {
-			return signPhychosisScore;
-		}
-		public void setSignPhychosisScore(Double signPhychosisScore) {
-			this.signPhychosisScore = signPhychosisScore;
-		}
-		public Double getSignOldScore() {
-			return signOldScore;
-		}
-		public void setSignOldScore(Double signOldScore) {
-			this.signOldScore = signOldScore;
-		}
-		public Double getSignMaternalScore() {
-			return signMaternalScore;
-		}
-		public void setSignMaternalScore(Double signMaternalScore) {
-			this.signMaternalScore = signMaternalScore;
-		}
-		public Double getSignChildrenScore() {
-			return signChildrenScore;
-		}
-		public void setSignChildrenScore(Double signChildrenScore) {
-			this.signChildrenScore = signChildrenScore;
-		}
-		public Double getSignManageScore() {
-			return signManageScore;
-		}
-		public void setSignManageScore(Double signManageScore) {
-			this.signManageScore = signManageScore;
-		}
-		public Double getPublicHealthHyperScore() {
-			return publicHealthHyperScore;
-		}
-		public void setPublicHealthHyperScore(Double publicHealthHyperScore) {
-			this.publicHealthHyperScore = publicHealthHyperScore;
-		}
-		public Double getPublicHealthDiabetesScore() {
-			return publicHealthDiabetesScore;
-		}
-		public void setPublicHealthDiabetesScore(Double publicHealthDiabetesScore) {
-			this.publicHealthDiabetesScore = publicHealthDiabetesScore;
-		}
-		 
-		public Double getPublicHealthPhychosisScore() {
-			return publicHealthPhychosisScore;
-		}
-		public void setPublicHealthPhychosisScore(Double publicHealthPhychosisScore) {
-			this.publicHealthPhychosisScore = publicHealthPhychosisScore;
-		}
-		public Double getPublicHealthOldScore() {
-			return publicHealthOldScore;
-		}
-		public void setPublicHealthOldScore(Double publicHealthOldScore) {
-			this.publicHealthOldScore = publicHealthOldScore;
-		}
-		public Double getPublicHealthMaternalScore() {
-			return publicHealthMaternalScore;
-		}
-		public void setPublicHealthMaternalScore(Double publicHealthMaternalScore) {
-			this.publicHealthMaternalScore = publicHealthMaternalScore;
-		}
-		public Double getPublicHealthChildrenScore() {
-			return publicHealthChildrenScore;
-		}
-		public void setPublicHealthChildrenScore(Double publicHealthChildrenScore) {
-			this.publicHealthChildrenScore = publicHealthChildrenScore;
-		}
-		public Double getPublicHealthScore() {
-			return publicHealthScore;
-		}
-		public void setPublicHealthScore(Double publicHealthScore) {
-			this.publicHealthScore = publicHealthScore;
-		}
-		public Double getHealthManageEduScore() {
-			return healthManageEduScore;
-		}
-		public void setHealthManageEduScore(Double healthManageEduScore) {
-			this.healthManageEduScore = healthManageEduScore;
-		}
-		public Double getHealthManageDailyActivityScore() {
-			return healthManageDailyActivityScore;
-		}
-		public void setHealthManageDailyActivityScore(Double healthManageDailyActivityScore) {
-			this.healthManageDailyActivityScore = healthManageDailyActivityScore;
-		}
-		public Double getHealthManageAssessmentScore() {
-			return healthManageAssessmentScore;
-		}
-		public void setHealthManageAssessmentScore(Double healthManageAssessmentScore) {
-			this.healthManageAssessmentScore = healthManageAssessmentScore;
-		}
-		public Double getHealthManageDocumentScore() {
-			return healthManageDocumentScore;
-		}
-		public void setHealthManageDocumentScore(Double healthManageDocumentScore) {
-			this.healthManageDocumentScore = healthManageDocumentScore;
-		}
-		public Double getHealthManageScore() {
-			return healthManageScore;
-		}
-		public void setHealthManageScore(Double healthManageScore) {
-			this.healthManageScore = healthManageScore;
-		}
-		public Double getCustomerScore() {
-			return customerScore;
-		}
-		public void setCustomerScore(Double customerScore) {
-			this.customerScore = customerScore;
-		}
-		 
-		public Double getResultScore() {
-			return resultScore;
-		}
-		public void setResultScore(Double resultScore) {
-			this.resultScore = resultScore;
-		}
-		public Integer getTeamTotal() {
-			return teamTotal;
-		}
-		public void setTeamTotal(Integer teamTotal) {
-			this.teamTotal = teamTotal;
-		}
-		public Integer getUnQualifiedIncrement() {
-			return unQualifiedIncrement;
-		}
-		public void setUnQualifiedIncrement(Integer unQualifiedIncrement) {
-			this.unQualifiedIncrement = unQualifiedIncrement;
-		}
-		public Integer getQualifiedIncrement() {
-			return qualifiedIncrement;
-		}
-		public void setQualifiedIncrement(Integer qualifiedIncrement) {
-			this.qualifiedIncrement = qualifiedIncrement;
-		}
-		public Integer getExcellentIncrement() {
-			return excellentIncrement;
-		}
-		public void setExcellentIncrement(Integer excellentIncrement) {
-			this.excellentIncrement = excellentIncrement;
-		}
-		public String getMonth() {
-			return month;
-		}
-		public void setMonth(String month) {
-			this.month = month;
-		}
-		public Date getCreateTime() {
-			return createTime;
-		}
-		public void setCreateTime(Date createTime) {
-			this.createTime = createTime;
-		}
-	    
 
-	 
+	private int id;
+	/**
+	 * 机构ID
+	 */
+	private String orgId;
+	/**
+	 * 签约人数
+	 */
+	private int signIncrement;
+	/**
+	 * 签约家庭户数
+	 */
+	private int familyIncrement;
+
+	/**
+	 * 签约人数得分（二类指标）
+	 */
+	private int signIncrementScore;
+	/**
+	 * 高血压签约得分（二类指标）
+	 */
+	private Double signHyperScore;
+	/**
+	 * 糖尿病得分（二类指标）
+	 */
+	private Double signDiabetesScore;
+	/**
+	 * 重性精神病签约得分（二类指标）
+	 */
+	private Double signPhychosisScore;
+	/**
+	 * 签约管理老年人得分（二类指标）
+	 */
+	private Double signOldScore;
+	/**
+	 * 孕产妇签约得分（二类指标）
+	 */
+	private Double signMaternalScore;
+	/**
+	 * 儿童签约得分
+	 */
+	private Double signChildrenScore;
+	/**
+	 * 签约管理得分（一类指标）
+	 */
+	private Double signManageScore;
+	/**
+	 * 公卫服务高血压得分（二类指标）
+	 */
+	private Double publicHealthHyperScore;
+	/**
+	 * 公卫服务糖尿病得分（二类指标）
+	 */
+	private Double publicHealthDiabetesScore;
+	/**
+	 * 公卫服务重性精神病得分（二类指标）
+	 */
+	private Double publicHealthPhychosisScore;
+	/**
+	 * 公卫服务老年人得分（二类指标）
+	 */
+	private Double publicHealthOldScore;
+	/**
+	 * 公卫服务孕产妇得分
+	 */
+	private Double publicHealthMaternalScore;
+	/**
+	 * 公卫服务儿童得分（二类指标）
+	 */
+	private Double publicHealthChildrenScore;
+	/**
+	 * 公卫服务得分（一类指标）
+	 */
+	private Double publicHealthScore;
+	/**
+	 * 健康管理健康教育得分（二类指标）
+	 */
+	private Double healthManageEduScore;
+	/**
+	 * 健康管理日活跃量得分（二类指标）
+	 */
+	private Double healthManageDailyActivityScore;
+	/**
+	 * 健康管理健康评估得分（二类指标）
+	 */
+	private Double healthManageAssessmentScore;
+	/**
+	 * 健康管理建档得分（二类指标）
+	 */
+	private Double healthManageDocumentScore;
+	/**
+	 * 健康管理得分（一类指标）
+	 */
+	private Double healthManageScore;
+	/**
+	 * 居民满意度得分（一类得分）
+	 */
+	private Double customerScore;
+	/**
+	 * 总评得分（最终得分）
+	 */
+	private Double resultScore;
+	/**
+	 * 团队数量
+	 */
+	private int teamTotal;
+	/**
+	 * 不合格团队数量
+	 */
+	private int unQualifiedIncrement;
+	/**
+	 * 合格团队数量
+	 */
+	private int qualifiedIncrement;
+	/**
+	 * 优秀团队数量
+	 */
+	private int excellentIncrement;
+	/**
+	 * 统计的目标月份，格式yyyyMM，如201708
+	 */
+	private String month;
+	/**
+	 * 统计时间
+	 */
+	private Date createTime;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+
+	public int getSignIncrement() {
+		return signIncrement;
+	}
+
+	public void setSignIncrement(int signIncrement) {
+		this.signIncrement = signIncrement;
+	}
+
+	public int getFamilyIncrement() {
+		return familyIncrement;
+	}
+
+	public void setFamilyIncrement(int familyIncrement) {
+		this.familyIncrement = familyIncrement;
+	}
+
+	public Double getSignHyperScore() {
+		return signHyperScore;
+	}
+
+	public void setSignHyperScore(Double signHyperScore) {
+		this.signHyperScore = signHyperScore;
+	}
+
+	public Double getSignDiabetesScore() {
+		return signDiabetesScore;
+	}
+
+	public void setSignDiabetesScore(Double signDiabetesScore) {
+		this.signDiabetesScore = signDiabetesScore;
+	}
+
+	public Double getSignPhychosisScore() {
+		return signPhychosisScore;
+	}
+
+	public void setSignPhychosisScore(Double signPhychosisScore) {
+		this.signPhychosisScore = signPhychosisScore;
+	}
+
+	public Double getSignOldScore() {
+		return signOldScore;
+	}
+
+	public void setSignOldScore(Double signOldScore) {
+		this.signOldScore = signOldScore;
+	}
+
+	public Double getSignMaternalScore() {
+		return signMaternalScore;
+	}
+
+	public void setSignMaternalScore(Double signMaternalScore) {
+		this.signMaternalScore = signMaternalScore;
+	}
+
+	public Double getSignChildrenScore() {
+		return signChildrenScore;
+	}
+
+	public void setSignChildrenScore(Double signChildrenScore) {
+		this.signChildrenScore = signChildrenScore;
+	}
+
+	public Double getSignManageScore() {
+		return signManageScore;
+	}
+
+	public void setSignManageScore(Double signManageScore) {
+		this.signManageScore = signManageScore;
+	}
+
+	public Double getPublicHealthHyperScore() {
+		return publicHealthHyperScore;
+	}
+
+	public void setPublicHealthHyperScore(Double publicHealthHyperScore) {
+		this.publicHealthHyperScore = publicHealthHyperScore;
+	}
+
+	public Double getPublicHealthDiabetesScore() {
+		return publicHealthDiabetesScore;
+	}
+
+	public void setPublicHealthDiabetesScore(Double publicHealthDiabetesScore) {
+		this.publicHealthDiabetesScore = publicHealthDiabetesScore;
+	}
+
+	public Double getPublicHealthPhychosisScore() {
+		return publicHealthPhychosisScore;
+	}
+
+	public void setPublicHealthPhychosisScore(Double publicHealthPhychosisScore) {
+		this.publicHealthPhychosisScore = publicHealthPhychosisScore;
+	}
+
+	public Double getPublicHealthOldScore() {
+		return publicHealthOldScore;
+	}
+
+	public void setPublicHealthOldScore(Double publicHealthOldScore) {
+		this.publicHealthOldScore = publicHealthOldScore;
+	}
+
+	public Double getPublicHealthMaternalScore() {
+		return publicHealthMaternalScore;
+	}
+
+	public void setPublicHealthMaternalScore(Double publicHealthMaternalScore) {
+		this.publicHealthMaternalScore = publicHealthMaternalScore;
+	}
+
+	public Double getPublicHealthChildrenScore() {
+		return publicHealthChildrenScore;
+	}
+
+	public void setPublicHealthChildrenScore(Double publicHealthChildrenScore) {
+		this.publicHealthChildrenScore = publicHealthChildrenScore;
+	}
+
+	public Double getPublicHealthScore() {
+		return publicHealthScore;
+	}
+
+	public void setPublicHealthScore(Double publicHealthScore) {
+		this.publicHealthScore = publicHealthScore;
+	}
+
+	public Double getHealthManageEduScore() {
+		return healthManageEduScore;
+	}
+
+	public void setHealthManageEduScore(Double healthManageEduScore) {
+		this.healthManageEduScore = healthManageEduScore;
+	}
+
+	public Double getHealthManageDailyActivityScore() {
+		return healthManageDailyActivityScore;
+	}
+
+	public void setHealthManageDailyActivityScore(
+			Double healthManageDailyActivityScore) {
+		this.healthManageDailyActivityScore = healthManageDailyActivityScore;
+	}
+
+	public Double getHealthManageAssessmentScore() {
+		return healthManageAssessmentScore;
+	}
+
+	public void setHealthManageAssessmentScore(
+			Double healthManageAssessmentScore) {
+		this.healthManageAssessmentScore = healthManageAssessmentScore;
+	}
+
+	public Double getHealthManageDocumentScore() {
+		return healthManageDocumentScore;
+	}
+
+	public void setHealthManageDocumentScore(Double healthManageDocumentScore) {
+		this.healthManageDocumentScore = healthManageDocumentScore;
+	}
+
+	public Double getHealthManageScore() {
+		return healthManageScore;
+	}
+
+	public void setHealthManageScore(Double healthManageScore) {
+		this.healthManageScore = healthManageScore;
+	}
+
+	public Double getCustomerScore() {
+		return customerScore;
+	}
+
+	public void setCustomerScore(Double customerScore) {
+		this.customerScore = customerScore;
+	}
+
+	public Double getResultScore() {
+		return resultScore;
+	}
+
+	public void setResultScore(Double resultScore) {
+		this.resultScore = resultScore;
+	}
+
+	public int getTeamTotal() {
+		return teamTotal;
+	}
+
+	public void setTeamTotal(int teamTotal) {
+		this.teamTotal = teamTotal;
+	}
+
+	public int getUnQualifiedIncrement() {
+		return unQualifiedIncrement;
+	}
+
+	public void setUnQualifiedIncrement(int unQualifiedIncrement) {
+		this.unQualifiedIncrement = unQualifiedIncrement;
+	}
+
+	public int getQualifiedIncrement() {
+		return qualifiedIncrement;
+	}
+
+	public void setQualifiedIncrement(int qualifiedIncrement) {
+		this.qualifiedIncrement = qualifiedIncrement;
+	}
+
+	public int getExcellentIncrement() {
+		return excellentIncrement;
+	}
+
+	public void setExcellentIncrement(int excellentIncrement) {
+		this.excellentIncrement = excellentIncrement;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public int getSignIncrementScore() {
+		return signIncrementScore;
+	}
+
+	public void setSignIncrementScore(int signIncrementScore) {
+		this.signIncrementScore = signIncrementScore;
+	}
+
+	
 }
