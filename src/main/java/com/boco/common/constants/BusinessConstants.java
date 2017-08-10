@@ -114,4 +114,30 @@ public class BusinessConstants {
 	public final static String USER_IN_SESSION = "user_in_session";
 	public final static String USER_AND_ORG_IN_SESSION = "user_and_org_in_session";
 	
+	/*考核占比*/
+	public final static String SIGN_ADMIN = "签约管理";
+	public final static String SIGN_COUNT = "签约总数";
+	public final static String SIGN_HY = "高血压人数";
+	public final static String SIGN_DIA= "糖尿病人数";
+	public final static String SIGN_OLD = "老年人人数";
+	public final static String SIGN_MAT = "孕产妇人数";
+	public final static String SIGN_CHI = "儿童人数";
+	public final static String SIGN_ZXJ = "重型精神病人数";
+	
+	public final static String UP_ADMIN = "随访体检";
+	public final static String UP_COUNT = "总次数";
+	public final static String UP_HY = "高血压人次";
+	public final static String UP_DIA = "糖尿病人次";
+	public final static String UP_OLD = "老年人人次";
+	public final static String UP_MAT = "孕产妇人次";
+	public final static String UP_CHI = "儿童人次";
+	public final static String UP_ZX = "重型精神病人次";
+	
+	
+	public final static String HEALTH_ADMIN = "健康管理";
+	public final static String HEALTH_EDU = "健康教育";
+	public final static String HEALTH_WZ = "问诊次数";
+	public final static String HEALTH_CP = "健康评估";
+	public final static String HEALTH_DOC = "建档数";
+	
 }
