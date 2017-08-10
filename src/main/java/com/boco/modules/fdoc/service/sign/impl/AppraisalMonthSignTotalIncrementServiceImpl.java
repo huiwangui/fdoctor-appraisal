@@ -26,6 +26,9 @@ public class AppraisalMonthSignTotalIncrementServiceImpl implements AppraisalMon
 		
 		//获取签约管理基础数据
 		AppraisalMonthSignTotalIncrementVo signTotalData = signTotalDao.getSignTotalData(monthOrYear);
+		
+		//如果为0，设定为全属性为0的对象
+		signTotalData = (signTotalData != null) ? signTotalData : new AppraisalMonthSignTotalIncrementVo();
 		int signTotal = signTotalData.getSignIncrement();
 		
 		//封装占比
