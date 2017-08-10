@@ -3,6 +3,7 @@ package com.boco.modules.fdoc.web.system;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -174,4 +175,47 @@ public class MainPageController {
 		
 		return JsonUtils.getJson(BaseJsonVo.success(teamScore));
 	}
+	
+	/**
+	 * 获取机构分级列表
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/getOrgWithGrade", method = RequestMethod.GET)
+	@ResponseBody
+	public String getOrgWithGrade(HttpServletRequest request, String month, String target) {
+		
+		try {
+			Map<String, Object> result = orgScoreService.getAppraisalMonthOrgScoreWithGrade(month, target);
+			return JsonUtils.getJson(BaseJsonVo.success(result));
+		} catch (Exception e) {
+			//出现反射调用异常，提示后台错误
+			e.printStackTrace();
+			return JsonUtils.getJson(BaseJsonVo.empty(ApiStatusEnum.ERROR_CODE.getKey(),
+					ApiStatusEnum.ERROR_CODE.getValue()));
+		}
+		
+	}
+	
+	/**
+	 * 获取团队分级列表
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/getTeamWithGrade", method = RequestMethod.GET)
+	@ResponseBody
+	public String getTeamWithGrade(HttpServletRequest request, String month, String target) {
+		
+		try {
+			Map<String, Object> result = teamScoreService.getAppraisalMonthTeamScoreWithGrade(month, target);
+			return JsonUtils.getJson(BaseJsonVo.success(result));
+		} catch (Exception e) {
+			//出现反射调用异常，提示后台错误
+			e.printStackTrace();
+			return JsonUtils.getJson(BaseJsonVo.empty(ApiStatusEnum.ERROR_CODE.getKey(),
+					ApiStatusEnum.ERROR_CODE.getValue()));
+		}
+		
+	}
+	
 }
