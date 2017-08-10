@@ -62,7 +62,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
      <script>
-	 
+	     //首页默认展示上月数据
+	     var date=new Date();
+	     var year=date.getFullYear(); 
+	     var lastMonth=date.getMonth();
+	     if(lastMonth<10){
+	    	 lastMonth = "0"+lastMonth;
+	     }
+	     var lastTime = (year.toString()+"年"+lastMonth.toString()+"月");     	 
+	     document.getElementById('month').value=lastTime;
 		 
 		 function tableConfig(){
 	    		layui.config({
