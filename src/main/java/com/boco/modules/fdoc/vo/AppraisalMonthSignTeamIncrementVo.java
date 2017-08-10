@@ -1,6 +1,6 @@
 package com.boco.modules.fdoc.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTeamIncrementEntity;
 

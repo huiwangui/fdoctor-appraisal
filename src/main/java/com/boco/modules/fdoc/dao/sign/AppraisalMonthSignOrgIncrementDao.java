@@ -16,4 +16,11 @@ public interface AppraisalMonthSignOrgIncrementDao extends CrudDao<AppraisalMont
 	 * @return
 	 */
 	public List<AppraisalMonthSignOrgIncrementVo> getMonthSignOrgDataList(String month);
+	
+	/**
+	 * 获取机构月签约数据（从原始签约表中获取）
+	 * @param paramVo
+	 * @return
+	 */
+	public AppraisalMonthSignOrgIncrementEntity getMonthSignOrgDataSource(AppraisalMonthSignOrgIncrementVo paramVo);
 }

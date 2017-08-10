@@ -3,16 +3,22 @@ package com.boco.modules.fdoc.service.sign.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.boco.common.constants.BusinessConstants;
+import com.boco.common.utils.DateUtils;
 import com.boco.common.utils.StringUtils;
 import com.boco.modules.fdoc.dao.sign.AppraisalMonthSignOrgIncrementDao;
 import com.boco.modules.fdoc.dao.system.AppraisalGradeLineDao;
+import com.boco.modules.fdoc.dao.system.HospitalDao;
+import com.boco.modules.fdoc.model.score.HospitalEntity;
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignOrgIncrementEntity;
+import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTeamIncrementEntity;
 import com.boco.modules.fdoc.model.system.AppraisalGradeLineEntity;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignOrgIncrementService;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
@@ -24,6 +30,8 @@ public class AppraisalMonthSignOrgIncrementServiceImpl implements AppraisalMonth
 	AppraisalMonthSignOrgIncrementDao signOrgIncrementDao;
 	@Resource
 	AppraisalGradeLineDao gradeLineDao;
+	@Resource
+	HospitalDao hospitalDao;
 
 	@Override
 	public List<AppraisalMonthSignOrgIncrementVo> getMonthSignOrgDataList(
@@ -56,6 +64,30 @@ public class AppraisalMonthSignOrgIncrementServiceImpl implements AppraisalMonth
 				}
 			}
 			return resultList;
+	}
+
+	@Override
+	public String doMonthSignOrgIncrementStatistics(Date monthBegin,
+			Date monthEnd) {
+		//封装查询参数
+		AppraisalMonthSignOrgIncrementVo paramVo = new AppraisalMonthSignOrgIncrementVo();
+		paramVo.setMonthBegin(monthBegin);
+		paramVo.setMonthEnd(monthEnd);
+		
+		//获取所有机构列表
+		List<HospitalEntity> hospitalList = hospitalDao.getHospitalList();
+		for (HospitalEntity hospitalEntity : hospitalList) {
+			
+			paramVo.setOrgId(hospitalEntity.getId());
+			
+			//获取数据
+			AppraisalMonthSignOrgIncrementEntity entity = signOrgIncrementDao.getMonthSignOrgDataSource(paramVo);
+			entity.setOrgId(hospitalEntity.getId());
+			entity.setMonth(DateUtils.formatDate(monthEnd, "yyyyMM"));
+			entity.setCreateTime(new Date());
+			signOrgIncrementDao.insert(entity);
+		}
+		return BusinessConstants.SUCCESS;
 	}
 
 	

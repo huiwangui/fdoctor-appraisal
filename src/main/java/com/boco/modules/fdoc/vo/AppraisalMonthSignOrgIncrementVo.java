@@ -1,5 +1,7 @@
 package com.boco.modules.fdoc.vo;
 
+import java.util.Date;
+
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignOrgIncrementEntity;
 
 /**
@@ -12,6 +14,16 @@ public class AppraisalMonthSignOrgIncrementVo extends AppraisalMonthSignOrgIncre
 	 * 机构名
 	 */
 	private String orgName;
+	
+	/**
+	 * 一个月开始日期
+	 */
+	private Date monthBegin;
+	
+	/**
+	 * 一个月结束日期
+	 */
+	private Date monthEnd;
 	
 	/**
 	 * 总计得分
@@ -295,4 +307,21 @@ public class AppraisalMonthSignOrgIncrementVo extends AppraisalMonthSignOrgIncre
 	public void setCustomerScore(double customerScore) {
 		this.customerScore = customerScore;
 	}
+
+	public Date getMonthBegin() {
+		return monthBegin;
+	}
+
+	public void setMonthBegin(Date monthBegin) {
+		this.monthBegin = monthBegin;
+	}
+
+	public Date getMonthEnd() {
+		return monthEnd;
+	}
+
+	public void setMonthEnd(Date monthEnd) {
+		this.monthEnd = monthEnd;
+	}
+	
 }

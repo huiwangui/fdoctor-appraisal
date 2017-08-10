@@ -1,5 +1,6 @@
 package com.boco.modules.fdoc.service.sign;
 
+import java.util.Date;
 import java.util.List;
 
 import com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo;
@@ -28,5 +29,5 @@ public interface AppraisalMonthSignTeamIncrementService {
 	 * 统计并插入数据
 	 * @return
 	 */
-	public String doMonthSignTeamIncrementStatistics(AppraisalMonthSignTeamIncrementVo paramVo);
+	public String doMonthSignTeamIncrementStatistics(Date monthBegin, Date monthEnd);
 }

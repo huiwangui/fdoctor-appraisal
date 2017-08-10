@@ -2,15 +2,20 @@ package com.boco.modules.fdoc.service.sign.impl;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.boco.common.constants.BusinessConstants;
+import com.boco.common.utils.DateUtils;
 import com.boco.common.utils.StringUtils;
 import com.boco.modules.fdoc.dao.sign.AppraisalMonthSignTeamIncrementDao;
 import com.boco.modules.fdoc.dao.system.AppraisalGradeLineDao;
+import com.boco.modules.fdoc.dao.system.DoctorDao;
+import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTeamIncrementEntity;
 import com.boco.modules.fdoc.model.system.AppraisalGradeLineEntity;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignTeamIncrementService;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
@@ -23,6 +28,8 @@ public class AppraisalMonthSignTeamIncrementServiceImpl implements AppraisalMont
 	AppraisalGradeLineDao gradeLineDao;
 	@Resource
 	AppraisalMonthSignTeamIncrementDao teamIncrementDao;
+	@Resource
+	DoctorDao doctorDao;
 	
 	@Override
 	public List<AppraisalMonthSignTeamIncrementVo> getMonthSignTeamDataList(
@@ -59,10 +66,27 @@ public class AppraisalMonthSignTeamIncrementServiceImpl implements AppraisalMont
 	}
 
 	@Override
-	public String doMonthSignTeamIncrementStatistics(
-			AppraisalMonthSignTeamIncrementVo paramVo) {
+	public String doMonthSignTeamIncrementStatistics(Date monthBegin, Date monthEnd) {
 		
-		return null;
+		//封装查询参数
+		AppraisalMonthSignTeamIncrementVo paramVo = new AppraisalMonthSignTeamIncrementVo();
+		paramVo.setMonthBegin(monthBegin);
+		paramVo.setMonthEnd(monthEnd);
+		
+		//获取所有的团队ID
+		List<String> teamIds = doctorDao.getTeamIdsByHospital(null);
+		for (String teamId : teamIds) {
+			paramVo.setTeamId(teamId);
+			
+			//获取数据
+			AppraisalMonthSignTeamIncrementEntity entity = teamIncrementDao.getMonthSignTeamDataSource(paramVo);
+			entity.setTeamId(teamId);
+			entity.setMonth(DateUtils.formatDate(monthEnd, "yyyyMM"));
+			entity.setCreateTime(new Date());
+			teamIncrementDao.insert(entity);
+			
+		}
+		return BusinessConstants.SUCCESS;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.boco.modules.fdoc.service.sign;
 
+import java.util.Date;
 import java.util.List;
 
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTotalIncrementEntity;
@@ -31,4 +32,10 @@ public interface AppraisalMonthSignTotalIncrementService {
 	 * @return
 	 */
 	public List<String> getYears();
+	
+	/**
+	 * 统计并插入数据
+	 * @return
+	 */
+	public String doMonthSignTotalIncrementStatistics(Date monthBegin, Date monthEnd);
 }

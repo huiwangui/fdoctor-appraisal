@@ -35,4 +35,30 @@
 		WHERE
 			a.`month` = #{0}
 	</select>
+	
+	<!-- 获取团队月签约数据（从原始签约表中获取） -->
+	<select id="getMonthSignTeamDataSource" parameterType="com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo" resultType="com.boco.modules.fdoc.model.sign.AppraisalMonthSignTeamIncrementEntity">
+		SELECT COUNT(c.person_id) AS sign_increment, SUM(d.hyper_flag) AS hyper_increment, SUM(d.diabetes_flag) AS diabetes_increment, SUM(d.major_psychosis_flag) AS phychosis_increment, SUM(d.oldm_flag) AS old_increment
+			, SUM(d.maternal_flag) AS maternal_increment, SUM(d.child_flag) AS children_increment, COUNT(DISTINCT a.family_id)
+		FROM t_user_doc_sign a
+			LEFT JOIN t_sign_agreement b ON a.id = b.sign_id
+			LEFT JOIN t_person_information c ON a.family_id = c.family_id
+			LEFT JOIN t_person_desease_info d ON c.person_id = d.person_id
+		WHERE a.doc_team_id = #{teamId}
+			AND b.sign_time BETWEEN #{monthBegin} AND #{monthEnd}
+	</select>
+	
+	<!-- 新增数据 -->
+	<insert id="insert" parameterType="com.boco.modules.fdoc.model.sign.AppraisalMonthSignTeamIncrementEntity">
+		insert into t_appraisal_month_sign_team_increment (team_id, sign_increment, 
+	      hyper_increment, diabetes_increment, phychosis_increment, 
+	      old_increment, maternal_increment, children_increment, 
+	      family_increment, month, create_time
+	      )
+	    values (#{teamId,jdbcType=VARCHAR}, #{signIncrement,jdbcType=INTEGER}, 
+	      #{hyperIncrement,jdbcType=INTEGER}, #{diabetesIncrement,jdbcType=INTEGER}, #{phychosisIncrement,jdbcType=INTEGER}, 
+	      #{oldIncrement,jdbcType=INTEGER}, #{maternalIncrement,jdbcType=INTEGER}, #{childrenIncrement,jdbcType=INTEGER}, 
+	      #{familyIncrement,jdbcType=INTEGER}, #{month,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+	      )
+	</insert>
 </mapper>

@@ -2,12 +2,15 @@ package com.boco.modules.fdoc.service.sign.impl;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.boco.common.constants.BusinessConstants;
+import com.boco.common.utils.DateUtils;
 import com.boco.common.utils.NumberUtils;
 import com.boco.modules.fdoc.dao.sign.AppraisalMonthSignTotalIncrementDao;
 import com.boco.modules.fdoc.model.sign.AppraisalMonthSignTotalIncrementEntity;
@@ -81,6 +84,23 @@ public class AppraisalMonthSignTotalIncrementServiceImpl implements AppraisalMon
 	@Override
 	public List<String> getYears() {
 		return signTotalDao.getYears();
+	}
+
+	@Override
+	public String doMonthSignTotalIncrementStatistics(Date monthBegin,
+			Date monthEnd) {
+		
+		//封装查询参数
+		AppraisalMonthSignTotalIncrementVo paramVo = new AppraisalMonthSignTotalIncrementVo();
+		paramVo.setMonthBegin(monthBegin);
+		paramVo.setMonthEnd(monthEnd);
+		
+		AppraisalMonthSignTotalIncrementEntity entity = signTotalDao.getMonthSignTotalDataSource(paramVo);
+		entity.setMonth(DateUtils.formatDate(monthEnd, "yyyyMM"));
+		entity.setCreateTime(new Date());
+		signTotalDao.insert(entity);
+		
+		return BusinessConstants.SUCCESS;
 	}
 
 }

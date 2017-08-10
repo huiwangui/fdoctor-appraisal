@@ -35,4 +35,10 @@ public interface AppraisalMonthSignTotalIncrementDao extends CrudDao<AppraisalMo
 	 * @return
 	 */
 	public List<String> getYears();
+	
+	/**
+	 * 获取月签约数据（从原始签约表中获取）
+	 * @return
+	 */
+	public AppraisalMonthSignTotalIncrementEntity getMonthSignTotalDataSource(AppraisalMonthSignTotalIncrementVo vo);
 }

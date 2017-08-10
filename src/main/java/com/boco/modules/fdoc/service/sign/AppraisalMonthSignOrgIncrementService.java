@@ -1,5 +1,6 @@
 package com.boco.modules.fdoc.service.sign;
 
+import java.util.Date;
 import java.util.List;
 
 import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
@@ -22,4 +23,10 @@ public interface AppraisalMonthSignOrgIncrementService {
 	 * @return
 	 */
 	public List<AppraisalMonthSignOrgIncrementVo> getMonthSignExcellentOrgDataList(String month, String target)  throws Exception;
+	
+	/**
+	 * 统计并插入数据
+	 * @return
+	 */
+	public String doMonthSignOrgIncrementStatistics(Date monthBegin, Date monthEnd);
 }

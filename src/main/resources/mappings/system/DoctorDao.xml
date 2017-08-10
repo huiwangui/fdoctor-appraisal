@@ -234,8 +234,12 @@
 		team_id
 	FROM
 		t_doctor
-	WHERE
-		org_id = #{0}
+		
+	<where>
+	    <if test ="_parameter != null and _parameter !=''">
+			org_id = #{_parameter}
+	    </if>
+  	</where>
   </select>
   
   <!-- 通过机构Id获取团队队长集合 -->
