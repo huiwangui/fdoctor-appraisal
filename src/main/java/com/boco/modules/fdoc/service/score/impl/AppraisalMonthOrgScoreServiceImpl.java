@@ -65,8 +65,8 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 			List<AppraisalMonthOrgScoreVo> gradeList = new ArrayList<AppraisalMonthOrgScoreVo>();
 			
 			for (AppraisalMonthOrgScoreVo scoreItem : scoreList) {
-				//获取item字节码对象
-				Class<? extends AppraisalMonthOrgScoreVo> cls = scoreItem.getClass();
+				//获取item父类字节码对象
+				Class<?> cls = scoreItem.getClass().getSuperclass();
 				
 				//调用对应字段的get方法
 				Method getMethod = cls.getDeclaredMethod("get" + StringUtils.captureUpName(target));

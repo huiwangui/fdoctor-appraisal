@@ -68,7 +68,7 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 			for (AppraisalMonthTeamScoreVo scoreItem : scoreList) {
 				
 				//获取item字节码对象
-				Class<? extends AppraisalMonthTeamScoreVo> cls = scoreItem.getClass();
+				Class<?> cls = scoreItem.getClass().getSuperclass();
 				
 				//调用对应字段的get方法
 				Method getMethod = cls.getDeclaredMethod("get" + StringUtils.captureUpName(target));
