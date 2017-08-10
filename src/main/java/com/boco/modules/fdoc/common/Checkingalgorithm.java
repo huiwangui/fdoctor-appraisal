@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.boco.common.constants.BusinessConstants;
+import com.boco.common.utils.JsonUtils;
 import com.boco.common.utils.NumberUtils;
 import com.boco.modules.fdoc.model.system.AppraisalQuotaEntity;
 
@@ -56,31 +57,32 @@ public class Checkingalgorithm implements Calculation {
 					} else {
 						String type = field.getGenericType().toString();
 						if (type.equals("class java.lang.Integer")) {
-							Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
-							if (value == null) {
-								value = 0.0;
+							if(!(field.get(list.get(i))==null)){
+								Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
+								if (maps.containsKey(field.getName())) {
+									maps.put(field.getName(), maps.get(field.getName()) + value);
+								} else {
+									maps.put(field.getName(), value);
+								}
 							}
-							if (maps.containsKey(field.getName())) {
-								maps.put(field.getName(), maps.get(field.getName()) + value);
-							} else {
-								maps.put(field.getName(), value);
-							}
-
 						}
-
 					}
 				}
 			}
 		
 
 		}
+		System.out.println("每项总和"+JsonUtils.getJsonFormat(maps));
 
 		// 每项平均值
 		Map<String, Double> avgmaps = new HashMap<String, Double>();
 		for (Map.Entry<String, Double> entry : maps.entrySet()) {
-			avgmaps.put(entry.getKey(), NumberUtils.division(entry.getValue(),
-					Double.parseDouble((String) String.valueOf(list.size())), length));// 结果为Double
+//			avgmaps.put(entry.getKey(), NumberUtils.division(entry.getValue(),
+//					Double.parseDouble((String) String.valueOf(list.size())), length));// 结果为Double
+			avgmaps.put(entry.getKey(), entry.getValue()/Double.parseDouble((String) String.valueOf(list.size())));
 		}
+		
+		System.out.println("每项平均值"+JsonUtils.getJsonFormat(avgmaps));
 		// 每项得分(未处理区间值)slist
 		List<Map<String, Object>> slist = new ArrayList<Map<String, Object>>(list.size());
 		// 每项最高分后得到的区间值
@@ -105,20 +107,23 @@ public class Checkingalgorithm implements Calculation {
 						if (!"id".equals(field.getName())) {
 							String type = field.getGenericType().toString();
 							if (type.equals("class java.lang.Integer")) {
-								Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
-								if (value == null) {
-									value = 0.0;
-								}
-								Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
-										length)) * 100);// 原始得分
-								xmap.put(field.getName(), xscore);
-								// 得到最高分算区间值 ：100/最高分=区间值
-								if (Highmap.containsKey(field.getName())) {
-									if ((Double) Highmap.get(field.getName()) < xscore) {
-										Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));
+								if(!(field.get(list.get(i))==null)){
+									Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
+//									Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
+//											length)) * 100);// 原始得分
+									
+									Double xscore =value/avgmaps.get(field.getName())*100;
+									xmap.put(field.getName(), xscore);
+									// 得到最高分算区间值 ：100/最高分=区间值
+									if (Highmap.containsKey(field.getName())) {
+										if ((Double) Highmap.get(field.getName()) < xscore) {
+											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));
+											Highmap.put(field.getName(),100/xscore);
+										}
+									} else {
+										//Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));// 区间值
+										  Highmap.put(field.getName(),100/xscore);
 									}
-								} else {
-									Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));// 区间值
 								}
 							}
 						} else {
@@ -131,6 +136,11 @@ public class Checkingalgorithm implements Calculation {
 			}
 			slist.add(xmap);
 		}
+		
+		System.out.println("每项未区间前的得分"+JsonUtils.getJsonFormat(slist));
+
+		System.out.println("区间值"+JsonUtils.getJsonFormat(Highmap));
+
 
 		// 处理区间值后的得到的得分 原始得分*区间值
 		// 经过区间处理后
@@ -157,6 +167,7 @@ public class Checkingalgorithm implements Calculation {
 
 		}
 
+		System.out.println("每项区间后得分"+JsonUtils.getJsonFormat(qjscorelist));
 
 		// 计算最后得分 需要签约二类占比*区间+
 		// 存放最后得分的list
@@ -173,7 +184,7 @@ public class Checkingalgorithm implements Calculation {
 						Double value = (Double) Double.valueOf(String.valueOf(entry.getValue()));
 						if (zbMap.get(entry.getKey()) != null) {
 							value = value * (zbMap.get(entry.getKey()));
-							value = NumberUtils.roundHalfUp(value, length);
+							value = NumberUtils.roundHalfUp(value, length);//最后取长度
 							if (resultMap.containsKey("resultScore")) {
 								resultMap.put("resultScore", (Double) resultMap.get("resultScore") + value);
 							} else {
