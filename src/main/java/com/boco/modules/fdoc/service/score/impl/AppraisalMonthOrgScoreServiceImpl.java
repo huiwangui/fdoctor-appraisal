@@ -1,5 +1,6 @@
 package com.boco.modules.fdoc.service.score.impl;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.boco.common.utils.StringUtils;
 import com.boco.modules.fdoc.dao.score.AppraisalMonthOrgScoreDao;
 import com.boco.modules.fdoc.dao.system.AppraisalGradeLineDao;
 import com.boco.modules.fdoc.dao.system.HospitalDao;
@@ -17,6 +19,7 @@ import com.boco.modules.fdoc.model.score.HospitalEntity;
 import com.boco.modules.fdoc.model.system.AppraisalGradeLineEntity;
 import com.boco.modules.fdoc.service.score.AppraisalMonthOrgScoreService;
 import com.boco.modules.fdoc.vo.AppraisalMonthOrgScoreVo;
+import com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo;
  
 @Service
 public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScoreService {
@@ -46,7 +49,7 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 	}
 	
 	@Override
-	public Map<String, Object> getAppraisalMonthOrgScoreWithGrade(String month) {
+	public Map<String, Object> getAppraisalMonthOrgScoreWithGrade(String month, String target) throws Exception{
 		
 		//获取月度机构评分列表
 		List<AppraisalMonthOrgScoreVo> scoreList = appraisalMonthOrgScoreDao.getAppraisalMonthOrgScoreListByMonth(month);
@@ -62,7 +65,15 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 			List<AppraisalMonthOrgScoreVo> gradeList = new ArrayList<AppraisalMonthOrgScoreVo>();
 			
 			for (AppraisalMonthOrgScoreVo scoreItem : scoreList) {
-				if (scoreItem.getResultScore() >= line.getLower() && scoreItem.getResultScore() < line.getUpper()) {
+				//获取item字节码对象
+				Class<? extends AppraisalMonthOrgScoreVo> cls = scoreItem.getClass();
+				
+				//调用对应字段的get方法
+				Method getMethod = cls.getDeclaredMethod("get" + StringUtils.captureUpName(target));
+				
+				double score = (double) getMethod.invoke(scoreItem);
+				
+				if (score >= line.getLower() && score < line.getUpper()) {
 					gradeList.add(scoreItem);
 				}
 			}

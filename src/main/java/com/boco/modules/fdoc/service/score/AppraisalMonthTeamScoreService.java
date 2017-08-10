@@ -56,8 +56,9 @@ public interface AppraisalMonthTeamScoreService {
 	/**
 	 * 按照分数线对月份团队得分数据进行分组
 	 * @param month
+	 * @param target：判断优秀的目标字段，比如需要查找“高血压得分”的优秀团队，传入signHyperScore(AppraisalFieldTargetConstans中的静态属性)
 	 * @return
 	 */
-	public Map<String, Object> getAppraisalMonthTeamScoreWithGrade(String month);
+	public Map<String, Object> getAppraisalMonthTeamScoreWithGrade(String month, String target) throws Exception;
 
 }
