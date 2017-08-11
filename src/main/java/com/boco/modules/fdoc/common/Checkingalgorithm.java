@@ -7,12 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.boco.common.constants.BusinessConstants;
 import com.boco.common.utils.JsonUtils;
 import com.boco.common.utils.NumberUtils;
 import com.boco.modules.fdoc.model.system.AppraisalQuotaEntity;
 
 public class Checkingalgorithm implements Calculation {
+	
+	
+	Logger log =LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 
 	 * 二类指标算法
@@ -119,12 +125,10 @@ public class Checkingalgorithm implements Calculation {
 									//System.out.println("TEST===="+value);
 									Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
 											8)) * 100);// 原始得分
-//									
-									//Double xscore =value/avgmaps.get(field.getName())*100;
 									xmap.put(field.getName()+"ScoreYS", xscore);
 									// 得到最高分算区间值 ：100/最高分=区间值
 									if (Highmap.containsKey(field.getName()+"ScoreYS")) {
-										if ((Double) Highmap.get(field.getName()+"ScoreYS") >(100/xscore)) {
+										if ((Double) Highmap.get(field.getName()+"ScoreYS") >(NumberUtils.division(100, xscore, 8))) {
 											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));
 											//System.out.println("小的分数："+Highmap.get(field.getName()+"ScoreYS"));
 											//Highmap.put(field.getName()+"ScoreYS",100/xscore);
@@ -132,7 +136,7 @@ public class Checkingalgorithm implements Calculation {
 											//System.out.println("大的分数："+Highmap.get(field.getName()+"ScoreYS"));
 										}
 									} else {
-										Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));// 区间值
+										Highmap.put(field.getName()+"ScoreYS", NumberUtils.division(100, xscore, 8));// 区间值
 										 // Highmap.put(field.getName()+"ScoreYS",100/xscore);
 									}
 								}
@@ -170,7 +174,7 @@ public class Checkingalgorithm implements Calculation {
 					if (!"id".equals(entry.getKey())) {
 						//System.out.println(entry.getKey());
 						Double value = (Double) entry.getValue();
-						Double endscore = (double) (value * Highmap.get(entry.getKey().substring(0,entry.getKey().length()-7)));// 区间过后的每项得分
+						Double endscore = (double) (value * Highmap.get(entry.getKey()));// 区间过后的每项得分
 						endscore = NumberUtils.roundHalfUp(endscore, length);
 						endmap.put(entry.getKey().substring(0,entry.getKey().length()-7)+"Score", endscore);
 					} else {
@@ -184,7 +188,7 @@ public class Checkingalgorithm implements Calculation {
 
 		}
 
-	//	System.out.println("每项区间后得分"+JsonUtils.getJsonFormat(qjscorelist));
+		//System.out.println("每项区间后得分"+JsonUtils.getJsonFormat(qjscorelist));
 
 		// 计算最后得分 需要签约二类占比*区间+
 		// 存放最后得分的list
@@ -220,11 +224,10 @@ public class Checkingalgorithm implements Calculation {
 			}
 			resultlist.add(resultMap);
 		}
-
+		//System.out.println("最终后得分"+JsonUtils.getJsonFormat(resultlist));
 		//Map<String, Object> returnMap = new HashMap<String, Object>();
 		//returnMap.put("items", qjscorelist);
 		//returnMap.put("score", resultlist);
-		System.out.println("最後得分"+JsonUtils.getJsonFormat(qjscorelist));
 		return resultlist;
 
 	}
