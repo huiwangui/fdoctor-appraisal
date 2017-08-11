@@ -1,5 +1,7 @@
 package com.boco.modules.fdoc.vo;
 
+import java.util.Date;
+
 public class MaptoBeanVo {
 	
 	
@@ -32,8 +34,45 @@ public class MaptoBeanVo {
     * 高血压人数增量分数
     */
     private Double hyperIncrementScore;
+    /**
+     * 每项结果得分
+     */
+    private Double resultScore;
+    
+    /**
+	 * 统计的目标月份，格式yyyyMM，如201708
+	 */
+	private String month;
+	/**
+	 * 统计时间
+	 */
+	private Date createTime;
 
-    public Integer getId() {
+    public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Double getResultScore() {
+		return resultScore;
+	}
+
+	public void setResultScore(Double resultScore) {
+		this.resultScore = resultScore;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 

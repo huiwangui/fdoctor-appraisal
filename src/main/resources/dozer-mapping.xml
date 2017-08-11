@@ -8,13 +8,63 @@
     <field>
       <a>hyperIncrementScore</a>
       <b>signHyperScore</b>
-      
     </field>
     <field>
       <a>diabetesIncrementScore</a>
       <b>signDiabetesScore</b>
     </field>
-    
-    
+     <field>
+      <a>oldIncrementScore</a>
+      <b>signOldScore</b>
+    </field>
+    <field>
+      <a>phychosisIncrementScore</a>
+      <b>signPhychosisScore</b>
+    </field>
+    <field>
+      <a>maternalIncrementScore</a>
+      <b>signMaternalScore</b>
+    </field>
+    <field>
+      <a>childrenIncrementScore</a>
+      <b>signChildrenScore</b>
+    </field>
+     <field>
+      <a>resultScore</a>
+      <b>signManageScore</b>
+    </field> 
+  </mapping>
+  
+  <mapping date-format="yyyy-MM-dd">
+    <class-a>com.boco.modules.fdoc.vo.MaptoBeanVo</class-a>
+    <class-b>com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity</class-b>
+    <field>
+      <a>hyperIncrementScore</a>
+      <b>signHyperScore</b>
+    </field>
+    <field>
+      <a>diabetesIncrementScore</a>
+      <b>signDiabetesScore</b>
+    </field>
+     <field>
+      <a>oldIncrementScore</a>
+      <b>signOldScore</b>
+    </field>
+    <field>
+      <a>phychosisIncrementScore</a>
+      <b>signPhychosisScore</b>
+    </field>
+    <field>
+      <a>maternalIncrementScore</a>
+      <b>signMaternalScore</b>
+    </field>
+    <field>
+      <a>childrenIncrementScore</a>
+      <b>signChildrenScore</b>
+    </field>
+     <field>
+      <a>resultScore</a>
+      <b>signManageScore</b>
+    </field> 
   </mapping>
 </mappings>

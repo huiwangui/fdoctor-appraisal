@@ -467,6 +467,12 @@
 		<scope>system</scope>
 		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1472629883730-20161113.jar</systemPath>
 		</dependency>
+		
+		<dependency>
+		    <groupId>net.sf.dozer</groupId>
+		    <artifactId>dozer</artifactId>
+		    <version>5.4.0</version>
+		</dependency>
 
 	</dependencies>
 

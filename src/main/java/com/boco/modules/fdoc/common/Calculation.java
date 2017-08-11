@@ -21,7 +21,7 @@ public interface Calculation {
     * @throws Exception
     *
     */
-	<T> Map<String,Object>  getSecondPeriodScore(List<T> list, Map<String, Double> zbMap,int length) throws Exception;
+	<T> Object getSecondPeriodScore(List<T> list, Map<String, Double> zbMap,int length) throws Exception;
 	/**
 	 * 一类指标算法
 	 * @param list

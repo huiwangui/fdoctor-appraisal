@@ -21,7 +21,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="statics/js/jquery-2.1.4.min.js"></script>  
   <script type="text/javascript" src="statics/beginnerAdmin/plugins/layui/layui.js"></script>
   <script type="text/javascript" src="statics/js/My97DatePicker/WdatePicker.js"></script>
-  
+   <script type="text/javascript" src="statics/js/laydate-v1.1/laydate/laydate.js"></script>
+   <style>
+	  .laydate_table { 
+		display: none;
+	  }
+	  #laydate_hms{
+		display: none !important;
+	  }
+  </style>
  </head>
  <body style=" background-color: gainsboro;">
  
@@ -44,7 +52,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  	<div class="layui-inline" >
 			   	    <label class="layui-form-label"  style="width: 100px; padding:9px 0"> 月份：</label>
 					<div class="layui-input-inline">
-						<input type="text" id="month" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'})" class="Wdate" style="color:#666;height:38px;text-indent:10px;border:1px solid #e6e6e6;line-height:38px;"/> 
+						<!-- <input type="text" id="month" onclick="WdatePicker({skin:'default',dateFmt:'yyyy年MM月'})" class="Wdate" style="color:#666;height:38px;text-indent:10px;border:1px solid #e6e6e6;line-height:38px;"/>  -->
+					 		<input class="layui-input bg_date" id="month"   onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM'})">
+					
 					</div>     
 			    </div>
 			    
@@ -72,6 +82,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
      <script>
+     
+	     laydate({
+	   	  elem: '#month',
+	   	  format: 'YYYY年MM月',// 分隔符可以任意定义，该例子表示只显示年月
+	   	  istime: false,
+	   	  festival: false, //显示节日
+	   	  istoday: false
+	   	 });
 	     //首页默认展示上月数据
 	     var date=new Date();
 	     var year=date.getFullYear(); 
