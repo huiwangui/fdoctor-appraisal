@@ -147,8 +147,9 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 				Double result = xo.getSignManageScore() * zbmap.get("signManageScore");//加全平均值需要加入后兩項
 				xo.setResultScore(result);
 				xo.setCreateTime(new Date());
-				ok = appraisalMonthOrgScoreDao.insert(xo) + ok;
-				if( appraisalMonthOrgScoreDao.insert(xo)==0){
+				int inInt = appraisalMonthOrgScoreDao.insert(xo);
+				ok=ok+inInt;
+				if(inInt==0){
 					throw new RuntimeException();
 					
 				}

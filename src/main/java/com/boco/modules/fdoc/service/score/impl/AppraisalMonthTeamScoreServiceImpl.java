@@ -132,8 +132,9 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 				Double result = xo.getSignManageScore() * zbmap.get("signManageScore");// 这以后需加入后两项的权值
 				xo.setResultScore(result);
 				xo.setCreateTime(new Date());
-				ok = appraisalMonthTeamScoreDao.insert(xo) + ok;
-				if( appraisalMonthTeamScoreDao.insert(xo)==0){
+				int inInt = appraisalMonthTeamScoreDao.insert(xo);
+				ok=ok+inInt;
+				if(inInt==0){
 					throw new RuntimeException();
 					
 				}
