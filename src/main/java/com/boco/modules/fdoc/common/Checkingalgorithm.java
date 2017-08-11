@@ -32,7 +32,7 @@ public class Checkingalgorithm implements Calculation {
 	 */
 	@SuppressWarnings("unused")
 	@Override
-	public <T> Map<String, Object> getSecondPeriodScore(List<T> list, Map<String, Double> zbMap, int length)
+	public <T> List<Map<String,Object>> getSecondPeriodScore(List<T> list, Map<String, Double> zbMap, int length)
 			throws IllegalArgumentException, IllegalAccessException, NoSuchMethodException, SecurityException,
 			InvocationTargetException {
 
@@ -55,8 +55,10 @@ public class Checkingalgorithm implements Calculation {
 					if ("id".equals(field.getName())) {
 						//
 					} else {
+						
 						String type = field.getGenericType().toString();
-						if (type.equals("class java.lang.Integer")) {
+						System.out.println(type);
+						if (type.equals("class java.lang.Integer")||type.equals("int")) {
 							if(!(field.get(list.get(i))==null)){
 								Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
 								if (maps.containsKey(field.getName())) {
@@ -66,6 +68,7 @@ public class Checkingalgorithm implements Calculation {
 								}
 							}
 						}
+						
 					}
 				}
 			}
@@ -111,7 +114,7 @@ public class Checkingalgorithm implements Calculation {
                         }
 						if (!"id".equals(field.getName())) {
 							String type = field.getGenericType().toString();
-							if (type.equals("class java.lang.Integer")) {
+							if (type.equals("class java.lang.Integer")||type.equals("int")) {
 								if(!(field.get(list.get(i))==null)){
 									Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
 //									Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
@@ -132,6 +135,9 @@ public class Checkingalgorithm implements Calculation {
 										  Highmap.put(field.getName()+"ScoreYS",100/xscore);
 									}
 								}
+							}
+							if (type.equals("class java.util.Date")||type.equals("class java.lang.String")) {//----假日日期格式的
+								xmap.put(field.getName(),field.get(list.get(i)));
 							}
 						} else {
 							xmap.put("id", field.get(list.get(i)));
@@ -155,11 +161,13 @@ public class Checkingalgorithm implements Calculation {
 		for (Map<String, Object> ysmap : slist) {
 			Map<String, Object> endmap = new HashMap<String, Object>();
 			for (Map.Entry<String, Object> entry : ysmap.entrySet()) {
-				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())|| "familyIncrement".equals(entry.getKey())||"signIncrement".equals(entry.getKey())) {
+				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())||"createTime".equals(entry.getKey())||
+				    "familyIncrement".equals(entry.getKey())||"signIncrement".equals(entry.getKey())||("month".equals(entry.getKey()))) {
 					endmap.put(entry.getKey(),  entry.getValue());
 				} else {
 					 
 					if (!"id".equals(entry.getKey())) {
+						
 						Double value = (Double) entry.getValue();
 						Double endscore = (double) (value * Highmap.get(entry.getKey()));// 区间过后的每项得分
 						endscore = NumberUtils.roundHalfUp(endscore, length);
@@ -184,11 +192,13 @@ public class Checkingalgorithm implements Calculation {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 
-				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())|| "familyIncrement".equals(entry.getKey())||"signIncrement".equals(entry.getKey())) {
+				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())||"createTime".equals(entry.getKey())||
+				   "familyIncrement".equals(entry.getKey())||"signIncrement".equals(entry.getKey())||("month".equals(entry.getKey()))) {
 					resultMap.put(entry.getKey(),  entry.getValue());
 				} else {
 					 
 					if (!"id".equals(entry.getKey())) {
+						resultMap.put(entry.getKey(), entry.getValue());
 						Double value = (Double) Double.valueOf(String.valueOf(entry.getValue()));
 						if (zbMap.get(entry.getKey()) != null) {
 							value = value * (zbMap.get(entry.getKey()));
@@ -210,11 +220,11 @@ public class Checkingalgorithm implements Calculation {
 			resultlist.add(resultMap);
 		}
 
-		Map<String, Object> returnMap = new HashMap<String, Object>();
-		returnMap.put("items", qjscorelist);
-		returnMap.put("score", resultlist);
+		//Map<String, Object> returnMap = new HashMap<String, Object>();
+		//returnMap.put("items", qjscorelist);
+		//returnMap.put("score", resultlist);
 
-		return returnMap;
+		return resultlist;
 
 	}
 
@@ -227,8 +237,8 @@ public class Checkingalgorithm implements Calculation {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 
-				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())) {
-					resultMap.put(entry.getKey(), (String) entry.getValue());
+				if ("teamId".equals(entry.getKey()) || "orgId".equals(entry.getKey())||"createTime".equals(entry.getKey())||
+						   "familyIncrement".equals(entry.getKey())||"signIncrement".equals(entry.getKey())||("month".equals(entry.getKey()))) {
 				} else {
 					if (!"id".equals(entry.getKey())) {
 
@@ -343,5 +353,7 @@ public class Checkingalgorithm implements Calculation {
 		return map;
 
 	}
+	
+	
 
 }
