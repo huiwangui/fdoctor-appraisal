@@ -166,7 +166,7 @@
 	  <!-- 新增数据 -->
 	  <insert id="insert" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity" >
 	    insert into t_appraisal_month_team_score (team_id, sign_increment, 
-	      family_increment, sign_hyper_score, sign_diabetes_score, 
+	      family_increment,sign_increment_score, sign_hyper_score, sign_diabetes_score, 
 	      sign_phychosis_score, sign_old_score, sign_maternal_score, 
 	      sign_children_score, sign_manage_score, public_health_hyper_score, 
 	      public_health_diabetes_score, public_health_phychosis_score, 
@@ -177,7 +177,7 @@
 	      health_manage_score, customer_score, result_score, 
 	      month, create_time)
 	    values (#{teamId,jdbcType=VARCHAR}, #{signIncrement,jdbcType=INTEGER}, 
-	      #{familyIncrement,jdbcType=INTEGER}, #{signHyperScore,jdbcType=DOUBLE}, #{signDiabetesScore,jdbcType=DOUBLE}, 
+	      #{familyIncrement,jdbcType=INTEGER},#{signIncrementScore,jdbcType=DOUBLE}, #{signHyperScore,jdbcType=DOUBLE}, #{signDiabetesScore,jdbcType=DOUBLE}, 
 	      #{signPhychosisScore,jdbcType=DOUBLE}, #{signOldScore,jdbcType=DOUBLE}, #{signMaternalScore,jdbcType=DOUBLE}, 
 	      #{signChildrenScore,jdbcType=DOUBLE}, #{signManageScore,jdbcType=DOUBLE}, #{publicHealthHyperScore,jdbcType=DOUBLE}, 
 	      #{publicHealthDiabetesScore,jdbcType=DOUBLE}, #{publicHealthPhychosisScore,jdbcType=DOUBLE}, 

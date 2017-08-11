@@ -10,7 +10,8 @@
 		    classpath:datasource-druid.xml,
 			classpath:spring-config-cache.xml,
         	classpath:spring-mybatis.xml,
-			classpath:spring-context*.xml
+			classpath:spring-context*.xml,
+			classpath:spring-dozer*.xml
 		</param-value>
   </context-param>
   <context-param>
