@@ -66,11 +66,6 @@ public class DoctorTeamController {
 			int familyIncrement = team.getFamilyIncrement();
 			int signIncrement = team.getSignIncrement();
 			team.setSignFamilyAndPerson(familyIncrement + "/" + signIncrement);
-			team.setSignManageScore(0.0);
-			team.setPublicHealthScore(0.0);
-			team.setHealthManageScore(0.0);
-			team.setCustomerScore(0.0);
-			team.setResultScore(0.0);
 
 		}
 		// return JsonUtils.getJson(teamScoreList);
