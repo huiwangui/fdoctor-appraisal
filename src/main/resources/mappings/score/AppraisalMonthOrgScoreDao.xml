@@ -153,29 +153,29 @@
 	  
 	  <!--新增数据-->
 	  <insert id="insert" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity" >
-	    insert into t_appraisal_month_org_score (id, org_id, sign_increment, 
+	    insert into t_appraisal_month_org_score (org_id, sign_increment, 
 	      family_increment, sign_hyper_score, sign_diabetes_score, 
 	      sign_phychosis_score, sign_old_score, sign_maternal_score, 
 	      sign_children_score, sign_manage_score, public_health_hyper_score, 
-	      public_health_diabetes_score, public_health_phychosis_socre, 
+	      public_health_diabetes_score, public_health_phychosis_score, 
 	      public_health_old_score, public_health_maternal_score, 
 	      public_health_children_score, public_health_score, 
 	      health_manage_edu_score, health_manage_daily_activity_score, 
 	      health_manage_assessment_score, health_manage_document_score, 
-	      health_manage_score, customer_score, result_socre, 
+	      health_manage_score, customer_score, result_score, 
 	      team_total, un_qualified_increment, qualified_increment, 
 	      excellent_increment, month, create_time
 	      )
-	    values (#{id,jdbcType=INTEGER}, #{orgId,jdbcType=VARCHAR}, #{signIncrement,jdbcType=INTEGER}, 
+	    values (#{orgId,jdbcType=VARCHAR}, #{signIncrement,jdbcType=INTEGER}, 
 	      #{familyIncrement,jdbcType=INTEGER}, #{signHyperScore,jdbcType=DOUBLE}, #{signDiabetesScore,jdbcType=DOUBLE}, 
 	      #{signPhychosisScore,jdbcType=DOUBLE}, #{signOldScore,jdbcType=DOUBLE}, #{signMaternalScore,jdbcType=DOUBLE}, 
 	      #{signChildrenScore,jdbcType=DOUBLE}, #{signManageScore,jdbcType=DOUBLE}, #{publicHealthHyperScore,jdbcType=DOUBLE}, 
-	      #{publicHealthDiabetesScore,jdbcType=DOUBLE}, #{publicHealthPhychosisSocre,jdbcType=DOUBLE}, 
+	      #{publicHealthDiabetesScore,jdbcType=DOUBLE}, #{publicHealthPhychosisScore,jdbcType=DOUBLE}, 
 	      #{publicHealthOldScore,jdbcType=DOUBLE}, #{publicHealthMaternalScore,jdbcType=DOUBLE}, 
 	      #{publicHealthChildrenScore,jdbcType=DOUBLE}, #{publicHealthScore,jdbcType=DOUBLE}, 
 	      #{healthManageEduScore,jdbcType=DOUBLE}, #{healthManageDailyActivityScore,jdbcType=DOUBLE}, 
 	      #{healthManageAssessmentScore,jdbcType=DOUBLE}, #{healthManageDocumentScore,jdbcType=DOUBLE}, 
-	      #{healthManageScore,jdbcType=DOUBLE}, #{customerScore,jdbcType=DOUBLE}, #{resultSocre,jdbcType=DOUBLE}, 
+	      #{healthManageScore,jdbcType=DOUBLE}, #{customerScore,jdbcType=DOUBLE}, #{resultScore,jdbcType=DOUBLE}, 
 	      #{teamTotal,jdbcType=INTEGER}, #{unQualifiedIncrement,jdbcType=INTEGER}, #{qualifiedIncrement,jdbcType=INTEGER}, 
 	      #{excellentIncrement,jdbcType=INTEGER}, #{month,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
 	      )

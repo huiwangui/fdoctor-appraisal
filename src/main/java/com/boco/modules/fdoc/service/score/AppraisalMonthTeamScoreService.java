@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity;
+import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
+import com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo;
 import com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo;
 
 public interface AppraisalMonthTeamScoreService {
@@ -74,4 +76,15 @@ public interface AppraisalMonthTeamScoreService {
 	 * @return 影响行数
 	 */
 	public int update(AppraisalMonthTeamScoreEntity entity);
+	
+	 /**
+     * 插入数据   （todo:随访体检 和健康管理 要到dozer-mapping.xml下配置对象映射关系）
+     * @param list1 团队签约管理增长列表
+     * @param listTeamPublicHealthVo 团队随访体检增长列表
+     * @param listTeamHealthMange   团队健康管理增长列表
+     * @return
+     * @throws Exception
+     *
+     */
+	public int insert(List<AppraisalMonthSignTeamIncrementVo> list1,List<?> listTeamPublicHealthVo,List<?> listTeamHealthMange)throws Exception;
 }
