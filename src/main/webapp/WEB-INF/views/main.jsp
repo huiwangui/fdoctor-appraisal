@@ -57,39 +57,45 @@
 				</a></li>
 				<li class="item"><a href="javascript:void(0)" onclick="changeSignItem('hyper', this)">
 						<p>
+							<span>高血压</span>
 							<span class="num" inc-data-name="hyperIncrement"></span><span>人</span>
 						</p>
-						<p class="p2">高血压 &nbsp;占比 : <span pro-data-name="hyperProportion"></span></p>
+						<p class="p2">占比 : <span pro-data-name="hyperProportion"></span></p>
 				</a></li>
 				<li class="item"><a href="javascript:void(0)" onclick="changeSignItem('diabetes', this)">
 						<p>
+							<span>糖尿病</span>
 							<span class="num" inc-data-name="diabetesIncrement"></span><span>人</span>
 						</p>
-						<p class="p2">糖尿病 &nbsp;占比 :  <span pro-data-name="diabetesProportion"></span></p>
+						<p class="p2">占比 :  <span pro-data-name="diabetesProportion"></span></p>
 				</a></li>
 				<li class="item"><a href="javascript:void(0)" onclick="changeSignItem('phychosis', this)">
 						<p>
+							<span>重性精神病</span>
 							<span class="num" inc-data-name="phychosisIncrement"></span><span>人</span>
 						</p>
-						<p class="p2">重性精神病 &nbsp;占比 : <span pro-data-name="phychosisProportion"></span> </p>
+						<p class="p2">占比 : <span pro-data-name="phychosisProportion"></span> </p>
 				</a></li>
 				<li class="item"><a href="javascript:void(0)" onclick="changeSignItem('old', this)">
 						<p>
+							<span>老年人</span>
 							<span class="num" inc-data-name="oldIncrement"></span><span>人</span>
 						</p>
-						<p class="p2">老年人 &nbsp;占比 :  <span pro-data-name="oldProportion"></span></p>
+						<p class="p2">占比 :  <span pro-data-name="oldProportion"></span></p>
 				</a></li>
 				<li class="item"><a href="javascript:void(0)" onclick="changeSignItem('maternal', this)">
 						<p>
+							<span>孕产妇</span>
 							<span class="num" inc-data-name="maternalIncrement"></span><span>人</span>
 						</p>
-						<p class="p2">孕产妇 &nbsp;占比 :  <span pro-data-name="maternalProportion"></span></p>
+						<p class="p2">占比 :  <span pro-data-name="maternalProportion"></span></p>
 				</a></li>
 				<li class="item"><a href="javascript:void(0)" onclick="changeSignItem('children', this)">
 						<p>
+							<span>儿童</span>
 							<span class="num" inc-data-name="childrenIncrement"></span><span>人</span>
 						</p>
-						<p class="p2">儿童 &nbsp;占比 :  <span pro-data-name="childrenProportion"></span></p>
+						<p class="p2">占比 :  <span pro-data-name="childrenProportion"></span></p>
 				</a></li>
 			</ul>
 
