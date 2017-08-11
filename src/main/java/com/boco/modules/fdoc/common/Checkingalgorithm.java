@@ -74,7 +74,7 @@ public class Checkingalgorithm implements Calculation {
 		
 
 		}
-		System.out.println("每项总和"+JsonUtils.getJsonFormat(maps));
+		//System.out.println("每项总和"+JsonUtils.getJsonFormat(maps));
 
 		// 每项平均值
 		Map<String, Double> avgmaps = new HashMap<String, Double>();
@@ -84,7 +84,7 @@ public class Checkingalgorithm implements Calculation {
 		//	avgmaps.put(entry.getKey(), entry.getValue()/Double.parseDouble((String) String.valueOf(list.size())));
 		}
 		
-		System.out.println("每项平均值"+JsonUtils.getJsonFormat(avgmaps));
+		//System.out.println("每项平均值"+JsonUtils.getJsonFormat(avgmaps));
 		
 		
 		
@@ -116,7 +116,7 @@ public class Checkingalgorithm implements Calculation {
 							if (type.equals("class java.lang.Integer")||type.equals("int")) {
 								if(!(field.get(list.get(i))==null)){
 									Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
-									System.out.println("TEST===="+value);
+									//System.out.println("TEST===="+value);
 									Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
 											8)) * 100);// 原始得分
 //									
@@ -126,10 +126,10 @@ public class Checkingalgorithm implements Calculation {
 									if (Highmap.containsKey(field.getName()+"ScoreYS")) {
 										if ((Double) Highmap.get(field.getName()+"ScoreYS") >(100/xscore)) {
 											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));
-											System.out.println("小的分数："+Highmap.get(field.getName()+"ScoreYS"));
+											//System.out.println("小的分数："+Highmap.get(field.getName()+"ScoreYS"));
 											//Highmap.put(field.getName()+"ScoreYS",100/xscore);
 											Highmap.put(field.getName()+"ScoreYS",NumberUtils.division(100, xscore, 8));
-											System.out.println("大的分数："+Highmap.get(field.getName()+"ScoreYS"));
+											//System.out.println("大的分数："+Highmap.get(field.getName()+"ScoreYS"));
 										}
 									} else {
 										Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));// 区间值
@@ -151,9 +151,9 @@ public class Checkingalgorithm implements Calculation {
 			slist.add(xmap);
 		}
 		
-		System.out.println("每项未区间前的得分"+JsonUtils.getJsonFormat(slist));
+		//System.out.println("每项未区间前的得分"+JsonUtils.getJsonFormat(slist));
 
-		System.out.println("区间值"+JsonUtils.getJsonFormat(Highmap));
+		//System.out.println("区间值"+JsonUtils.getJsonFormat(Highmap));
 
 
 		// 处理区间值后的得到的得分 原始得分*区间值
@@ -168,9 +168,9 @@ public class Checkingalgorithm implements Calculation {
 				} else {
 					 
 					if (!"id".equals(entry.getKey())) {
-						
+						//System.out.println(entry.getKey());
 						Double value = (Double) entry.getValue();
-						Double endscore = (double) (value * Highmap.get(entry.getKey()));// 区间过后的每项得分
+						Double endscore = (double) (value * Highmap.get(entry.getKey().substring(0,entry.getKey().length()-7)));// 区间过后的每项得分
 						endscore = NumberUtils.roundHalfUp(endscore, length);
 						endmap.put(entry.getKey().substring(0,entry.getKey().length()-7)+"Score", endscore);
 					} else {
@@ -184,7 +184,7 @@ public class Checkingalgorithm implements Calculation {
 
 		}
 
-		System.out.println("每项区间后得分"+JsonUtils.getJsonFormat(qjscorelist));
+	//	System.out.println("每项区间后得分"+JsonUtils.getJsonFormat(qjscorelist));
 
 		// 计算最后得分 需要签约二类占比*区间+
 		// 存放最后得分的list
@@ -224,7 +224,7 @@ public class Checkingalgorithm implements Calculation {
 		//Map<String, Object> returnMap = new HashMap<String, Object>();
 		//returnMap.put("items", qjscorelist);
 		//returnMap.put("score", resultlist);
-
+		System.out.println("最後得分"+JsonUtils.getJsonFormat(qjscorelist));
 		return resultlist;
 
 	}
