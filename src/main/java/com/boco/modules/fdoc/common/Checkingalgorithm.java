@@ -57,7 +57,6 @@ public class Checkingalgorithm implements Calculation {
 					} else {
 						
 						String type = field.getGenericType().toString();
-						System.out.println(type);
 						if (type.equals("class java.lang.Integer")||type.equals("int")) {
 							if(!(field.get(list.get(i))==null)){
 								Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
@@ -80,9 +79,9 @@ public class Checkingalgorithm implements Calculation {
 		// 每项平均值
 		Map<String, Double> avgmaps = new HashMap<String, Double>();
 		for (Map.Entry<String, Double> entry : maps.entrySet()) {
-//			avgmaps.put(entry.getKey(), NumberUtils.division(entry.getValue(),
-//					Double.parseDouble((String) String.valueOf(list.size())), length));// 结果为Double
-			avgmaps.put(entry.getKey(), entry.getValue()/Double.parseDouble((String) String.valueOf(list.size())));
+			avgmaps.put(entry.getKey(), NumberUtils.division(entry.getValue(),
+					Double.parseDouble((String) String.valueOf(list.size())), 8));// 结果为Double
+		//	avgmaps.put(entry.getKey(), entry.getValue()/Double.parseDouble((String) String.valueOf(list.size())));
 		}
 		
 		System.out.println("每项平均值"+JsonUtils.getJsonFormat(avgmaps));
@@ -117,22 +116,24 @@ public class Checkingalgorithm implements Calculation {
 							if (type.equals("class java.lang.Integer")||type.equals("int")) {
 								if(!(field.get(list.get(i))==null)){
 									Double value = Double.parseDouble((String) String.valueOf(field.get(list.get(i))));
-//									Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
-//											length)) * 100);// 原始得分
-									
-									Double xscore =value/avgmaps.get(field.getName())*100;
+									System.out.println("TEST===="+value);
+									Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
+											8)) * 100);// 原始得分
+//									
+									//Double xscore =value/avgmaps.get(field.getName())*100;
 									xmap.put(field.getName()+"ScoreYS", xscore);
 									// 得到最高分算区间值 ：100/最高分=区间值
 									if (Highmap.containsKey(field.getName()+"ScoreYS")) {
 										if ((Double) Highmap.get(field.getName()+"ScoreYS") >(100/xscore)) {
-											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));
+											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));
 											System.out.println("小的分数："+Highmap.get(field.getName()+"ScoreYS"));
-											Highmap.put(field.getName()+"ScoreYS",100/xscore);
+											//Highmap.put(field.getName()+"ScoreYS",100/xscore);
+											Highmap.put(field.getName()+"ScoreYS",NumberUtils.division(100, xscore, 8));
 											System.out.println("大的分数："+Highmap.get(field.getName()+"ScoreYS"));
 										}
 									} else {
-										//Highmap.put(field.getName(), NumberUtils.division(100, xscore, length));// 区间值
-										  Highmap.put(field.getName()+"ScoreYS",100/xscore);
+										Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));// 区间值
+										 // Highmap.put(field.getName()+"ScoreYS",100/xscore);
 									}
 								}
 							}
