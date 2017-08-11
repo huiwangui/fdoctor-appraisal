@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 		"classpath:datasource-druid.xml",
 		"classpath:spring-context.xml",
 		"classpath:spring-mybatis.xml",
+		"classpath:spring-dozer.xml"
 		})
 public class JunitTestCase {
 	protected Logger logger = Logger.getLogger(getClass());
