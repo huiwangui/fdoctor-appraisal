@@ -18,5 +18,14 @@ public interface AppraisalQuotaService {
 	 *
 	 */
 	int updateByPrimaryKey(List<AppraisalQuotaEntity> appraisalQuotaEntitys);
+	
+	/**
+	 * 查找一类指标下的二类指标
+	 * @param parentId
+	 * @return
+	 *
+	 */
+	List<AppraisalQuotaEntity>  getByParentId(int parentId);
+
 
 }

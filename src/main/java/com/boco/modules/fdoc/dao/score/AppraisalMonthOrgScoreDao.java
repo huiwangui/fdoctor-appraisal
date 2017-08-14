@@ -1,6 +1,7 @@
 package com.boco.modules.fdoc.dao.score;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boco.common.annotation.MyBatisDao;
 import com.boco.common.persistence.CrudDao;
@@ -52,4 +53,35 @@ public interface AppraisalMonthOrgScoreDao extends CrudDao<AppraisalMonthOrgScor
 	 * @author h
 	 */
 	public AppraisalMonthOrgScoreVo getAppraisalMonthOrgScoreByOrgId(String orgId);
+	
+	/**
+	 * 获取团队数量
+	 * @param orgId
+	 * @return
+	 *
+	 */
+	public int getTeamCount(String orgId);
+	/**
+	 * 获取得分（通过团队得分表算的平均分）
+	 * @param map
+	 * @return
+	 *
+	 */
+	AppraisalMonthOrgScoreEntity getScoreByOrgIdAndMonth(Map map);
+	
+	/**
+	 * 获取优秀团队数量
+	 * @param map
+	 * @return
+	 *
+	 */
+	int getGoodteams(Map map);
+	/**
+	 * 不优秀的团队
+	 * @param map
+	 * @return
+	 *
+	 */
+	int getUnQuali(Map map);
+
 }

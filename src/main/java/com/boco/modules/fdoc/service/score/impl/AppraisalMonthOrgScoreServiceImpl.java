@@ -1,5 +1,6 @@
 package com.boco.modules.fdoc.service.score.impl;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.boco.common.utils.BeanUtils;
 import com.boco.common.utils.JsonUtils;
+import com.boco.common.utils.NumberUtils;
 import com.boco.common.utils.StringUtils;
 import com.boco.modules.fdoc.common.Checkingalgorithm;
 import com.boco.modules.fdoc.dao.score.AppraisalMonthOrgScoreDao;
@@ -133,18 +135,20 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 		}
 		int ok = 0;
 		Checkingalgorithm cal = new Checkingalgorithm();
-		List<AppraisalQuotaEntity> zb = quotaService.getAll();// ---指标
-		Map<String, Double> zbmap = cal.getMap(zb, 2);
+		List<AppraisalQuotaEntity> zb1=quotaService.getByParentId(10);//---签约指标
+		List<AppraisalQuotaEntity> zb2=quotaService.getByParentId(20);//---随访体检指标
+		List<AppraisalQuotaEntity> zb3=quotaService.getByParentId(30);//---健康管理指标
+		List<AppraisalQuotaEntity> zb=quotaService.getByParentId(0);//---一类指标占比
+		Map<String, Double> zbmap1 = cal.getMap(zb1, 2);
 		try {
 			List<Map<String, Object>> rlist = (List<Map<String, Object>>) cal.getSecondPeriodScore(list1,
-					cal.getMap(zb, 2), 2);
+					cal.getMap(zb1, 2), 2);
 
-			System.out.println(JsonUtils.getJsonFormat(cal.getSecondPeriodScore(list1, cal.getMap(zb, 2), 2)));
 
 			for (Map<String, Object> map : rlist) {
 				MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
 				AppraisalMonthOrgScoreEntity xo = mapper.map(vo, AppraisalMonthOrgScoreEntity.class);
-				Double result = xo.getSignManageScore() * zbmap.get("signManageScore");//加全平均值需要加入后兩項
+				Double result = xo.getSignManageScore() * zbmap1.get("signManageScore");//加全平均值需要加入后兩項todo
 				xo.setResultScore(result);
 				xo.setCreateTime(new Date());
 				int inInt = appraisalMonthOrgScoreDao.insert(xo);
@@ -161,6 +165,103 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 		}
 
 		return ok;
+	}
+
+	@Override
+	public int insert(List<HospitalEntity> list, String month) throws IllegalArgumentException, IllegalAccessException {
+		int ok=0;
+		
+		for (HospitalEntity hospitalEntity : list) {
+			AppraisalMonthOrgScoreEntity scoreEntity =new AppraisalMonthOrgScoreEntity();
+			//获取团队数量
+			int teams=appraisalMonthOrgScoreDao.getTeamCount(hospitalEntity.getId());
+			//获取各项得分,封装查询参数
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("orgId", hospitalEntity.getId());
+			map.put("month", month);
+			AppraisalMonthOrgScoreEntity secondScore=appraisalMonthOrgScoreDao.getScoreByOrgIdAndMonth(map);
+			//计算二类指标的最终得分
+			Double signManageScore=0.0;
+			Double publicHealthScore=0.0;
+			Double healthManageScore=0.0;
+			Checkingalgorithm cal = new Checkingalgorithm();
+			List<AppraisalQuotaEntity> zb1=quotaService.getByParentId(10);//---签约指标
+			List<AppraisalQuotaEntity> zb2=quotaService.getByParentId(20);//---随访体检指标
+			List<AppraisalQuotaEntity> zb3=quotaService.getByParentId(30);//---健康管理指标
+			Map<String, Double> zbmap1 = cal.getMap(zb1, 2);
+			Map<String, Double> zbmap2 = cal.getMap(zb2, 2);
+			Map<String, Double> zbmap3 = cal.getMap(zb3, 2);
+			Field[] fields = secondScore.getClass().getDeclaredFields();
+			for (int j = 0; j < fields.length; j++) {
+				Field field = fields[j];
+				field.setAccessible(true); // 设置些属性是可以访问的
+				if (field != null) {
+					if ("orgId".equals(field.getName()) || "signIncrement".equals(field.getName())|| "familyIncrement".equals(field.getName())) {
+						//
+					} else {
+						String type = field.getGenericType().toString();
+						if (type.equals("class java.lang.Integer")||type.equals("int")) {
+							if(!(field.get(secondScore)==null)){
+								Double value = (Double) field.get(secondScore);
+								if(zbmap1.get(field.getName())!=null){
+									value = value * (zbmap1.get(field.getName()));
+									signManageScore = signManageScore+value;//最后取长度
+								}
+								if(zbmap2.get(field.getName())!=null){
+									value = value * (zbmap2.get(field.getName()));
+									publicHealthScore = publicHealthScore+value;//最后取长度
+								}
+								if(zbmap3.get(field.getName())!=null){
+									value = value * (zbmap3.get(field.getName()));
+									healthManageScore = healthManageScore+value;//最后取长度
+								}
+							
+							}
+						}
+						
+					}
+				}
+			}
+			//计算最后得分
+			List<AppraisalQuotaEntity> zb=quotaService.getByParentId(0);//---健康管理指标
+			Map<String, Double> zbmap = cal.getMap(zb, 2);
+			Double resultScore=signManageScore*zbmap.get("signManageScore")+publicHealthScore*zbmap.get("publicHealthScore")+healthManageScore*zbmap.get("healthManageScore");
+			//得到的对象
+			secondScore.setOrgId(hospitalEntity.getId());
+			secondScore.setSignManageScore(signManageScore);
+			secondScore.setPublicHealthScore(publicHealthScore);
+			secondScore.setHealthManageScore(healthManageScore);
+			secondScore.setTeamTotal(teams);
+			//优秀的团队
+			//1.查找优秀的最低分数线
+			AppraisalGradeLineEntity gradeLine=gradeLineDao.getExcellentGradeLine();
+			//2.查找分数高于或等于最低分数线的团队数量
+			map.put("lowerLine", gradeLine.getLower());
+			int goodTeams=appraisalMonthOrgScoreDao.getGoodteams(map);
+			secondScore.setExcellentIncrement(goodTeams);
+			//不优秀团队
+			//1.不优秀团队的最低分数线
+			map.put("unLine", gradeLineDao.getUnQualified_incrementGradeLine().getUpper());
+			//2.查找分数小于或等于最低分数线的团队数量
+			int unQualified=appraisalMonthOrgScoreDao.getGoodteams(map);
+			secondScore.setUnQualifiedIncrement(unQualified);
+			//合格的团队
+			secondScore.setQualifiedIncrement(teams-unQualified-goodTeams);
+			//插入数据
+			 ok=ok+appraisalMonthOrgScoreDao.insert(secondScore);
+		}
+		return ok;
+	}
+
+	@Override
+	public int getTeamCount(String orgId) {
+		return appraisalMonthOrgScoreDao.getTeamCount(orgId);
+	}
+
+	@Override
+	public AppraisalMonthOrgScoreEntity getScoreByOrgIdAndMonth(Map map) {
+		
+		return appraisalMonthOrgScoreDao.getScoreByOrgIdAndMonth(map);
 	}
 
 }

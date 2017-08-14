@@ -37,4 +37,11 @@ public class AppraisalQuotaServiceImpl implements  AppraisalQuotaService{
 		return result;
 	}
 
+
+
+	@Override
+	public List<AppraisalQuotaEntity> getByParentId(int parentId) {
+		return appraisalQuotaDao.getByParentId(parentId);
+	}
+
 }

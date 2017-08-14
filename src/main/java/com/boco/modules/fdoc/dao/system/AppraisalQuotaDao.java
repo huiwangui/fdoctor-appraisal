@@ -10,5 +10,12 @@ import com.boco.modules.fdoc.model.system.AppraisalQuotaEntity;
 public interface AppraisalQuotaDao extends CrudDao<AppraisalQuotaEntity>{
 	int updateByPrimaryKey(AppraisalQuotaEntity appraisalQuotaEntity);
 	List<AppraisalQuotaEntity>  getAll();
+	/**
+	 * 查找一类指标下的二类指标
+	 * @param parentId
+	 * @return
+	 *
+	 */
+	List<AppraisalQuotaEntity>  getByParentId(int parentId);
 
 }

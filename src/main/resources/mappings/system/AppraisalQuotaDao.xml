@@ -11,6 +11,14 @@
 	</select>
 	
 	
+	<select id="getByParentId"  resultType="com.boco.modules.fdoc.model.system.AppraisalQuotaEntity" parameterType="int" >
+	   select <include refid="Base_Column_List"/> from t_appraisal_quota where  parent_id=#{prentId}
+	   
+	</select>
+	
+		
+	
+	
 	  <update id="updateByPrimaryKey" parameterType="com.boco.modules.fdoc.model.system.AppraisalQuotaEntity" >
 	      update t_appraisal_quota
 	      set name = #{name,jdbcType=VARCHAR},

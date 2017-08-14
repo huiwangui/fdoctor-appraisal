@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 
 import org.dozer.Mapper;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -30,7 +32,7 @@ import com.boco.modules.fdoc.vo.MaptoBeanVo;
 @ContextConfiguration(locations = {
 		"classpath:spring-dozer.xml"})
 public class CalculationTest extends JunitTestCase{
-	
+	Logger log =LoggerFactory.getLogger(this.getClass());
 	
 	@Resource
 	AppraisalMonthSignTeamIncrementService signTeamService;
@@ -78,37 +80,58 @@ public class CalculationTest extends JunitTestCase{
 		
 	}*/
 	
+//	
+//	@Test
+//	public void team() throws Exception{
+//		Checkingalgorithm cal=new Checkingalgorithm();
+//		List<AppraisalMonthSignTeamIncrementVo>  SignTeamlist=signTeamService.getMonthSignTeamDataList("201703");//机构签约管理
+//		//System.out.println(JsonUtils.getJsonFormat(SignTeamlist));
+//		List<AppraisalQuotaEntity> zb=quotaService.getAll();//---指标
+//		 Map<String, Double> zbmap=cal.getMap(zb, 2);
+//		 System.out.println(JsonUtils.getJsonFormat(zbmap));
+//		 //log.error("指标{}"+JsonUtils.getJsonFormat(zbmap));
+//		try {
+//		 	List<Map<String,Object>> rlist=(List<Map<String,Object>>) cal.getSecondPeriodScore(SignTeamlist, cal.getMap(zb,2),2);
+//			//System.out.println(JsonUtils.getJsonFormat(rlist));
+//			//System.out.println(JsonUtils.getJsonFormat(cal.getSecondPeriodScore(SignTeamlist, cal.getMap(zb,2),2)));
+//			//
+//			/*for (Map<String,Object> map:rlist) {
+//				 MaptoBeanVo vo=(MaptoBeanVo) BeanUtils.mapToObject(map,MaptoBeanVo.class);
+//				 //System.out.println("MapBeanVo"+JsonUtils.getJsonFormat(vo));
+//				 AppraisalMonthTeamScoreEntity xo= mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
+//				// System.out.println("Entity"+JsonUtils.getJsonFormat(xo));
+//				 Double result=xo.getSignManageScore()*zbmap.get("signManageScore");
+//				 xo.setResultScore(result);
+//				 xo.setCreateTime(new Date());
+//				// System.out.println(JsonUtils.getJsonFormat(xo));
+//				 teamScore.insert(xo);
+//			}*/
+//			
+//			
+//		} catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException
+//				| InvocationTargetException e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
+//   
+	
+/*	@Test
+	public void ccc() throws Exception{
+		
+		List<AppraisalMonthSignTeamIncrementVo>  teamList=signTeamService.getMonthSignTeamDataList("201703");
+		teamScore.insert(teamList, null, null);
+		
+	}*/
+	
 	
 	@Test
-	public void team() throws Exception{
+	public void dddd() throws Exception{
 		Checkingalgorithm cal=new Checkingalgorithm();
-		List<AppraisalMonthSignTeamIncrementVo>  SignTeamlist=signTeamService.getMonthSignTeamDataList("201705");//机构签约管理
-		System.out.println(JsonUtils.getJsonFormat(SignTeamlist));
-		List<AppraisalQuotaEntity> zb=quotaService.getAll();//---指标
-		 Map<String, Double> zbmap=cal.getMap(zb, 2);
-		try {
-		 	List<Map<String,Object>> rlist=(List<Map<String,Object>>) cal.getSecondPeriodScore(SignTeamlist, cal.getMap(zb,2),2);
-					
-			System.out.println(JsonUtils.getJsonFormat(cal.getSecondPeriodScore(SignTeamlist, cal.getMap(zb,2),2)));
-			
-			for (Map<String,Object> map:rlist) {
-				 MaptoBeanVo vo=(MaptoBeanVo) BeanUtils.mapToObject(map,MaptoBeanVo.class);
-				 System.out.println("MapBeanVo"+JsonUtils.getJsonFormat(vo));
-				 AppraisalMonthTeamScoreEntity xo= mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
-				 System.out.println("Entity"+JsonUtils.getJsonFormat(xo));
-				 Double result=xo.getSignManageScore()*zbmap.get("signManageScore");
-				 xo.setResultScore(result);
-				 xo.setCreateTime(new Date());
-				 System.out.println(JsonUtils.getJsonFormat(xo));
-				 teamScore.insert(xo);
-			}
-			
-			
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-		}
+	  	List<AppraisalQuotaEntity> zb1=quotaService.getByParentId(10);//---指标
+	  	System.out.println(JsonUtils.getJsonFormat(zb1));
+		 Map<String, Double> zbmap=cal.getMap(zb1, 2);
+		 System.out.println(JsonUtils.getJsonFormat(zbmap));
 		
 	}
-
 }

@@ -157,7 +157,7 @@ public class Checkingalgorithm implements Calculation {
 		
 		//System.out.println("每项未区间前的得分"+JsonUtils.getJsonFormat(slist));
 
-		//System.out.println("区间值"+JsonUtils.getJsonFormat(Highmap));
+		System.out.println("区间值"+JsonUtils.getJsonFormat(Highmap));
 
 
 		// 处理区间值后的得到的得分 原始得分*区间值
@@ -206,6 +206,7 @@ public class Checkingalgorithm implements Calculation {
 						resultMap.put(entry.getKey(), entry.getValue());
 						Double value = (Double) Double.valueOf(String.valueOf(entry.getValue()));
 						if (zbMap.get(entry.getKey()) != null) {
+							System.out.println(zbMap.get(entry.getKey()));
 							value = value * (zbMap.get(entry.getKey()));
 							value = NumberUtils.roundHalfUp(value, length);//最后取长度
 							if (resultMap.containsKey("resultScore")) {
@@ -224,7 +225,7 @@ public class Checkingalgorithm implements Calculation {
 			}
 			resultlist.add(resultMap);
 		}
-		//System.out.println("最终后得分"+JsonUtils.getJsonFormat(resultlist));
+	//	System.out.println("最终后得分"+JsonUtils.getJsonFormat(resultlist));
 		//Map<String, Object> returnMap = new HashMap<String, Object>();
 		//returnMap.put("items", qjscorelist);
 		//returnMap.put("score", resultlist);
@@ -335,7 +336,7 @@ public class Checkingalgorithm implements Calculation {
 				break;
 
 			case BusinessConstants.HEALTH_ADMIN:
-				map.put("customerScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("healthManageScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_EDU:
 				map.put("educationIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));

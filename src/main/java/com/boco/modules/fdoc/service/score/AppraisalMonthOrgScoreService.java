@@ -94,5 +94,31 @@ public interface AppraisalMonthOrgScoreService {
      *
      */
 	public int insert(List<AppraisalMonthSignOrgIncrementVo> list1,List<?> listPublicHealthVo,List<?> listHealthMange)throws Exception;
-
+	 /**
+     * 插入数据   （）
+     * @param list 机构列表
+     * @param month 插入的月份
+     * @return  新增条数
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+     *
+     */
+	public int insert( List<HospitalEntity> list ,String month) throws IllegalArgumentException, IllegalAccessException;
+	
+	
+	/**
+	 * 获取团队数量
+	 * @param orgId
+	 * @return
+	 *
+	 */
+	public int getTeamCount(String orgId);
+	
+	/**
+	 * 获取得分（通过团队得分表算的平均分）
+	 * @param map
+	 * @return
+	 *
+	 */
+	AppraisalMonthOrgScoreEntity getScoreByOrgIdAndMonth(Map map);
 }

@@ -3,9 +3,11 @@ package com.boco.modules.fdoc.web;
 import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
@@ -22,10 +24,28 @@ import com.boco.common.utils.FTPUtils;
 import com.boco.common.utils.JsonUtils;
 import com.boco.common.utils.PropertiesUtils;
 import com.boco.common.utils.StringUtils;
+import com.boco.modules.fdoc.service.score.AppraisalMonthOrgScoreService;
+import com.boco.modules.fdoc.service.score.AppraisalMonthTeamScoreService;
+import com.boco.modules.fdoc.service.sign.AppraisalMonthSignOrgIncrementService;
+import com.boco.modules.fdoc.service.sign.AppraisalMonthSignTeamIncrementService;
+import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
+import com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo;
 
 @Controller
 @RequestMapping(value = "/common", produces = "application/json;charset=UTF-8")
 public class CommonController {
+	
+	@Resource
+	AppraisalMonthTeamScoreService teamscoreService;
+    
+	@Resource
+	AppraisalMonthOrgScoreService orgscoreService;
+	
+	@Resource
+	AppraisalMonthSignOrgIncrementService orgIncreatmentService;
+	
+	@Resource
+	AppraisalMonthSignTeamIncrementService teamIncreatmentService;
 
 	/**
 	 * 
@@ -112,5 +132,15 @@ public class CommonController {
 			returnMap.put("msg", "图片上传失败");
 			return JsonUtils.getJson(returnMap);
 		}
+	}
+	
+	
+	@RequestMapping("/test")
+	public String xxx() throws Exception{
+		
+		List<AppraisalMonthSignTeamIncrementVo>  teamList=teamIncreatmentService.getMonthSignTeamDataList("201605");
+		teamscoreService.insert(teamList, null, null);
+		return null;
+		
 	}
 }

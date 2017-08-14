@@ -121,15 +121,18 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 		}
 		int ok = 0;
 		Checkingalgorithm cal = new Checkingalgorithm();
-		List<AppraisalQuotaEntity> zb = quotaService.getAll();// ---指标
-		Map<String, Double> zbmap = cal.getMap(zb, 2);// 指标转换
+		List<AppraisalQuotaEntity> zb1=quotaService.getByParentId(10);//---签约指标
+		List<AppraisalQuotaEntity> zb2=quotaService.getByParentId(20);//---随访体检指标
+		List<AppraisalQuotaEntity> zb3=quotaService.getByParentId(30);//---健康管理指标
+		List<AppraisalQuotaEntity> zb=quotaService.getByParentId(0);//---一类指标占比
+		Map<String, Double> zbmap1 = cal.getMap(zb1, 2);
 		try {
 			List<Map<String, Object>> rlist = (List<Map<String, Object>>) cal.getSecondPeriodScore(list1,
-					cal.getMap(zb, 2), 2);
+					cal.getMap(zb1, 2), 2);//签约得分
 			for (Map<String, Object> map : rlist) {
 				MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
 				AppraisalMonthTeamScoreEntity xo = mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
-				Double result = xo.getSignManageScore() * zbmap.get("signManageScore");// 这以后需加入后两项的权值
+				Double result = xo.getSignManageScore() * zbmap1.get("signManageScore");// 这以后需加入后两项的权值
 				xo.setResultScore(result);
 				xo.setCreateTime(new Date());
 				int inInt = appraisalMonthTeamScoreDao.insert(xo);

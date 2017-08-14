@@ -277,4 +277,116 @@
 	    </set>
 	    where id = #{id,jdbcType=INTEGER}
 	  </update>
+	  
+	  <!-- 获取团队数量 -->
+	  <select id="getTeamCount"  parameterType="java.lang.String" resultType="int">
+	  
+	  SELECT COUNT(1) FROM (SELECT * from t_doctor   WHERE org_id=#{orgId} GROUP BY team_id) a
+	  
+	  </select>
+	  
+	  <!-- 获取二类指标每项得分 -->
+	  
+	  <select id="getScoreByOrgIdAndMonth" parameterType="map" resultType="com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity">
+	    SELECT
+		sum(sign_increment) signIncrement,
+		sum(family_increment) familyIncrement,
+		avg(sign_increment_score) signIncrementScore,
+		avg(sign_hyper_score) signHyperScore,
+		avg(sign_diabetes_score) signDiabetesScore,
+		avg(sign_phychosis_score) signPhychosisScore,
+		avg(sign_old_score) signOldScore,
+		avg(sign_maternal_score) signMaternalScore,
+		avg(sign_children_score) signChildrenScore,
+		avg(public_health_hyper_score) publicHealthHyperScore,
+		avg(
+			public_health_diabetes_score
+		) publicHealthDiabetesScore,
+		avg(
+			public_health_phychosis_score
+		) publicHealthPhychosisScore,
+		avg(public_health_old_score) publicHealthOldScore,
+		avg(
+			public_health_maternal_score
+		) publicHealthMaternalScore,
+		avg(
+			public_health_children_score
+		) publicHealthChildrenScore,
+		avg(health_manage_edu_score) healthManageEduScore,
+		avg(
+			health_manage_daily_activity_score
+		) healthManageDailyActivityScore,
+		avg(
+			health_manage_assessment_score
+		) healthManageAssessmentScore,
+		avg(
+			health_manage_document_score
+		) healthManageDocumentScore
+	FROM
+		(
+			SELECT
+				*
+			FROM
+				t_appraisal_month_team_score
+			WHERE
+				team_id IN (
+					SELECT
+						team_id
+					FROM
+						t_doctor
+					WHERE
+						org_id = #{orgId}
+					GROUP BY
+						team_id
+				)
+			AND month= #{month}
+		) h
+		     
+	  
+	  </select>
+	  
+	  
+	  <!-- 查询优秀的团队 -->
+	  <select id="getGoodteams"  parameterType="map" resultType="int">
+	    SELECT
+			COUNT(result_score)
+		FROM
+			t_appraisal_month_team_score
+		WHERE
+			team_id IN (
+				SELECT
+					team_id
+				FROM
+					t_doctor
+				WHERE
+					org_id =#{orgId}
+				GROUP BY
+					team_id
+			)
+		AND MONTH =#{month}
+		AND result_score >=#{lowerLine}
+	  </select>
+	  
+	  
+	   <!-- 查询不优秀的团队 -->
+	  <select id="getUnQuali"  parameterType="map" resultType="int">
+	    SELECT
+			COUNT(result_score)
+		FROM
+			t_appraisal_month_team_score
+		WHERE
+			team_id IN (
+				SELECT
+					team_id
+				FROM
+					t_doctor
+				WHERE
+					org_id =#{orgId}
+				GROUP BY
+					team_id
+			)
+		AND MONTH =#{month}
+		AND result_score &lt;=#{unLine}
+	  </select>
+	  
 </mapper>
