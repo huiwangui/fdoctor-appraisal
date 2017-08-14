@@ -20,4 +20,10 @@ public interface AppraisalGradeLineDao extends CrudDao<AppraisalGradeLineEntity>
 	 * @return
 	 */
 	public AppraisalGradeLineEntity getExcellentGradeLine();
+	
+	/**
+	 * 获取不合格分数线
+	 * @return
+	 */
+	public AppraisalGradeLineEntity getUnQualified_incrementGradeLine();
 }

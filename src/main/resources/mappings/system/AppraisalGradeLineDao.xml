@@ -44,4 +44,10 @@
 	order by lower DESC limit 1
   </select>
   
+  <!-- 获取不合格的分数线 -->
+  <select id="getUnQualified_incrementGradeLine" resultType="com.boco.modules.fdoc.model.system.AppraisalGradeLineEntity">
+	select <include refid="Base_Column_List"/> from t_appraisal_grade_line
+	order by lower ASC limit 1
+  </select>
+  
 </mapper>
