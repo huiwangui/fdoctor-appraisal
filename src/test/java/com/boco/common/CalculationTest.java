@@ -1,7 +1,10 @@
 package com.boco.common;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +22,14 @@ import com.boco.common.utils.JsonUtils;
 import com.boco.modules.fdoc.common.Checkingalgorithm;
 import com.boco.modules.fdoc.model.score.AppraisalMonthOrgScoreEntity;
 import com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity;
+import com.boco.modules.fdoc.model.score.HospitalEntity;
 import com.boco.modules.fdoc.model.system.AppraisalQuotaEntity;
 import com.boco.modules.fdoc.service.score.AppraisalMonthOrgScoreService;
 import com.boco.modules.fdoc.service.score.AppraisalMonthTeamScoreService;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignOrgIncrementService;
 import com.boco.modules.fdoc.service.sign.AppraisalMonthSignTeamIncrementService;
 import com.boco.modules.fdoc.service.system.AppraisalQuotaService;
+import com.boco.modules.fdoc.service.system.HospitalService;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignOrgIncrementVo;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo;
 import com.boco.modules.fdoc.vo.MaptoBeanVo;
@@ -46,7 +51,8 @@ public class CalculationTest extends JunitTestCase{
 	AppraisalMonthSignOrgIncrementService orgService;
 	@Resource
 	AppraisalQuotaService quotaService;
-	
+	@Resource
+	HospitalService hospital;
 	
 /*	@Test
 	public void org() throws Exception{
@@ -125,13 +131,21 @@ public class CalculationTest extends JunitTestCase{
 	}*/
 	
 	
+//	@Test
+//	public void dddd() throws Exception{
+//		Checkingalgorithm cal=new Checkingalgorithm();
+//	  	List<AppraisalQuotaEntity> zb1=quotaService.getByParentId(10);//---指标
+//	  	System.out.println(JsonUtils.getJsonFormat(zb1));
+//		 Map<String, Double> zbmap=cal.getMap(zb1, 2);
+//		 System.out.println(JsonUtils.getJsonFormat(zbmap));
+//		
+//	}
+	
+	
 	@Test
-	public void dddd() throws Exception{
-		Checkingalgorithm cal=new Checkingalgorithm();
-	  	List<AppraisalQuotaEntity> zb1=quotaService.getByParentId(10);//---指标
-	  	System.out.println(JsonUtils.getJsonFormat(zb1));
-		 Map<String, Double> zbmap=cal.getMap(zb1, 2);
-		 System.out.println(JsonUtils.getJsonFormat(zbmap));
+	public void eee() throws Exception{
+		List<HospitalEntity> list=hospital.getHospitalList();
+		ogrScore.insert(list, "201701");
 		
 	}
 }
