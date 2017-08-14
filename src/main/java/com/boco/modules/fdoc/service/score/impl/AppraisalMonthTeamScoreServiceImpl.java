@@ -28,6 +28,7 @@ import com.boco.modules.fdoc.service.system.AppraisalQuotaService;
 import com.boco.modules.fdoc.vo.AppraisalMonthSignTeamIncrementVo;
 import com.boco.modules.fdoc.vo.AppraisalMonthTeamScoreVo;
 import com.boco.modules.fdoc.vo.MaptoBeanVo;
+import com.boco.sp.external.api.dictionary.JsonUtils;
 
 @Service
 public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamScoreService {
@@ -126,13 +127,15 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 		List<AppraisalQuotaEntity> zb3=quotaService.getByParentId(30);//---健康管理指标
 		List<AppraisalQuotaEntity> zb=quotaService.getByParentId(0);//---一类指标占比
 		Map<String, Double> zbmap1 = cal.getMap(zb1, 2);
+		Map<String, Double> zbmap = cal.getMap(zb, 2);
 		try {
 			List<Map<String, Object>> rlist = (List<Map<String, Object>>) cal.getSecondPeriodScore(list1,
 					cal.getMap(zb1, 2), 2);//签约得分
 			for (Map<String, Object> map : rlist) {
 				MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
 				AppraisalMonthTeamScoreEntity xo = mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
-				Double result = xo.getSignManageScore() * zbmap1.get("signManageScore");// 这以后需加入后两项的权值
+				
+				Double result = xo.getSignManageScore() *zbmap .get("signManageScore");// 这以后需加入后两项的权值
 				xo.setResultScore(result);
 				xo.setCreateTime(new Date());
 				int inInt = appraisalMonthTeamScoreDao.insert(xo);

@@ -180,7 +180,7 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 				map.put("orgId", hospitalEntity.getId());
 				map.put("month", month);
 				AppraisalMonthOrgScoreEntity secondScore=appraisalMonthOrgScoreDao.getScoreByOrgIdAndMonth(map);
-				System.out.println(JsonUtils.getJsonFormat(secondScore));
+				
 				if(secondScore!=null){
 					//计算二类指标的最终得分
 					Double signManageScore=0.0;
@@ -251,6 +251,7 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 					secondScore.setQualifiedIncrement(teams-unQualified-goodTeams);
 					//插入数据
 					 ok=ok+appraisalMonthOrgScoreDao.insert(secondScore);
+					 System.out.println(JsonUtils.getJsonFormat(secondScore));
 					
 				}
 				

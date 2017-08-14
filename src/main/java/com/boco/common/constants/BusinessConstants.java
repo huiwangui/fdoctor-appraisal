@@ -122,7 +122,7 @@ public class BusinessConstants {
 	public final static String SIGN_OLD = "老年人人数";
 	public final static String SIGN_MAT = "孕产妇人数";
 	public final static String SIGN_CHI = "儿童人数";
-	public final static String SIGN_ZXJ = "重型精神病人数";
+	public final static String SIGN_ZXJ = "重型精神病";
 	
 	public final static String UP_ADMIN = "随访体检";
 	public final static String UP_COUNT = "总次数";

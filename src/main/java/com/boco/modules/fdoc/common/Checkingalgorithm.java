@@ -157,7 +157,7 @@ public class Checkingalgorithm implements Calculation {
 		
 		//System.out.println("每项未区间前的得分"+JsonUtils.getJsonFormat(slist));
 
-		System.out.println("区间值"+JsonUtils.getJsonFormat(Highmap));
+		//System.out.println("区间值"+JsonUtils.getJsonFormat(Highmap));
 
 
 		// 处理区间值后的得到的得分 原始得分*区间值
@@ -206,7 +206,6 @@ public class Checkingalgorithm implements Calculation {
 						resultMap.put(entry.getKey(), entry.getValue());
 						Double value = (Double) Double.valueOf(String.valueOf(entry.getValue()));
 						if (zbMap.get(entry.getKey()) != null) {
-							System.out.println(zbMap.get(entry.getKey()));
 							value = value * (zbMap.get(entry.getKey()));
 							value = NumberUtils.roundHalfUp(value, length);//最后取长度
 							if (resultMap.containsKey("resultScore")) {
@@ -307,7 +306,7 @@ public class Checkingalgorithm implements Calculation {
 				map.put("childrenIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_ZXJ:
-				map.put("phychosisI11ncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("phychosisIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 				
 			case BusinessConstants.UP_ADMIN:
