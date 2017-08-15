@@ -29,7 +29,7 @@ public class AppraisalMonthOrgScoreEntity {
 	/**
 	 * 签约人数得分（二类指标）
 	 */
-	private int signIncrementScore;
+	private double signIncrementScore;
 	/**
 	 * 高血压签约得分（二类指标）
 	 */
@@ -389,13 +389,15 @@ public class AppraisalMonthOrgScoreEntity {
 		this.createTime = createTime;
 	}
 
-	public int getSignIncrementScore() {
+	public double getSignIncrementScore() {
 		return signIncrementScore;
 	}
 
-	public void setSignIncrementScore(int signIncrementScore) {
+	public void setSignIncrementScore(double signIncrementScore) {
 		this.signIncrementScore = signIncrementScore;
 	}
+
+
 
 	
 }

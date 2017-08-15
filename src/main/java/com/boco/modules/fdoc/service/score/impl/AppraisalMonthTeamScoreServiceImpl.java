@@ -121,6 +121,7 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 			return 0;
 		}
 		int ok = 0;
+		
 		Checkingalgorithm cal = new Checkingalgorithm();
 		List<AppraisalQuotaEntity> zb1=quotaService.getByParentId(10);//---签约指标
 		List<AppraisalQuotaEntity> zb2=quotaService.getByParentId(20);//---随访体检指标

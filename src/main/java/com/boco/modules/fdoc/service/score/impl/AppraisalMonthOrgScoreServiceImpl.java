@@ -169,8 +169,10 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 
 	@Override
 	public int insert(List<HospitalEntity> list, String month) throws IllegalArgumentException, IllegalAccessException {
+		if(list==null){
+			return 0;
+		}
 		int ok=0;
-		
 		for (HospitalEntity hospitalEntity : list) {
 			//获取团队数量
 			if(hospitalEntity!=null){
@@ -198,7 +200,9 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 						Field field = fields[j];
 						field.setAccessible(true); // 设置些属性是可以访问的
 						if (field != null) {
-							if ("orgId".equals(field.getName()) || "signIncrement".equals(field.getName())|| "familyIncrement".equals(field.getName())) {
+							if ("orgId".equals(field.getName()) || "signIncrement".equals(field.getName())|| "familyIncrement".equals(field.getName())
+									|| "signManageScore".equals(field.getName())|| "publicHealthScore".equals(field.getName())
+									|| "healthManageScore".equals(field.getName())) {
 								//
 							} else {
 								String type = field.getGenericType().toString();
@@ -234,6 +238,7 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 					secondScore.setPublicHealthScore(publicHealthScore);
 					secondScore.setHealthManageScore(healthManageScore);
 					secondScore.setTeamTotal(teams);
+					secondScore.setResultScore(resultScore);
 					//优秀的团队
 					//1.查找优秀的最低分数线
 					AppraisalGradeLineEntity gradeLine=gradeLineDao.getExcellentGradeLine();
@@ -249,9 +254,10 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 					secondScore.setUnQualifiedIncrement(unQualified);
 					//合格的团队
 					secondScore.setQualifiedIncrement(teams-unQualified-goodTeams);
+					secondScore.setMonth(month);
+					secondScore.setCreateTime(new Date());
 					//插入数据
 					 ok=ok+appraisalMonthOrgScoreDao.insert(secondScore);
-					 System.out.println(JsonUtils.getJsonFormat(secondScore));
 					
 				}
 				

@@ -292,21 +292,28 @@ public class Checkingalgorithm implements Calculation {
 				break;
 			case BusinessConstants.SIGN_HY:
 				map.put("hyperIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("signHyperScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_DIA:
 				map.put("diabetesIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("signDiabetesScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+
 				break;
 			case BusinessConstants.SIGN_MAT:
 				map.put("maternalIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("signMaternalScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_OLD:
 				map.put("oldIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("signOldScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_CHI:
 				map.put("childrenIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("signChildrenScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.SIGN_ZXJ:
 				map.put("phychosisIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("signPhychosisScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 				
 			case BusinessConstants.UP_ADMIN:
@@ -317,21 +324,31 @@ public class Checkingalgorithm implements Calculation {
 				break;
 			case BusinessConstants.UP_HY:
 				map.put("hyperIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("publicHealthHyperScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+
 				break;
 			case BusinessConstants.UP_DIA:
 				map.put("diabetesIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("publicHealthDiabetesScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+
 				break;
 			case BusinessConstants.UP_MAT:
 				map.put("maternalIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("publicHealthMaternalScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+
 				break;
 			case BusinessConstants.UP_OLD:
 				map.put("oldIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("publicHealthOldScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+
 				break;
 			case BusinessConstants.UP_CHI:
 				map.put("childrenIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("publicHealthChildrenScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.UP_ZX:
 				map.put("phychosisIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("publicHealthPhychosisScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 
 			case BusinessConstants.HEALTH_ADMIN:
@@ -339,15 +356,19 @@ public class Checkingalgorithm implements Calculation {
 				break;
 			case BusinessConstants.HEALTH_EDU:
 				map.put("educationIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("healthManageEduScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_WZ:
 				map.put("dailyActivityScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("healthManageDailyActivityScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_CP:
 				map.put("assessmentIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("healthManageAssessmentScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 			case BusinessConstants.HEALTH_DOC:
 				map.put("documentIncrementScore", (double) NumberUtils.division(entity.getRate(), 100, length));
+				map.put("healthManageDocumentScore", (double) NumberUtils.division(entity.getRate(), 100, length));
 				break;
 
 			}
