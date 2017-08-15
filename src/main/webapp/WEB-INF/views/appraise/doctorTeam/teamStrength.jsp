@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		             type: 'radar',           
 		             data : [                 
 		                  {
-		                     value : [${team.publicHealthHyperScore}, ${team.publicHealthDiabetesScore}, ${team.publicHealthPhychosisScore}, ${team.publicHealthOldScore}, ${team.publicHealthMaternalScore}, ${team.publicHealthChildrenScore}],
+		                     value : [${team.signHyperScore}, ${team.signDiabetesScore}, ${team.signPhychosisScore}, ${team.signOldScore}, ${team.signMaternalScore}, ${team.signChildrenScore}],
 		                     name : '得分情况'
 		                 } 
 		             ],	          
@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	     //随访
 	     followUpOption = {
 		         title: {
-		             text: '医生团队健康管理实力',
+		             text: '医生团队随访实力',
 		             x:'center'
 		         },
 		         tooltip: {},
@@ -143,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		             type: 'radar',           
 		             data : [                 
 		                  {
-		                     value : [${team.signHyperScore}, ${team.signDiabetesScore}, ${team.signPhychosisScore}, ${team.signOldScore}, ${team.signMaternalScore}, ${team.signChildrenScore}],
+		                     value : [${team.publicHealthHyperScore}, ${team.publicHealthDiabetesScore}, ${team.publicHealthPhychosisScore}, ${team.publicHealthOldScore}, ${team.publicHealthMaternalScore}, ${team.publicHealthChildrenScore}],
 		                     name : '得分情况'
 		                 } 
 		             ],	          
