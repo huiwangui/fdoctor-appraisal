@@ -37,9 +37,9 @@
 						</div>
 					</div>
 					<ul class="layui-nav admin-header-item">
-						<li class="layui-nav-item">
-							<a href="javascript:;">清除缓存</a>
-						</li>
+<!-- 						<li class="layui-nav-item"> -->
+<!-- 							<a href="javascript:;">清除缓存</a> -->
+<!-- 						</li> -->
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
 								<img src="http://182.151.199.4:8115/upload/img/default.jpg" />
