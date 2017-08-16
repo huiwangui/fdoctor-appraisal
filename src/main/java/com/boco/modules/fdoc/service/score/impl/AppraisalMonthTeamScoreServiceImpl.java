@@ -117,9 +117,7 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 	public int insert(List<AppraisalMonthSignTeamIncrementVo> list1, List<?> listTeamPublicHealthVo,
 			List<?> listTeamHealthMange) throws Exception {
 
-		if (list1 == null) {
-			return 0;
-		}
+		
 		int ok = 0;
 		
 		Checkingalgorithm cal = new Checkingalgorithm();
@@ -128,23 +126,95 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 		List<AppraisalQuotaEntity> zb3=quotaService.getByParentId(30);//---健康管理指标
 		List<AppraisalQuotaEntity> zb=quotaService.getByParentId(0);//---一类指标占比
 		Map<String, Double> zbmap1 = cal.getMap(zb1, 2);
+		Map<String, Double> zbmap2 = cal.getMap(zb2, 2);
+		Map<String, Double> zbmap3 = cal.getMap(zb3, 2);
 		Map<String, Double> zbmap = cal.getMap(zb, 2);
+		Double result=0.0;//总得分
+		
 		try {
-			List<Map<String, Object>> rlist = (List<Map<String, Object>>) cal.getSecondPeriodScore(list1,
-					cal.getMap(zb1, 2), 2);//签约得分
-			for (Map<String, Object> map : rlist) {
-				MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
-				AppraisalMonthTeamScoreEntity xo = mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
-				
-				Double result = xo.getSignManageScore() *zbmap .get("signManageScore");// 这以后需加入后两项的权值
-				xo.setResultScore(result);
-				xo.setCreateTime(new Date());
-				int inInt = appraisalMonthTeamScoreDao.insert(xo);
-				ok=ok+inInt;
-				if(inInt==0){
-					throw new RuntimeException();
-					
+			if(list1!=null){
+				List<Map<String, Object>> rlist = (List<Map<String, Object>>) cal.getSecondPeriodScore(list1,
+						cal.getMap(zb1, 2), 2);//签约得分
+                if(rlist!=null&&rlist.size()>0){
+                	for (Map<String, Object> map : rlist) {
+        				MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
+        				AppraisalMonthTeamScoreEntity teamScoreEntity = mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
+        			    result = teamScoreEntity.getSignManageScore() *zbmap .get("signManageScore");
+        			    System.out.println(JsonUtils.getJsonFormat(teamScoreEntity));
+        				int update=appraisalMonthTeamScoreDao.update(teamScoreEntity);
+        				if(update==0){
+        					teamScoreEntity.setResultScore(result);
+        					teamScoreEntity.setCreateTime(new Date());
+        					int inInt = appraisalMonthTeamScoreDao.insert(teamScoreEntity);
+        					if(inInt>0){
+        						ok++;
+        					}else{
+        						throw new RuntimeException("添加数据异常");
+        					}
+        				}else{
+        					ok++;
+        				}
+        				
+        			}
 				}
+			}
+			
+			if(listTeamPublicHealthVo!=null){
+				List<Map<String, Object>> list2 = (List<Map<String, Object>>) cal.getSecondPeriodScore(listTeamPublicHealthVo,
+						cal.getMap(zb2, 2), 2);//随访体检得分
+				if(list2!=null&&list2.size()>0){
+					
+					for (Map<String, Object> map : list2) {
+						MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
+						AppraisalMonthTeamScoreEntity teamScoreEntity=mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
+					    result =result+ teamScoreEntity.getSignManageScore() *zbmap .get("publicHealthScore");
+					    appraisalMonthTeamScoreDao.update(teamScoreEntity);
+					    int update=appraisalMonthTeamScoreDao.update(teamScoreEntity);
+        				if(update==0){
+        					teamScoreEntity.setResultScore(result);
+        					teamScoreEntity.setCreateTime(new Date());
+        					int inInt = appraisalMonthTeamScoreDao.insert(teamScoreEntity);
+        					if(inInt>0){
+        						ok++;
+        					}else{
+        						throw new RuntimeException("添加数据异常");
+        					}
+        				}else{
+        					ok++;
+        				}
+						
+					}
+				}
+				
+			}
+            if(listTeamHealthMange!=null){
+            	List<Map<String, Object>> list3 = (List<Map<String, Object>>) cal.getSecondPeriodScore(listTeamHealthMange,
+						cal.getMap(zb3, 2), 2);//健康管理得分
+                if(list3!=null&&list3.size()>0){
+					
+					for (Map<String, Object> map : list3) {
+						MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
+						AppraisalMonthTeamScoreEntity teamScoreEntity=mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
+					    result =result+ teamScoreEntity.getSignManageScore() *zbmap .get("healthManageScore");
+					    appraisalMonthTeamScoreDao.update(teamScoreEntity);
+					    int update=appraisalMonthTeamScoreDao.update(teamScoreEntity);
+        				if(update==0){
+        					teamScoreEntity.setResultScore(result);
+        					teamScoreEntity.setCreateTime(new Date());
+        					int inInt = appraisalMonthTeamScoreDao.insert(teamScoreEntity);
+        					if(inInt>0){
+        						ok++;
+        					}else{
+        						throw new RuntimeException("添加数据异常");
+        					}
+        				}else{
+        					ok++;
+        				}
+						
+					}
+				}
+				
+				
 			}
 
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException

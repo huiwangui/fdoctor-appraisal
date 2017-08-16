@@ -69,7 +69,7 @@ public class AppraisalMonthTeamScoreEntity {
 	private double publicHealthDiabetesScore;
 	/**
 	 * 公卫服务重性精神病得分（二类指标）
-	 */
+	 */           
 	private double publicHealthPhychosisScore;
 	/**
 	 * 公卫服务老年人得分（二类指标）

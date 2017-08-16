@@ -250,7 +250,7 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 					//1.不优秀团队的最低分数线
 					map.put("unLine", gradeLineDao.getUnQualified_incrementGradeLine().getUpper());
 					//2.查找分数小于或等于最低分数线的团队数量
-					int unQualified=appraisalMonthOrgScoreDao.getGoodteams(map);
+					int unQualified=appraisalMonthOrgScoreDao.getUnQuali(map);
 					secondScore.setUnQualifiedIncrement(unQualified);
 					//合格的团队
 					secondScore.setQualifiedIncrement(teams-unQualified-goodTeams);

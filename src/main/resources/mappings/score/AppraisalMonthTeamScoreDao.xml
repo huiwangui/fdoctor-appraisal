@@ -194,9 +194,7 @@
 	  <update id="update" parameterType="com.boco.modules.fdoc.model.score.AppraisalMonthTeamScoreEntity" >
 	    update t_appraisal_month_team_score
 	    <set >
-	      <if test="teamId != null" >
-	        team_id = #{teamId,jdbcType=VARCHAR},
-	      </if>
+	    
 	      <if test="signIncrement != null" >
 	        sign_increment = #{signIncrement,jdbcType=INTEGER},
 	      </if>
@@ -230,8 +228,8 @@
 	      <if test="publicHealthDiabetesScore != null" >
 	        public_health_diabetes_score = #{publicHealthDiabetesScore,jdbcType=DOUBLE},
 	      </if>
-	      <if test="publicHealthPhychosisSocre != null" >
-	        public_health_phychosis_socre = #{publicHealthPhychosisSocre,jdbcType=DOUBLE},
+	      <if test="publicHealthPhychosisScore != null" >
+	        public_health_phychosis_score = #{publicHealthPhychosisScore,jdbcType=DOUBLE},
 	      </if>
 	      <if test="publicHealthOldScore != null" >
 	        public_health_old_score = #{publicHealthOldScore,jdbcType=DOUBLE},
@@ -263,16 +261,13 @@
 	      <if test="customerScore != null" >
 	        customer_score = #{customerScore,jdbcType=DOUBLE},
 	      </if>
-	      <if test="resultSocre != null" >
-	        result_socre = #{resultSocre,jdbcType=DOUBLE},
-	      </if>
-	      <if test="month != null" >
-	        month = #{month,jdbcType=VARCHAR},
+	      <if test="resultScore != null" >
+	        result_score = #{resultScore,jdbcType=DOUBLE},
 	      </if>
 	      <if test="createTime != null" >
 	        create_time = #{createTime,jdbcType=TIMESTAMP},
 	      </if>
 	    </set>
-	    where id = #{id,jdbcType=INTEGER}
+	    where team_id = #{teamId,jdbcType=INTEGER} and month=#{month}
 	  </update>
 </mapper>
