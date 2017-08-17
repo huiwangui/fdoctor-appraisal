@@ -28,11 +28,11 @@
 				<div class="content">
 					<form action="">
 						<div style="margin-top: 10%; " class="clearfix">
-							<span class="left_icon1"></span>
+							<span class="left_icon1" style="height: 49px"></span>
 							<input type="text" name="account" id="account" value="" placeholder="用户名" class="username"/>
 						</div>
 						<div class="clearfix">
-							<span class="left_icon2"></span>
+							<span class="left_icon2" style="height: 49px"></span>
 							<input type="password" name="password" id="password" value=""  placeholder="密码" class="password"/>
 						</div>
 						<!-- <div class="chk clearfix">

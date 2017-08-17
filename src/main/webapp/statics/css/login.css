@@ -419,6 +419,7 @@ body {
       width: 15px;
       height: 15px; }
   .login_box .login_btn {
+ 	cursor: pointer;
     margin-top: 5%;
     display: inline-block;
     width: 100%;
