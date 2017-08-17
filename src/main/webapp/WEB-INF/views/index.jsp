@@ -23,23 +23,26 @@
 
 	<body>
 		<div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #1aa094; width: 100%">
-			<div class="layui-header header header-demo">
+			<div class="layui-header header header-demo"  style="background: url('/fdoctor-appraisal/statics/image/appraisal_banner.png') left center no-repeat; background-size: cover;">
 				<div class="layui-main">
 					<div class="admin-login-box">
-						<a class="logo" style="left: 0;" href="">
-							<span style="font-size: 18px;">健康管理考核系统</span>
-						</a>
-						<div class="admin-side-toggle">
-							<i class="fa fa-bars" aria-hidden="true"></i>
-						</div>
-						<div class="admin-side-full">
-							<i class="fa fa-life-bouy" aria-hidden="true"></i>
-						</div>
+<!-- 						<div class="admin-side-toggle"> -->
+<!-- 							<i class="fa fa-bars" aria-hidden="true"></i> -->
+<!-- 						</div> -->
+<!-- 						<div class="admin-side-full"> -->
+<!-- 							<i class="fa fa-life-bouy" aria-hidden="true"></i> -->
+<!-- 						</div> -->
 					</div>
 					<ul class="layui-nav admin-header-item">
 <!-- 						<li class="layui-nav-item"> -->
 <!-- 							<a href="javascript:;">清除缓存</a> -->
 <!-- 						</li> -->
+						<div class="admin-side-toggle" style="left:-80px !important;">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+						</div>
+						<div class="admin-side-full" style="left:-30px !important;">
+							<i class="fa fa-life-bouy" aria-hidden="true"></i>
+						</div>
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
 								<img src="http://182.151.199.4:8115/upload/img/default.jpg" />
