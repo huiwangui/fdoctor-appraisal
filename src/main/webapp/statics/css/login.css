@@ -320,21 +320,21 @@ body {
 .main {
   width: 100%;
   height: 67.92208%;
-  background: url(/fdoctor-appraisal/statics/image/login/bg.png) no-repeat;
+  background: url(../img/bg.png) no-repeat;
   position: relative;
   background-size: cover; }
 
 .main1 {
   width: 100%;
   height: 67.92208%;
-  background: url(/fdoctor-appraisal/statics/image/login/bg1.png) no-repeat;
+  background: url(../img/bg1.png) no-repeat;
   position: relative;
   background-size: cover; }
 
 .main2 {
   width: 100%;
   height: 67.92208%;
-  background: url(/fdoctor-appraisal/statics/image/login/bg2.png) no-repeat;
+  background: url(../img/bg2.png) no-repeat;
   position: relative;
   background-size: cover; }
 
@@ -368,16 +368,16 @@ body {
   .login_box .left_icon1 {
     width: 15%;
     display: inline-block;
-    height: 49px;
-    background: url(/fdoctor-appraisal/statics/image/login/user.png) left 50% center no-repeat white;
+    height: 52px;
+    background: url(../img/user.png) left 50% center no-repeat white;
     float: left;
     border-top-left-radius: 5px;
     border-bottom: 1px solid #aaa; }
   .login_box .left_icon2 {
     width: 15%;
     display: inline-block;
-    height: 49px;
-    background: url(/fdoctor-appraisal/statics/image/login/password.png) left 50% center no-repeat white;
+    height: 52px;
+    background: url(../img/password.png) left 50% center no-repeat white;
     float: left;
     border-bottom-left-radius: 5px;
     border-bottom: 1px solid #aaa; }
@@ -449,24 +449,10 @@ body {
   .bottom p {
     color: #666;
     line-height: 2rem; }
-  .bottom .other_link {
-    position: relative; }
-    .bottom .other_link a {
-      border-left: 1px solid #999;
-      padding: 0 1rem; }
-    .bottom .other_link::after {
-      position: absolute;
-      content: "";
-      width: 100%;
-      height: 3px;
-      background: white;
-      left: 0;
-      top: 2px; }
-    .bottom .other_link::before {
-      position: absolute;
-      content: "";
-      width: 100%;
-      height: 3px;
-      background: white;
-      left: 0;
-      bottom: 2px; }
+  .bottom .other_link li {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    border-left: 1px solid #aaa;
+    height: 15px;
+    line-height: 15px; }

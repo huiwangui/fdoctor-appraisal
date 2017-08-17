@@ -52,12 +52,20 @@
 		</div>
 		
 		<div class="bottom tc">
-			<p class="other_link">
-				<a href="/">版权声明</a>
-				<a href="/">法律责任</a>
-				<a href="/">隐私声明</a>
-				<a href="/" style="border-right:1px solid #999">联系我们</a>
-			</p>
+			<ul class="other_link">
+				<li>
+					<a href="/">版权声明</a>
+				</li>
+				<li>
+					<a href="/">法律责任</a>
+				</li>
+				<li>
+					<a href="/">隐私声明</a>
+				</li>
+				<li style="border-right: 1px solid #aaa;">
+					<a href="/" >联系我们</a>
+				</li>
+			</ul>
 			<p>
 				地址：成都市成华区双庆路10号华润大厦7楼 邮编： 610000 Copyright@ 2017 - 2版权所有
 			</p>
