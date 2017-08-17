@@ -320,21 +320,21 @@ body {
 .main {
   width: 100%;
   height: 67.92208%;
-  background: url(../img/bg.png) no-repeat;
+  background: url(/fdoctor-appraisal/statics/image/login/bg.png) no-repeat;
   position: relative;
   background-size: cover; }
 
 .main1 {
   width: 100%;
   height: 67.92208%;
-  background: url(../img/bg1.png) no-repeat;
+  background: url(/fdoctor-appraisal/statics/image/login/bg1.png) no-repeat;
   position: relative;
   background-size: cover; }
 
 .main2 {
   width: 100%;
   height: 67.92208%;
-  background: url(../img/bg2.png) no-repeat;
+  background: url(/fdoctor-appraisal/statics/image/login/img/bg2.png) no-repeat;
   position: relative;
   background-size: cover; }
 
@@ -369,7 +369,7 @@ body {
     width: 15%;
     display: inline-block;
     height: 52px;
-    background: url(../img/user.png) left 50% center no-repeat white;
+    background: url(/fdoctor-appraisal/statics/image/login/user.png) left 50% center no-repeat white;
     float: left;
     border-top-left-radius: 5px;
     border-bottom: 1px solid #aaa; }
@@ -377,7 +377,7 @@ body {
     width: 15%;
     display: inline-block;
     height: 52px;
-    background: url(../img/password.png) left 50% center no-repeat white;
+    background: url(/fdoctor-appraisal/statics/image/login/password.png) left 50% center no-repeat white;
     float: left;
     border-bottom-left-radius: 5px;
     border-bottom: 1px solid #aaa; }
