@@ -133,9 +133,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                      //如果只选择了一行则可以进行修改，否则不操作
                      if (rows.length == 1) {
                          //修改之前先关闭已经开启的编辑行，当调用endEdit该方法时会触发onAfterEdit事件
-                         if (editRow != undefined) {
+                         /*if (editRow != undefined) {
                              datagrid.datagrid("endEdit", editRow);
-                         }
+                         }  */
                          //当无编辑行时
                          if (editRow == undefined) {
                              //获取到当前选择行的下标
@@ -148,6 +148,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                              //应该取消当前列表的所有选择行，要不然双击之后无法再选择其他行进行编辑
                              datagrid.datagrid("unselectAll");
                          }
+                     }else{
+                    	  $.messager.alert("提示", "请选择要修改的行", "error");
                      }
                  }
                  }, '-',
