@@ -83,4 +83,18 @@ public class MatcherUtiles {
 			return false;
 		}
 	}
+	
+	/**
+	 * 长度校验
+	 * 同时有数字和字母，长度最小6，最大16
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean lengthVail(String string) {
+		Pattern p = Pattern
+				.compile("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$");
+		Matcher m = p.matcher(string);
+		return m.matches();
+	}
 }

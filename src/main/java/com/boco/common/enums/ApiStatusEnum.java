@@ -39,11 +39,13 @@ public enum ApiStatusEnum {
 	PHONE_NOT_EXISTS((Integer) 2031, "手机号码不存在"),
 	OPENID_EXISTS((Integer) 2032, "OpenID已存在"),
 	
-	OLD_ERROR((Integer) 2032, "原密码错误"),
+	OLD_ERROR((Integer) 2052, "原密码错误"),
 	NONE_CHANGED((Integer) 2033, "密码并未进行过更改"),
 	IDCARD_OUTLAW((Integer) 2034, "身份证号不合法"),
 	MOBILE_OUTLAW((Integer) 2035, "手机号不合法"),
 	PASSWORD_OUTLAW((Integer) 2036, "密码含特殊字符"),
+	PASSWORD_NOSAME((Integer) 2053, "新密码两次输入不一致"),
+	PASSWORD_VAILED_FAIL((Integer) 2053, "新密码长度要大于6小于16，必须包含数字和字母"),
 	
 	USER_NOT_LOGIN((Integer) 2037, "用户尚未登录！"),
 	USER_NOT((Integer) 2038, "没有查询到对应居民信息！"),

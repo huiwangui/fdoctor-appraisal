@@ -68,12 +68,22 @@ public class AppraisalUserController {
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
 	@ResponseBody
-	public String updatePassword(HttpServletRequest request,String password,String newpassword) {
+	public String updatePassword(HttpServletRequest request,String password,String newpassword,String repassword) {
+		if(!repassword.equals(newpassword)){
+		     return JsonUtils.getJson(BaseJsonVo.empty(
+					ApiStatusEnum.PASSWORD_NOSAME.getKey(),
+					ApiStatusEnum.PASSWORD_NOSAME.getValue()));
+		}
+		if(repassword.equals(password)){
+		     return JsonUtils.getJson(BaseJsonVo.empty(
+					ApiStatusEnum.NONE_CHANGED.getKey(),
+					ApiStatusEnum.NONE_CHANGED.getValue()));
+		}
 		// 判断新密码是否合法
-		if (!MatcherUtiles.noSpecialChar(newpassword)) {
+		if (!MatcherUtiles.lengthVail(newpassword)) {
 			return JsonUtils.getJson(BaseJsonVo.empty(
-					ApiStatusEnum.PASSWORD_OUTLAW.getKey(),
-					ApiStatusEnum.PASSWORD_OUTLAW.getValue()));
+					ApiStatusEnum.PASSWORD_VAILED_FAIL.getKey(),
+					ApiStatusEnum.PASSWORD_VAILED_FAIL.getValue()));
 		}
 		AppraisalUserEntity user=(AppraisalUserEntity)request.getSession().getAttribute("user_session");
 		if(user==null){
@@ -82,7 +92,8 @@ public class AppraisalUserController {
 					ApiStatusEnum.SESSION_TOKEN_VALID.getValue()));
 		}
 		AppraisalUserEntity entity=new AppraisalUserEntity(user.getUserName(),StringUtils.toMd5(password));
-        if(entity!=null){
+		AppraisalUserEntity appEntity=appraisalUserService.selectByUserNameAndPassword(entity);
+        if(appEntity!=null){
         	AppraisalUserEntity updateEntity=new AppraisalUserEntity(user.getId(),user.getUserName(),StringUtils.toMd5(newpassword),user.getType());
         	int result=appraisalUserService.updateByPrimaryKeySelective(updateEntity);
         	if(result>0){
