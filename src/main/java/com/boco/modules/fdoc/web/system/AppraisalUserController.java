@@ -80,11 +80,11 @@ public class AppraisalUserController {
 					ApiStatusEnum.NONE_CHANGED.getValue()));
 		}
 		// 判断新密码是否合法
-		if (!MatcherUtiles.lengthVail(newpassword)) {
-			return JsonUtils.getJson(BaseJsonVo.empty(
-					ApiStatusEnum.PASSWORD_VAILED_FAIL.getKey(),
-					ApiStatusEnum.PASSWORD_VAILED_FAIL.getValue()));
-		}
+//		if (!MatcherUtiles.lengthVail(newpassword)) {
+//			return JsonUtils.getJson(BaseJsonVo.empty(
+//					ApiStatusEnum.PASSWORD_VAILED_FAIL.getKey(),
+//					ApiStatusEnum.PASSWORD_VAILED_FAIL.getValue()));
+//		}
 		AppraisalUserEntity user=(AppraisalUserEntity)request.getSession().getAttribute("user_session");
 		if(user==null){
 			return JsonUtils.getJson(BaseJsonVo.empty(
