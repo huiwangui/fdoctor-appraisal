@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  	<label class="layui-form-label" style="padding:9px 0"> 医疗机构：</label>
 				    <div class="layui-input-inline" ">
 				      	<select name="orgId" id="orgId" lay-search>
-							<option value="" style="width: 210px;">请选择</option>			 
+							<option value="" style="width: 210px;">可输入医院名搜索</option>			 
 								<c:forEach items="${organizationList}" var="organizationItem">
 									<option value="${organizationItem.id}">${organizationItem.orgName}</option>
 								</c:forEach> 
