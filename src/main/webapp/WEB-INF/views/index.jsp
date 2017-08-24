@@ -91,7 +91,7 @@
 			<div class="layui-footer footer footer-demo" id="admin-footer">
 				<div class="layui-main">
 					<p>2017 &copy;
-						<a href="">亿阳信通</a> 健康管理考核系统
+						<a href="">亿阳信通</a> 健康管理考核系统   version 1.0.0
 					</p>
 				</div>
 			</div>

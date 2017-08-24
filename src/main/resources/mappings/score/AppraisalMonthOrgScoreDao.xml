@@ -364,7 +364,7 @@
 					team_id
 			)
 		AND MONTH =#{month}
-		AND result_score >=#{lowerLine}
+		AND result_score >#{lowerLine}
 	  </select>
 	  
 	  
