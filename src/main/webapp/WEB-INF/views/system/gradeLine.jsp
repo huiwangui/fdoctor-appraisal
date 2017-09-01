@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  { field: 'name', title: '等级名称',  sortable: true,width:8,
                      editor: { type: 'validatebox', options: { required: true} }
                  },
-                  { field: 'lower', title: '分数下限',width:18,
+                  { field: 'lower', title: '分数下限（不包含）',width:18,
                 	  editor: {
   		                type: 'numberbox',
   		                options: {
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		                }
   		            },
                   },
-                   { field: 'upper', title: '分数上限', width:18,
+                   { field: 'upper', title: '分数上限（包含）', width:18,
                 	  editor: {
   		                type: 'numberbox',
   		                options: {
