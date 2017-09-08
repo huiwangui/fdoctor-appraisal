@@ -33,7 +33,8 @@
 		LEFT JOIN t_appraisal_month_team_score c ON a.team_id = c.team_id
 		AND a.`month` = c.`month`
 		WHERE
-			a.`month` = #{0}
+			a.`month` = #{0} 
+			
 	</select>
 	
 	<!-- 获取团队月签约数据（从原始签约表中获取） -->
@@ -61,4 +62,46 @@
 	      #{familyIncrement,jdbcType=INTEGER}, #{month,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
 	      )
 	</insert>
+	
+	
+	<!-- 更新数据 -->
+	<update id="update" parameterType="com.boco.modules.fdoc.model.sign.AppraisalMonthSignTeamIncrementEntity" >
+    update t_appraisal_month_sign_team_increment
+    <set >
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="signIncrement != null" >
+        sign_increment = #{signIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="hyperIncrement != null" >
+        hyper_increment = #{hyperIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="diabetesIncrement != null" >
+        diabetes_increment = #{diabetesIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="phychosisIncrement != null" >
+        phychosis_increment = #{phychosisIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="oldIncrement != null" >
+        old_increment = #{oldIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="maternalIncrement != null" >
+        maternal_increment = #{maternalIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="childrenIncrement != null" >
+        children_increment = #{childrenIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="familyIncrement != null" >
+        family_increment = #{familyIncrement,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where   team_id = #{teamId,jdbcType=VARCHAR}  and  month = #{month,jdbcType=VARCHAR}
+  </update>
 </mapper>

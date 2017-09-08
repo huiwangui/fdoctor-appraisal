@@ -98,7 +98,10 @@ public class AppraisalMonthSignTotalIncrementServiceImpl implements AppraisalMon
 		AppraisalMonthSignTotalIncrementEntity entity = signTotalDao.getMonthSignTotalDataSource(paramVo);
 		entity.setMonth(DateUtils.formatDate(monthEnd, "yyyyMM"));
 		entity.setCreateTime(new Date());
-		signTotalDao.insert(entity);
+		int num=signTotalDao.update(entity);
+		if(num==0){
+			signTotalDao.insert(entity);
+		}
 		
 		return BusinessConstants.SUCCESS;
 	}

@@ -83,7 +83,10 @@ public class AppraisalMonthSignTeamIncrementServiceImpl implements AppraisalMont
 			entity.setTeamId(teamId);
 			entity.setMonth(DateUtils.formatDate(monthEnd, "yyyyMM"));
 			entity.setCreateTime(new Date());
+			int updateNum=teamIncrementDao.update(entity);
+			if(updateNum==0){
 			teamIncrementDao.insert(entity);
+			}
 			
 		}
 		return BusinessConstants.SUCCESS;

@@ -23,6 +23,8 @@ public class Checkingalgorithm implements Calculation {
 	 * 
 	 * 二类指标算法
 	 * 
+	 * 算法修改：零分的不参与计算 去除区间值运算  单项最高分为100
+	 * 
 	 * @param list
 	 * @param length
 	 *            小数点位数
@@ -41,9 +43,9 @@ public class Checkingalgorithm implements Calculation {
 	public <T> List<Map<String,Object>> getSecondPeriodScore(List<T> list, Map<String, Double> zbMap, int length)
 			throws IllegalArgumentException, IllegalAccessException, NoSuchMethodException, SecurityException,
 			InvocationTargetException {
-
+   
 		// 每项总和数据maps
-		List<Map<String, Double>> listone = new ArrayList<Map<String, Double>>(list.size());
+		List<Map<String, Double>> listone = new ArrayList<Map<String, Double>>();
 		Map<String, Double> maps = new HashMap<String, Double>();
 		for (int i = 0; i < list.size(); i++) {
             Class supercz=list.get(i).getClass().getSuperclass();
@@ -77,18 +79,72 @@ public class Checkingalgorithm implements Calculation {
 					}
 				}
 			}
-		
 
 		}
 		//System.out.println("每项总和"+JsonUtils.getJsonFormat(maps));
+		
+		
+		       // 每项去除零分后的团队数量
+				//List<Map<String, Integer>> listExcludeZero = new ArrayList<Map<String, Integer>>();
+				Map<String, Integer> mapsExcludeZero = new HashMap<String, Integer>();
+				for (int i = 0; i < list.size(); i++) {
+		            Class supercz=list.get(i).getClass().getSuperclass();
+		            Field[] fields=null;
+		            if(supercz.toString().equals("class java.lang.Object")){//没有继承某个类
+		            	fields = list.get(i).getClass().getDeclaredFields();
+		            	
+		            }else{//继承了 
+		            	fields = list.get(i).getClass().getSuperclass().getDeclaredFields();
+		            }
+		        	for (int j = 0; j < fields.length; j++) {
+						Field field = fields[j];
+						field.setAccessible(true); // 设置些属性是可以访问的
+						if (field != null) {
+							if ("id".equals(field.getName())) {
+								//
+							} else {
+								
+								String type = field.getGenericType().toString();
+								if (type.equals("class java.lang.Integer")||type.equals("int")) {
+									if(!(field.get(list.get(i))==null)){
+										Integer value = (Integer) field.get(list.get(i));
+										if(value==0){
+											if (mapsExcludeZero.containsKey(field.getName())) {
+												mapsExcludeZero.put(field.getName(), mapsExcludeZero.get(field.getName())-1);
+											} else {
+												mapsExcludeZero.put(field.getName(), list.size()-1);
+											}
+										}else {
+											if (mapsExcludeZero.containsKey(field.getName())) {
+											} else {
+												mapsExcludeZero.put(field.getName(), list.size());
+											}
+										}
+										
+									}
+								}
+								
+							}
+						}
+					}
+
+				}
+				System.out.println("去除零后的每项团队数："+JsonUtils.getJsonFormat(mapsExcludeZero));
 
 		// 每项平均值
-		Map<String, Double> avgmaps = new HashMap<String, Double>();
-		for (Map.Entry<String, Double> entry : maps.entrySet()) {
-			avgmaps.put(entry.getKey(), NumberUtils.division(entry.getValue(),
-					Double.parseDouble((String) String.valueOf(list.size())), 8));// 结果为Double
-		//	avgmaps.put(entry.getKey(), entry.getValue()/Double.parseDouble((String) String.valueOf(list.size())));
-		}
+//		Map<String, Double> avgmaps = new HashMap<String, Double>();
+//		for (Map.Entry<String, Double> entry : maps.entrySet()) {
+//			avgmaps.put(entry.getKey(), NumberUtils.division(entry.getValue(),
+//					Double.parseDouble((String) String.valueOf(list.size())), 8));// 结果为Double
+//		//	avgmaps.put(entry.getKey(), entry.getValue()/Double.parseDouble((String) String.valueOf(list.size())));
+//		}
+				//修改后的去除零得分的团队
+				Map<String, Double> avgmaps = new HashMap<String, Double>();
+				for (Map.Entry<String, Double> entry : maps.entrySet()) {
+					avgmaps.put(entry.getKey(), NumberUtils.division(entry.getValue(),
+							mapsExcludeZero.get(entry.getKey()), 8));// 结果为Double
+				//	avgmaps.put(entry.getKey(), entry.getValue()/Double.parseDouble((String) String.valueOf(list.size())));
+				}
 		
 		//System.out.println("每项平均值"+JsonUtils.getJsonFormat(avgmaps));
 		
@@ -125,20 +181,29 @@ public class Checkingalgorithm implements Calculation {
 									//System.out.println("TEST===="+value);
 									Double xscore = (double) ((NumberUtils.division(value, avgmaps.get(field.getName()),
 											8)) * 100);// 原始得分
+									if(xscore>100){
+										xscore=100.0;
+									}
 									xmap.put(field.getName()+"ScoreYS", xscore);
 									// 得到最高分算区间值 ：100/最高分=区间值
-									if (Highmap.containsKey(field.getName()+"ScoreYS")) {
-										if ((Double) Highmap.get(field.getName()+"ScoreYS") >(NumberUtils.division(100, xscore, 8))) {
-											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));
-											//System.out.println("小的分数："+Highmap.get(field.getName()+"ScoreYS"));
-											//Highmap.put(field.getName()+"ScoreYS",100/xscore);
-											Highmap.put(field.getName()+"ScoreYS",NumberUtils.division(100, xscore, 8));
-											//System.out.println("大的分数："+Highmap.get(field.getName()+"ScoreYS"));
-										}
-									} else {
-										Highmap.put(field.getName()+"ScoreYS", NumberUtils.division(100, xscore, 8));// 区间值
-										 // Highmap.put(field.getName()+"ScoreYS",100/xscore);
-									}
+//									if (Highmap.containsKey(field.getName()+"ScoreYS")) {
+//										if(NumberUtils.division(100, xscore, 8)!=0&&Highmap.get(field.getName()+"ScoreYS")==0){
+//											Highmap.put(field.getName()+"ScoreYS",NumberUtils.division(100, xscore, 8));
+//										}
+//										if ((Double) Highmap.get(field.getName()+"ScoreYS") >(NumberUtils.division(100, xscore, 8))) {
+//											//Highmap.put(field.getName(), NumberUtils.division(100, xscore, 8));
+//											//System.out.println("小的分数："+Highmap.get(field.getName()+"ScoreYS"));
+//											//Highmap.put(field.getName()+"ScoreYS",100/xscore);
+//											if(NumberUtils.division(100, xscore, 8)!=0){
+//												Highmap.put(field.getName()+"ScoreYS",NumberUtils.division(100, xscore, 8));
+//											}
+//											
+//											//System.out.println("大的分数："+Highmap.get(field.getName()+"ScoreYS"));
+//										}
+//									} else {
+//										Highmap.put(field.getName()+"ScoreYS", NumberUtils.division(100, xscore, 8));// 区间值
+//										 // Highmap.put(field.getName()+"ScoreYS",100/xscore);
+//									}
 								}
 							}
 							if (type.equals("class java.util.Date")||type.equals("class java.lang.String")) {//----假日日期格式的
@@ -174,7 +239,11 @@ public class Checkingalgorithm implements Calculation {
 					if (!"id".equals(entry.getKey())) {
 						//System.out.println(entry.getKey());
 						Double value = (Double) entry.getValue();
-						Double endscore = (double) (value * Highmap.get(entry.getKey()));// 区间过后的每项得分
+						//Double endscore = (double) (value * Highmap.get(entry.getKey()));// 区间过后的每项得分
+						//endscore = NumberUtils.roundHalfUp(endscore, length);
+						//endmap.put(entry.getKey().substring(0,entry.getKey().length()-7)+"Score", endscore);
+						//修改为没用区间值
+						Double endscore = value;
 						endscore = NumberUtils.roundHalfUp(endscore, length);
 						endmap.put(entry.getKey().substring(0,entry.getKey().length()-7)+"Score", endscore);
 					} else {
@@ -224,7 +293,7 @@ public class Checkingalgorithm implements Calculation {
 			}
 			resultlist.add(resultMap);
 		}
-	//	System.out.println("最终后得分"+JsonUtils.getJsonFormat(resultlist));
+		//System.out.println("最终后得分"+JsonUtils.getJsonFormat(resultlist));
 		//Map<String, Object> returnMap = new HashMap<String, Object>();
 		//returnMap.put("items", qjscorelist);
 		//returnMap.put("score", resultlist);

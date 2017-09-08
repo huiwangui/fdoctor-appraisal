@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.boco.common.constants.BusinessConstants;
 import com.boco.common.utils.DateUtils;
+import com.boco.common.utils.JsonUtils;
 import com.boco.common.utils.StringUtils;
 import com.boco.modules.fdoc.dao.sign.AppraisalMonthSignOrgIncrementDao;
 import com.boco.modules.fdoc.dao.system.AppraisalGradeLineDao;
@@ -44,7 +45,8 @@ public class AppraisalMonthSignOrgIncrementServiceImpl implements AppraisalMonth
 			String month, String target) throws Exception {
 			//获取所有机构签约管理集合
 			List<AppraisalMonthSignOrgIncrementVo> dataList = signOrgIncrementDao.getMonthSignOrgDataList(month);
-			
+			System.out.println(month);
+		//	System.out.println(JsonUtils.getJsonFormat(dataList));
 			//获取优秀分数线
 			AppraisalGradeLineEntity excellentGradeLine = gradeLineDao.getExcellentGradeLine();
 			
@@ -85,7 +87,10 @@ public class AppraisalMonthSignOrgIncrementServiceImpl implements AppraisalMonth
 			entity.setOrgId(hospitalEntity.getId());
 			entity.setMonth(DateUtils.formatDate(monthEnd, "yyyyMM"));
 			entity.setCreateTime(new Date());
-			signOrgIncrementDao.insert(entity);
+			int num=signOrgIncrementDao.update(entity);
+			if(num==0){
+				signOrgIncrementDao.insert(entity);
+			}
 		}
 		return BusinessConstants.SUCCESS;
 	}

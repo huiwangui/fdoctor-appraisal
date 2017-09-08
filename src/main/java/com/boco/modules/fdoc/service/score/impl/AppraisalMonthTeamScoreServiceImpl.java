@@ -140,7 +140,7 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
         				MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
         				AppraisalMonthTeamScoreEntity teamScoreEntity = mapper.map(vo, AppraisalMonthTeamScoreEntity.class);
         			    result = teamScoreEntity.getSignManageScore() *zbmap .get("signManageScore");
-        			    System.out.println(JsonUtils.getJsonFormat(teamScoreEntity));
+        			   // System.out.println(JsonUtils.getJsonFormat(teamScoreEntity));
         				int update=appraisalMonthTeamScoreDao.update(teamScoreEntity);
         				if(update==0){
         					teamScoreEntity.setResultScore(result);
@@ -163,7 +163,6 @@ public class AppraisalMonthTeamScoreServiceImpl implements AppraisalMonthTeamSco
 				List<Map<String, Object>> list2 = (List<Map<String, Object>>) cal.getSecondPeriodScore(listTeamPublicHealthVo,
 						cal.getMap(zb2, 2), 2);//随访体检得分
 				if(list2!=null&&list2.size()>0){
-					
 					for (Map<String, Object> map : list2) {
 						MaptoBeanVo vo = (MaptoBeanVo) BeanUtils.mapToObject(map, MaptoBeanVo.class);
 						AppraisalMonthTeamScoreEntity teamScoreEntity=mapper.map(vo, AppraisalMonthTeamScoreEntity.class);

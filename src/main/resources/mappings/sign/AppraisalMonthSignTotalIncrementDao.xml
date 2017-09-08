@@ -68,4 +68,44 @@
 	      #{familyIncrement,jdbcType=INTEGER}, #{month,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
 	      )
 	</insert>
+	
+	
+	<!-- 更新数据 -->
+	
+	<update id="update" parameterType="com.boco.modules.fdoc.model.sign.AppraisalMonthSignTotalIncrementEntity" >
+      update t_appraisal_month_sign_total_increment
+	    <set >
+	      <if test="signIncrement != null" >
+	        sign_increment = #{signIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="hyperIncrement != null" >
+	        hyper_increment = #{hyperIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="diabetesIncrement != null" >
+	        diabetes_increment = #{diabetesIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="phychosisIncrement != null" >
+	        phychosis_increment = #{phychosisIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="oldIncrement != null" >
+	        old_increment = #{oldIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="maternalIncrement != null" >
+	        maternal_increment = #{maternalIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="childrenIncrement != null" >
+	        children_increment = #{childrenIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="familyIncrement != null" >
+	        family_increment = #{familyIncrement,jdbcType=INTEGER},
+	      </if>
+	      <if test="month != null" >
+	        month = #{month,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createTime != null" >
+	        create_time = #{createTime,jdbcType=TIMESTAMP},
+	      </if>
+	    </set>
+	    where  month = #{month,jdbcType=VARCHAR}
+  </update>
 </mapper>

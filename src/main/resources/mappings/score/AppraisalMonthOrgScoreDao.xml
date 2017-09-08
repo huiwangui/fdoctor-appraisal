@@ -220,8 +220,8 @@
 	      <if test="publicHealthDiabetesScore != null" >
 	        public_health_diabetes_score = #{publicHealthDiabetesScore,jdbcType=DOUBLE},
 	      </if>
-	      <if test="publicHealthPhychosisSocre != null" >
-	        public_health_phychosis_socre = #{publicHealthPhychosisSocre,jdbcType=DOUBLE},
+	      <if test="publicHealthPhychosisScore != null" >
+	        public_health_phychosis_score = #{publicHealthPhychosisScore,jdbcType=DOUBLE},
 	      </if>
 	      <if test="publicHealthOldScore != null" >
 	        public_health_old_score = #{publicHealthOldScore,jdbcType=DOUBLE},
@@ -253,8 +253,8 @@
 	      <if test="customerScore != null" >
 	        customer_score = #{customerScore,jdbcType=DOUBLE},
 	      </if>
-	      <if test="resultSocre != null" >
-	        result_socre = #{resultSocre,jdbcType=DOUBLE},
+	      <if test="resultScore != null" >
+	        result_score = #{resultScore,jdbcType=DOUBLE},
 	      </if>
 	      <if test="teamTotal != null" >
 	        team_total = #{teamTotal,jdbcType=INTEGER},
@@ -275,7 +275,7 @@
 	        create_time = #{createTime,jdbcType=TIMESTAMP},
 	      </if>
 	    </set>
-	    where id = #{id,jdbcType=INTEGER}
+	    where org_id = #{orgId} and  month = #{month}
 	  </update>
 	  
 	  <!-- 获取团队数量 -->

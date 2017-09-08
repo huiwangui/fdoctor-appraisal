@@ -256,8 +256,13 @@ public class AppraisalMonthOrgScoreServiceImpl implements AppraisalMonthOrgScore
 					secondScore.setQualifiedIncrement(teams-unQualified-goodTeams);
 					secondScore.setMonth(month);
 					secondScore.setCreateTime(new Date());
-					//插入数据
-					 ok=ok+appraisalMonthOrgScoreDao.insert(secondScore);
+					//更新数据
+					int updateNum=appraisalMonthOrgScoreDao.update(secondScore);
+					if(updateNum==0){
+						//插入数据
+						 ok=ok+appraisalMonthOrgScoreDao.insert(secondScore);
+					}
+					
 					
 				}
 				
